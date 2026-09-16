@@ -1,0 +1,236 @@
+# Contexto - Arquitectura
+
+## Propósito
+
+Referencia de la arquitectura conceptual del Organizador Personal: áreas vs tipos, modelo general del sistema, capas transversales y definiciones. Los contextos de área referencian este archivo; aquí no se duplica contenido de área.
+
+## Estructura del Vault
+
+```
+Organizador Personal
+│
+├── 01-Objetivos
+│
+├── 02-Musica
+│   ├── Estudio
+│   ├── Instrumento
+│   ├── Partituras
+│   └── Toques
+│
+├── 03-Programacion
+│   ├── Trabajo
+│   ├── Proyectos Personales
+│   ├── Freelance
+│   └── Estudio
+│
+├── 04-Finanzas
+│   ├── Objetivos Financieros
+│   ├── Inversiones
+│   └── Resumenes
+│
+├── 05-Otros Objetivos
+│
+├── 06-Rutina
+│   ├── Mensual
+│   ├── Semanal
+│   └── Diario
+│
+├── 07-Ideas
+│
+├── 08-Adquisiciones
+│
+└── 09-Calendario
+    ├── Toques
+    ├── Eventos
+    └── Entregas
+```
+
+## Áreas vs tipos
+
+- Las carpetas principales representan **áreas de vida**: Objetivos, Música, Programación, Finanzas, Otros Objetivos, Rutina, Ideas.
+- Las categorías/tipos representan otra dimensión conceptual: Objetivos, Rutinas, Proyectos, Adquisiciones, Eventos, Ideas, Planificación, Ejecución, Revisión.
+- No existe una carpeta transversal `Proyectos` ni una carpeta transversal `Tareas`.
+- Los proyectos viven dentro del área correspondiente.
+- Las acciones concretas correspondientes se gestionan desde `06-Rutina`.
+
+## Modelo general
+
+```
+OBJETIVOS
+    ↓
+RUTINAS / PROYECTOS
+    ↓
+PLANIFICACIÓN
+  ├─ MENSUAL
+  ├─ SEMANAL
+  └─ DIARIA
+    ↓
+EJECUCIÓN
+    ↓
+REVISIÓN
+    ↺
+```
+
+La cadena **Objetivos → Rutina → Revisión → Planificación** es una decisión existente del sistema; el modelo extendido es una precisión conceptual de esa cadena, no una implementación nueva.
+
+Dos capas transversales alimentan la planificación:
+
+```
+ADQUISICIONES ─────┐
+                   ├──→ PLANIFICACIÓN
+CALENDARIO ────────┘
+```
+
+### Capacidad y carga
+
+- Trabajo fijo lun–vie ≈ 8 h = capacidad reservada. La baja carga laboral se decide día a día por el usuario; el Planner nunca la asume disponible.
+- Fin de semana = descanso por defecto. Solo se usa para compromisos, actuaciones, grabaciones, eventos o necesidad concreta.
+- Espacio principal para proyectos personales: lun–vie, fuera del trabajo fijo.
+
+### Jerarquía de prioridades
+
+La "prioridad de proyectos" NO es una jerarquía general de la vida del usuario. Son conceptos distintos:
+
+**Prioridad general de vida** (estable, no cambia por período):
+
+```
+1. Rutinas y disciplina personal
+   ├── Música (estudio del instrumento)
+   └── Ejercicio
+2. Trabajo fijo (lun–vie, 8 h)
+3. Proyectos personales de programación
+4. Otros asuntos (según contexto, fechas y necesidad)
+```
+
+**Foco del mes**: dirección general de un período. Puede abarcar varias áreas (música, actuación, examen, programación, etc.). No equivale a prioridad de proyectos; vive en la nota mensual de `06-Rutina/Mensual`.
+
+**Prioridad de proyectos de programación**: solo el orden interno dentro de `03-Programacion/Proyectos Personales`. Preferencia del período, no permanente, modificable por el usuario. Se activa únicamente cuando existe capacidad para programación personal.
+
+**Foco de la semana**: dirección operativa de la semana. Deriva del foco mensual + calendario + ejecución previa.
+
+El objetivo de H2 no es desarrollar muchos proyectos de programación: es construir disciplina (música y ejercicio), mantener trabajo y mejorar profesionalmente. Los proyectos no desplazan automáticamente las rutinas.
+
+### Criterio de capacidad
+
+El Planner asigna capacidad en este orden conceptual:
+
+```
+1. Compromisos fijos (eventos, clases, toques, ensayos)
+2. Trabajo fijo (8 h, lun–vie)
+3. Rutinas fundamentales (música, ejercicio)
+4. Proyectos personales de programación
+5. Otros asuntos
+```
+
+No todos los niveles deben llenarse siempre. Una semana puede ser `Compromisos + Trabajo + Rutinas` y no tener proyecto personal; es un resultado correcto. El Planner se pregunta primero "¿qué es importante proteger esta semana?" antes de "¿qué proyecto puedo meter?".
+
+Sobre todo el proceso opera el **Planner como asistente de planificación** (Diseño Funcional V2):
+
+```
+LEER → ANALIZAR → RECORDAR CONTEXTO → PROPONER → USUARIO DECIDE → PLANIFICAR
+```
+
+Ciclo de planificación: **mensual → semanal → diaria → ejecución/registro → revisión ↺**.
+
+- El Planner sugiere y no manda; la decisión final siempre es del usuario.
+- Las rutinas de música y ejercicio son comportamiento estable, no proyectos que compiten por prioridad: se protegen antes de llenar espacios con proyectos.
+- La prioridad de proyectos de programación solo aplica dentro de esa categoría. El Planner nunca interpreta "Organizador es prioridad 1" como "hay que darle más tiempo que a música".
+- No reparte trabajo artificialmente entre todos los proyectos. Se prefiere concentración.
+- No llena el tiempo disponible: busca una carga razonable y sostenible.
+- Con poco tiempo disponible, reduce o elimina el bloque de programación; mantiene rutinas. Eso no significa que el proyecto perdió prioridad.
+- Bloqueos sin tareas inventadas. Recordatorio contextual breve; no preguntar lo ya conocido.
+- Sin métricas de energía o cansancio.
+- El plan no es un contrato: planificar → ejecutar → observar la realidad → ajustar → continuar.
+
+## Definiciones
+
+### Objetivos
+
+Indican qué se quiere conseguir y determinan prioridades. Viven en `01-Objetivos`.
+
+### Rutinas
+
+Actividades recurrentes que no tienen un cierre definitivo. Ejemplos: estudio de instrumento, estudio de programación, trabajo fijo, ejercicio, rutina financiera.
+
+- La **definición** de cada rutina vive en su área natural (Música → `02-Musica/Estudio`; ejercicio → `05-Otros Objetivos`).
+- La **ejecución** vive en `06-Rutina` (notas mensual/semanal/diaria), que enlaza a la definición sin copiarla.
+
+### Proyectos
+
+Tienen un resultado concreto y eventualmente se cierran. Ejemplos: proyecto personal de programación, repertorio para una presentación, obtener la libreta, resolver una mejora concreta del hogar.
+
+### Adquisiciones
+
+Categoría transversal con ciclo propio:
+
+```
+idea → investigar → decidir → comprar → adquirido
+```
+
+No generan automáticamente tareas. Viven en `08-Adquisiciones`. Las compras grandes/patrimoniales (p. ej. un auto) siguen viviendo en `04-Finanzas/Objetivos Financieros`.
+
+Criterio de clasificación: **objeto que se quiere comprar** → `08-Adquisiciones`; **trabajo/instalación/reparación** → `05-Otros Objetivos`. Los materiales de una reparación no se registran como adquisición separada.
+
+### Calendario
+
+Capa transversal en `09-Calendario`: representa restricciones y contexto temporal (toques, ensayos, eventos, entregas, grabaciones). No reemplaza el lugar donde vive la información original: sus notas son índices/contexto temporal que enlazan al contenido real. Los toques continúan viviendo en `02-Musica/Toques`; los eventos generales sin área natural pueden vivir en `09-Calendario/Eventos.md`. Ensayos, grabaciones y otros eventos musicales sin lugar preciso todavía viven su dato temporal en `Eventos.md` y luego se enlazan desde su ámbito natural cuando exista.
+
+Las clases de conducir tienen su fuente original en el proyecto [[Licencia de Conducir]] (`05-Otros Objetivos`); el calendario solo indexa la fecha.
+
+### Contexto dinámico semanal
+
+Compromisos variables que se definen semana a semana (visita a familiares, partidos de Peñarol, toques/ensayos de la semana, compromisos puntuales). No se convierten automáticamente en eventos permanentes del calendario; se registran de forma ligera en la nota semanal de `06-Rutina` para que la Revisión entienda los desvíos.
+
+**Recordatorio contextual de lunes**: al inicio de la semana, el Planner puede ofrecer un breve resumen del contexto relevante (compromisos conocidos, prioridad vigente, bloqueos). Es un recordatorio conciso, no un interrogatorio. Si la información ya está disponible, no se repite.
+
+### Ideas
+
+Son posibilidades, no obligaciones. Viven en `07-Ideas`.
+
+### Planificación
+
+Utilizará objetivos, rutinas, proyectos, calendario, bloqueos y contexto para decidir qué es razonable hacer durante un período. Se define en niveles:
+
+- **Mensual**: define el enfoque y las prioridades del mes. El foco mensual vive en `06-Rutina/Mensual`; no existe una entidad separada para el "foco mensual".
+- **Semanal**: organiza y distribuye el trabajo según la realidad, considerando calendario, bloqueos, rutinas, proyectos activos y lo ocurrido la semana previa. El contexto dinámico se registra de forma ligera en la nota semanal.
+- **Diaria**: bajada liviana del plan semanal a días concretos; no es una tercera sesión compleja de planificación.
+
+**No implementada aún.**
+
+### Ejecución
+
+Representará lo que realmente ocurrió, con registro diario liviano (Hecho / No hecho / Extra / Nota). Las secciones vacías se omiten; no es un formulario. **No implementada aún.**
+
+### Revisión
+
+Comparará lo planificado con lo ejecutado y alimentará el siguiente ciclo de planificación. Responde: qué se planeó, qué ocurrió, qué quedó pendiente, qué apareció sin estar previsto, qué se traslada, qué se descarta, qué se prioriza después. **No implementada aún.**
+
+### Aclaraciones de proyectos
+
+- **Ventolera (web)** = proyecto de programación (`03-Programacion/Proyectos Personales`): web de la banda La Ventolera, dashboard, Next.js/Tailwind.
+- **Fiesta Ventolera** = proyecto musical (`02-Musica`): evento/gala de la banda. Proyecto independiente del de programación.
+
+### Fuente financiera para seguimiento de objetivos
+
+- **Excel** = fuente para el seguimiento del objetivo financiero (ingresos mensuales, cuentas, evolución, acumulado).
+- **Aplicación financiera** = fuente de movimientos/datos operativos (registro diario de ingresos/egresos).
+- No se modifica la estrategia de inversión ni el área 04-Finanzas.
+
+## Fases funcionales del sistema
+
+Eje de funcionalidad del sistema (no confundir con las fases de desarrollo del proyecto, que viven en `roadmap.md`):
+
+1. **Núcleo de organización**: objetivos, proyectos, rutinas, calendario, adquisiciones, planificación mensual/semanal/diaria, ejecución y revisión, con capacidad de profundizar y ajustar cualquier elemento en cualquier momento.
+2. **Planner conversacional**: analiza objetivos, proyectos, rutinas y calendario; detecta bloqueos y fechas; revisa el progreso real; sugiere prioridades; pregunta por cambios; ayuda a organizar el mes y la semana. Asistente, no jefe.
+3. **Contexto semanal dinámico**: preguntas/contexto variables semana a semana (toques, visitas, partidos, compromisos puntuales), con persistencia ligera en la nota semanal.
+
+La evolución conceptual: **Objetivos → Proyectos/Rutinas → Planificación mensual → semanal → diaria → Ejecución → Revisión**, con el Planner como capa de inteligencia: contexto + estado real + calendario + prioridades → preguntas → propuesta → decisión del usuario → plan.
+
+## Reglas vigentes
+
+1. No duplicar información.
+2. Cada nota tiene un único lugar físico.
+3. Las vistas o índices transversales utilizan enlaces.
+4. No crear carpetas transversales `Proyectos` ni `Tareas`.
+5. El foco mensual vive en `06-Rutina/Mensual`; no se crean entidades nuevas para representarlo.
+6. Aún no se introducen: YAML/metadatos, nuevos estados de proyectos, automatizaciones, integración real con Google Calendar/Outlook, escritura automática del Planificador, Planner conversacional, ni contexto semanal dinámico automatizado.

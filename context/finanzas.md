@@ -1,0 +1,102 @@
+# Contexto - Finanzas
+
+## Propósito
+
+Área de organización financiera personal. Principio: **OBSIDIAN FINANZAS = pensar, decidir, proyectar y revisar**. No se convierte en una segunda aplicación financiera: es un sistema estratégico y de seguimiento.
+
+## Fuentes y responsabilidades
+
+- **AppFinanciera** → registro operativo diario (ingresos, gastos, gastos compartidos, gastos fijos, tarjeta, préstamos, etc.).
+- **Gletir** → ejecución y custodia de inversiones.
+- **Excel** → detalle auxiliar mientras AppFinanciera no integre todas las funcionalidades.
+- **Obsidian (04-Finanzas)** → estrategia, objetivos, resumen mensual, evolución y decisiones.
+- **Planner** → transforma acciones financieras relevantes en acciones planificables.
+
+## No duplicar en Obsidian
+
+Obsidian NO registra:
+
+- movimientos individuales;
+- gastos detallados;
+- operaciones diarias;
+- saldos en tiempo real.
+
+Los resúmenes mensuales utilizan datos provenientes de AppFinanciera/Excel, pero Obsidian no los duplica: registra la fotografía mensual y las decisiones.
+
+## Ubicación
+
+Carpeta del Vault: `04-Finanzas`
+
+Estructura:
+
+```
+04-Finanzas/
+├── Estrategia Financiera.md
+├── Resumenes/
+│   └── Resumen <Mes> <Año>.md
+├── Inversiones/
+│   └── Historial de Inversiones.md
+├── Objetivos Financieros/
+│   └── Objetivos 2026.md
+└── Revisión Anual <Año>.md
+```
+
+## Cómo funciona
+
+### Estrategia Financiera
+
+- Decisiones vigentes de estrategia y su regla general: los excedentes se destinan a inversiones según la estrategia.
+- Estrategia 2026: excedente mensual → normalmente fondo local; diciembre → aporte al ETF/VOO.
+- Los aportes mensuales son **variables, no una obligación rígida**: dependen del excedente disponible, ingresos extraordinarios y gastos excepcionales.
+- La estrategia se revisa una vez al año (no mes a mes), excepto cambios explícitos del usuario.
+
+### Resúmenes mensuales
+
+- Registro manual una vez por mes, con datos de AppFinanciera/Excel.
+- Contenido: ingresos totales, egresos totales, inversión realizada, estado de las inversiones en Gletir (fondo local y ETF VOO), estado de préstamos (si existen), estado de tarjeta (si corresponde) y avance contra objetivos.
+- Objetivo: una fotografía mensual comparable con los objetivos anuales.
+
+### Inversiones
+
+- **Objetivos 2026**: Fondo local ≈ **USD 5.000**; ETF **VOO** → aporte anual de **USD 1.500 en diciembre**.
+- El historial de inversiones vive en `Inversiones/Historial de Inversiones.md`.
+- No se registran montos, porcentajes ni asignación de cartera en tiempo real; eso lo custodia Gletir.
+
+### Objetivos Financieros
+
+- Objetivos patrimoniales y de inversión, con su estrategia de ahorro correspondiente.
+- Las compras grandes/patrimoniales viven aquí; las adquisiciones corrientes viven en `08-Adquisiciones`.
+- **Objetivo 2026 registrado**: alcanzar aproximado USD 5.000 en fondo local y realizar el aporte anual de USD 1.500 a VOO en diciembre.
+- Posible objetivo futuro (aún no decidido): crecimiento del fondo local hacia aproximadamente USD 7.000–8.000 para utilizar eventualmente parte como entrada para un vehículo. Los ETFs se mantienen como inversión de largo plazo.
+
+### Revisión anual
+
+- Revisión de metas vs realidad, evaluación de la estrategia del año.
+- Evaluación de diversificación, otros ETFs, alternativas en USD, etc.
+- Decide y actualiza `Estrategia Financiera.md` para el año siguiente.
+
+### Relación con el Planner
+
+- El Planner recibe acciones financieras relevantes y planificables (p. ej. actualizar el resumen mensual, revisar excedente e invertir, realizar el aporte a VOO en diciembre, preparar la revisión anual).
+- El Planner lee estrategia y resúmenes como contexto para decisiones, respeta el carácter variable de los aportes y **no inventa montos ni operaciones**.
+
+## Decisiones
+
+- Principio vigente: Obsidian Finanzas = estrategia, objetivos, resumen mensual, evolución y decisiones; no duplica la operación diaria.
+- Estructura de 3 carpetas (Inversiones, Objetivos Financieros, Resumenes) aprobada, con las notas definidas en la arquitectura de esta sección.
+- El Vault no duplica el registro diario de movimientos: AppFinanciera es la fuente principal; Obsidian se usa para resúmenes, análisis, objetivos y planificación.
+- Fuente para el seguimiento del objetivo financiero: el **Excel** como detalle auxiliar; la aplicación financiera queda para los movimientos/datos operativos.
+- Estrategia de inversión actual (ETF + fondo local Gletir en pesos) vigente hasta fin de año; es revisable y no es una regla permanente.
+- Inversión mensual variable según excedente; no es obligación rígida.
+
+## Sin definir aún
+
+- Estrategia de inversión posterior a fin de año (se revisa en la revisión anual).
+- Fechas y montos exactos de los objetivos patrimoniales futuros (auto, casa).
+- Cómo se obtendrán los datos de las fuentes (AppFinanciera, Gletir, Excel) hacia los resúmenes (automatización futura, Fase 6).
+
+### Evolución futura (ideas abiertas, NO son decisiones)
+
+- Diversificar la cartera en la revisión de fin de año (otros ETFs, alternativas en USD, etc.).
+- Interés de largo plazo de que las inversiones generen rendimientos/ingresos que contribuyan a la situación financiera.
+- Estas ideas no están aprobadas para implementarse aún.

@@ -1,0 +1,54 @@
+# Contexto - Rutina
+
+## Propósito
+
+Define las acciones y la organización temporal para avanzar hacia los objetivos. Es el segundo eslabón de la cadena **Objetivos → Rutina → Revisión → Planificación**: toma el "qué quiero conseguir" (01-Objetivos), lo convierte en "qué voy a hacer" en distintos períodos y registra qué ocurrió.
+
+## Ubicación
+
+Carpeta del Vault: `06-Rutina`
+
+Estructura actual:
+
+```
+06-Rutina/
+├── Mensual/
+├── Semanal/
+└── Diario/
+```
+
+Las tres carpetas existen y están aún vacías.
+
+## Cómo funciona
+
+- Se organiza por períodos en tres niveles: Mensual, Semanal y Diario.
+- Las notas se nombran **por período**, con nombres en lenguaje natural: mensual `Septiembre 2026.md` en `Mensual/`, semanal `Semana 36.md` en `Semanal/`, diaria `9 de Septiembre.md` en `Diario/`.
+- Los niveles Mensual, Semanal y Diario de la jerarquía general (Anual → Semestral → Mensual → Semanal → Diario) viven aquí, no en Objetivos.
+- NO se duplican los objetivos dentro de Rutina: las notas de rutina pueden enlazar a los objetivos correspondientes mediante enlaces internos de Obsidian.
+- Conceptualmente, esta área será el lugar donde se materializan las acciones concretas derivadas de objetivos, rutinas y proyectos (planificación, ejecución y revisión). El modelo general está en `context/arquitectura.md`; esa lógica no se implementa todavía.
+- Estado actual: el sistema de rutina aún no tiene notas creadas.
+
+## Decisiones
+
+- Las notas mensuales viven en `06-Rutina\Mensual\` y se nombran por período: `Septiembre 2026.md`.
+- Las notas semanales viven en `06-Rutina\Semanal\` y se nombran por período: `Semana 36.md`.
+- Las notas diarias viven en `06-Rutina\Diario\` y se nombran por período: `9 de Septiembre.md`.
+- La nota mensual enlaza al objetivo semestral correspondiente (`[[H1]]` / `[[H2]]`); las acciones individuales pueden enlazar además al objetivo concreto (`- [ ] Practicar improvisación sobre progresiones II-V-I ([[H2]])`).
+- No duplicar objetivos dentro de Rutina; la relación se hace con enlaces internos hacia 01-Objetivos.
+- Los niveles Mensual, Semanal y Diario pertenecen a Rutina dentro de la jerarquía temporal.
+- No sobreestructurar: mantener el sistema simple hasta que exista una necesidad concreta por nivel.
+
+### Estructura de las notas de Rutina (Fase 3.5, aprobada)
+
+- **Escritura bajo protocolo de aprobación**: el agente propone y solo escribe tras aprobación explícita y puntual de cada escritura ("Aprobado. Escribí X con este contenido").
+- **Formato de estado en texto plano, sin YAML**: `Estado: Abierta` al crear; `Estado: Cerrada` al cerrar.
+- **Nota mensual** (`Mensual/<Mes Año>.md`): `Estado`, vínculo a `[[H1]]`/`[[H2]]`, `## Foco del mes`, `## Rutinas (protegidas)`, `## Prioridad de proyectos`, `## Otros asuntos`, `## Finanzas`.
+- **Nota semanal** (`Semanal/Semana NN.md`): `Estado`, `## Foco de la semana`, `## Calendario`, `## Rutinas`, `## Acciones` (checkboxes, con enlace al objetivo cuando corresponda), `## Registro` (Hecho / No hecho / Extra / Nota; las secciones vacías se omiten).
+- **Nota diaria** (`Diario/<día>.md`): `## Compromisos`, `## Acciones`, `## Registro`.
+- **Cierre de período**: se cambia `Estado: Abierta` por `Estado: Cerrada` y se agrega `## Resumen` al final (plan vs realidad y pendientes, para notas mensuales y semanales). Requiere aprobación explícita. Las notas cerradas son inmutables; cualquier corrección requiere aprobación explícita.
+- **Traslados**: en el origen `→ trasladada a [[<Período>]]`; en el destino `(de [[<Período>]])`.
+
+## Sin definir aún
+
+- Vínculo superior de las notas semanales y diarias (qué nota u objetivo de nivel superior referencian a nivel de nota, si lo hacen).
+- Uso futuro de plugins (Calendar, Tasks) para automatizar o enlazar las notas de rutina. Se menciona solo como posibilidad futura; no está aprobado su uso.
