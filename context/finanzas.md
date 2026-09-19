@@ -89,6 +89,23 @@ Estructura:
 - Estrategia de inversión actual (ETF + fondo local Gletir en pesos) vigente hasta fin de año; es revisable y no es una regla permanente.
 - Inversión mensual variable según excedente; no es obligación rígida.
 
+## Roadmap financiero
+
+Dirección de trabajo del sistema financiero. **Regla: el roadmap es dirección de trabajo, no autorización de ejecución.** Flujo: Analizar → Proponer → Usuario decide → Planificar → Usuario aprueba → Ejecutar. No es una lista rígida de tareas.
+
+1. **Inversiones** — cargar y estructurar los datos reales históricos de Gletir. *(Ejecutada: `Inversiones/Historial de Inversiones.md` con datos 2026.)*
+2. **Auditoría AppFinanciera** — revisar cómo registra hoy gastos, tarjeta, ingresos, totales y balances.
+3. **Diseño gastos de terceros/reintegros** — proponer el cambio mínimo para representar gastos propios, gastos de terceros/adelantos, reintegros y dinero a recuperar, sin refactorizar innecesariamente.
+4. **Implementación AppFinanciera** — solo después de aprobar el diseño (etapa 3).
+5. **Datos reales financieros** — incorporar ingresos (desde ~jun 2026), gastos, inversiones y evolución con las fuentes ordenadas.
+6. **Resúmenes financieros** — resúmenes mensuales en Obsidian con datos reales (evolución y cumplimiento de objetivos).
+7. **Automatización** — endpoint/API de AppFinanciera e integración con Obsidian/Planner cuando las fuentes estén estables.
+
+- **Estado actual:** etapa 1 completada (historial de inversiones 2026 cargado).
+- **Próximo paso:** etapa 2 — Auditoría de AppFinanciera.
+- Las etapas 2–4 requieren trabajo sobre AppFinanciera: primero se audita y se diseña, y solo después se implementa.
+- No priorizar mejoras del Excel ni convertirlo en fuente de verdad; no crear estructuras nuevas en Obsidian sin aprobación.
+
 ## Sin definir aún
 
 - Estrategia de inversión posterior a fin de año (se revisa en la revisión anual).
