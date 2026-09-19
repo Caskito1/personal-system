@@ -15,18 +15,21 @@ Estructura:
 ├── Estudio/
 │   ├── Rutina de Estudio del Instrumento.md
 │   └── Ejercicios.md
-├── Repertorio/
-├── Clases/
-├── Registro/
-│   └── <AAAA-MM-DD>.md
-├── Estadisticas/
-│   ├── Semanal/
-│   │   └── 2026-S40.md
-│   └── Mensual/
-│       └── 2026-10.md
 ├── Partituras/
-└── Toques/
+│   ├── Ejercicios/
+│   └── Repertorio/
+│       └── Ventolera/
+├── Toques/
+├── Registro/
+│   ├── Plantilla de Sesion.md
+│   └── <AAAA-MM-DD>.md
+├── Clases/
+└── Estadisticas/
+    ├── Semanal/
+    └── Mensual/
 ```
+
+`Clases/` y `Estadisticas/` (Semanal/Mensual) existen como estructuras preparadas, sin contenido aún.
 
 ## Frecuencia
 
@@ -34,16 +37,21 @@ Base: **3 sesiones de estudio por semana** (referencia del sistema y del Planner
 
 ## Rutina
 
+`Estudio/Rutina de Estudio del Instrumento.md` define cómo está estructurada una sesión: qué bloques la componen y en qué orden. `Estudio/Ejercicios.md` define los ejercicios concretos de cada bloque.
+
 Orden estable de la rutina de estudio:
 
 1. Nota larga
-2. Flex
-3. Cromatismos
+2. Flexibilidad
+3. Cromáticos
 4. Escalas
 5. Arpegios
-6. Tema de estudio
+6. Progresiones armónicas
+7. Tema de improvisación
 
-El **tema de estudio** puede incluir: progresión armónica, melodía e improvisación.
+El **tema de improvisación** se trabaja en tres pasadas: **Pasada 1 — Acordes**, **Pasada 2 — Melodía**, **Pasada 3 — Improvisación**.
+
+Estado actual de los ejercicios: Escalas y Arpegios en **Mayores 7**; Progresiones armónicas en II-V-I (sin ejercicios cargados todavía).
 
 El sistema registra cambios de ejercicios/modalidades pero **no decide por sí mismo** cuándo cambiar la rutina. Los cambios ocurren porque el ejercicio está procesado/dominado o porque el profesor lo indica.
 
@@ -52,7 +60,7 @@ El sistema registra cambios de ejercicios/modalidades pero **no decide por sí m
 ### Estudio / Ejercicios
 
 - `Estudio/Rutina de Estudio del Instrumento.md` = nota base que describe la rutina en sí. El texto se actualiza cuando cambian los ejercicios.
-- `Estudio/Ejercicios.md` = nota general con los ejercicios organizados por área (Nota larga, Flex, Cromatismos, Escalas, Arpegios, Tema de estudio), en tabla o estructura organizada.
+- `Estudio/Ejercicios.md` = nota general con los ejercicios organizados por área (Nota larga, Flexibilidad, Cromáticos, Escalas, Arpegios, Progresiones armónicas, Tema de improvisación), en tabla o estructura organizada.
 - No existe una nota independiente por cada ejercicio.
 - Columnas/estructura de `Ejercicios.md`: ejercicio, modalidad, objetivo, tempo, PDF (referencia cuando corresponda), estado, observaciones e historial de cambios.
 - Los ejercicios van a crecer y evolucionar: cuando un ejercicio cambia, se registra el cambio y **se mantiene el anterior como histórico** (no se sobrescribe la historia). El registro de la fecha de cambio preserva qué modalidad era la vigente en cada momento.
@@ -67,49 +75,36 @@ El sistema registra cambios de ejercicios/modalidades pero **no decide por sí m
 - Estados mínimos: **En preparación** / **Aprendido**.
 - No se construye todavía un sistema complejo de grabaciones.
 
+### Partituras
+
+- `Partituras/Ejercicios/` y `Partituras/Repertorio/Ventolera/` están separadas: ejercicios (material técnico) vs. repertorio del proyecto Ventolera.
+
 ### Clases
 
+- La carpeta `Clases/` está creada como estructura preparada, sin contenido aún.
 - Comienzan en octubre. No se crea una arquitectura compleja: funciona como **fuente de modificaciones/indicaciones** para la rutina (ejercicios, modalidades, objetivos, tempos, indicaciones).
 - El sistema no aplica cambios automáticos; al comenzar las clases se integra esa información en el contexto.
 
 ### Registro de sesión
 
 - Una nota independiente por cada sesión: `Registro/<AAAA-MM-DD>.md`.
-- Formato:
-
-```
-# <AAAA-MM-DD>
-
-## Sesión
-- Duración total: <min>
-
-## Rutina
-- Nota larga: ✅ | <min> | <tempo>
-- Flex: ✅ | <min> | <tempo>
-- Cromatismos: ✅ | <min> | <tempo>
-- Escalas: ✅ | <min> | <tempo>
-- Arpegios: ✅ | <min> | <tempo>
-- Tema de estudio: ✅ | <min> | <tempo>
-
-## Nota
-<opcional>
-```
-
-- Los ejercicios pueden indicarse junto a cada área de la rutina cuando se requiera precisión.
+- La plantilla única de la sesión es `Registro/Plantilla de Sesion.md`: sigue el orden de la rutina (los 7 bloques, con ejercicio, variación, tempo, duración, resultado y observación por bloque), incluye el **Tema de improvisación** en sus 3 pasadas y una sección de **Repertorio**.
 - El registro debe permitir identificar **qué ejercicio/modalidad se utilizó** en cada momento histórico, para que el histórico no quede ambiguo cuando cambien los ejercicios.
-- La nota diaria de `06-Rutina/Diario/<día>.md` incluye el bloque `## Música` como lugar de captura de la sesión; los datos se transcriben luego a `Registro/<AAAA-MM-DD>.md`. La diaria es captura temporal; `Registro/` es el registro permanente.
+- La nota diaria de `06-Rutina/Diario/<día>.md` incluye el bloque `## Música` con una tabla como captura temporal de la sesión; los datos se transcriben luego a `Registro/<AAAA-MM-DD>.md`. La diaria es captura temporal; `Registro/` es el registro permanente.
 
 ### Estadísticas
 
 - Resumen semanal persistente: `Estadisticas/Semanal/<AÑO-S#>.md` (p. ej. `2026-S40.md`)
 - Resumen mensual persistente: `Estadisticas/Mensual/<AAAA-MM>.md` (p. ej. `2026-10.md`)
+- Las carpetas `Estadisticas/Semanal/` y `Estadisticas/Mensual/` están creadas como estructura preparada; los resúmenes se generan con datos reales al usarlas.
 - Pueden mostrar: cantidad de sesiones, días practicados, tiempo total, promedio por sesión, ejercicios realizados, cumplimiento de cada parte de la rutina, evolución de tempos, evolución del repertorio y cambios de ejercicios/modalidades del período.
 - Sirven para **detectar tendencias y ajustar la práctica**, no para evaluar ni castigar.
 - No inventar métricas que no puedan obtenerse de los registros.
 
 ### Toques y Calendario
 
-- Los eventos de toques viven en `02-Musica/Toques` y su calendario en `09-Calendario/Toques.md`.
+- `Toques/` aloja únicamente los toques que requieren preparación musical / repertorio definido; su calendario vive en `09-Calendario/Toques.md`.
+- El repertorio por toque se registra dentro de la nota del toque, solamente cuando corresponda, dividido en **Repaso** y **Nuevo**.
 - Fiesta Ventolera (proyecto musical) es independiente de VentoleraApp (programación, `03-Programacion/Proyectos Personales`).
 
 ## Planner y Música
@@ -121,7 +116,7 @@ El sistema registra cambios de ejercicios/modalidades pero **no decide por sí m
 ## Decisiones
 
 - Frecuencia base: **3 sesiones por semana**.
-- Separación conceptual: Estudio / Repertorio / Clases / Registro / Estadísticas / Partituras / Toques.
+- Separación conceptual: Estudio / Partituras / Toques / Registro / Clases / Estadísticas.
 - No mezclar ejercicios de estudio con partituras de repertorio (aunque ambos puedan usar PDFs).
 - Una única nota general de ejercicios (`Estudio/Ejercicios.md`).
 - Una nota de registro por sesión (`Registro/<AAAA-MM-DD>.md`).

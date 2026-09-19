@@ -109,6 +109,52 @@ Pedir aprobación explícita antes de:
 - Tomar decisiones permanentes sobre el sistema.
 - Cambios en esta documentación de contexto o en el roadmap.
 
+## Detección y mantenimiento de contexto
+
+Al finalizar una tarea, planificación o modificación relevante, el agente debe comprobar si los cambios realizados generan una posible **desincronización entre los archivos operativos y su documentación, contexto o reglas de funcionamiento**.
+
+### Detección
+
+El agente debe detectar y señalar posibles necesidades de actualización cuando, por ejemplo:
+
+- cambie una estructura, flujo o regla que esté documentada en archivos de contexto;
+- se modifique el comportamiento esperado de un agente;
+- una decisión nueva contradiga o deje desactualizada una definición existente;
+- se agregue, elimine o reorganice una parte estructural del sistema;
+- un archivo operativo y su documentación dejen de describir el mismo funcionamiento.
+
+No debe considerar necesario actualizar el contexto por cambios puntuales u operativos que no alteren la estructura, las reglas o el funcionamiento general del sistema.
+
+### Propuesta de mantenimiento
+
+Cuando detecte una posible desincronización, el agente debe **informarla como una propuesta de mantenimiento**, indicando claramente:
+
+- **Archivo afectado:** qué archivo de contexto o documentación podría necesitar actualización.
+- **Motivo:** qué cambio produjo la posible desincronización.
+- **Actualización propuesta:** qué información concreta debería agregarse, modificarse o eliminarse.
+
+La propuesta debe ser independiente de la tarea original y no debe ejecutarse automáticamente.
+
+### Aprobación explícita
+
+El agente **no debe modificar archivos de contexto o documentación como consecuencia de esta detección sin aprobación explícita del usuario**.
+
+El flujo obligatorio es:
+
+1. Detectar la posible desincronización.
+2. Informar la propuesta de mantenimiento.
+3. Esperar la aprobación explícita del usuario.
+4. Solo después de la aprobación, realizar la modificación propuesta.
+5. Informar qué archivo fue actualizado y qué cambio se realizó.
+
+La detección de una posible actualización **no implica autorización para escribirla**.
+
+### Principio
+
+El objetivo es mantener el contexto y la documentación sincronizados con la evolución real del sistema, **sin generar mantenimiento innecesario ni realizar cambios automáticos**.
+
+El agente debe priorizar cambios de contexto que sean estructurales, relevantes y duraderos, evitando proponer actualizaciones por cada modificación menor o puntual.
+
 ## Acciones que nunca se realizan automáticamente
 
 - Eliminar archivos, carpetas o notas.
