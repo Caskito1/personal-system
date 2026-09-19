@@ -158,6 +158,7 @@ La nota semanal propuesta se nombra por período (ej. `Semana 36.md`), según la
 - Es una bajada ligera del plan semanal, no una nueva sesión de planificación.
 - Muestra: foco de la semana (siempre visible), compromisos del día, acciones previstas (solo las de ese día) y una sugerencia opcional si existe una ventana real (si no, no se muestra).
 - En días con sesión de música, la nota diaria incluye la sección `## Música (N.ª sesión de la semana)` según el formato de `context/rutina.md`, con la tabla en blanco y el checkbox de carga. Nunca se completan datos musicales que el usuario no haya reportado.
+- Al armar la nota diaria, siempre leer `09-Calendario/**` (Toques.md, Eventos.md, Entregas.md) e incluir en `## Compromisos` todos los compromisos del día. Además, incorporar los eventos o cambios que el usuario haya informado en la conversación (aunque aún no estén registrados en el calendario), sin que eso reemplace al calendario como fuente base.
 
 ### Registro diario
 
