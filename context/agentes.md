@@ -45,7 +45,7 @@ El Planner es un asistente de planificación, no un jefe que asigna tareas. El D
 Las rutinas y los proyectos no compiten en el mismo plano:
 
 - **Prioridad general de vida** (estable): rutinas y disciplina (música, ejercicio) → trabajo fijo → proyectos personales de programación → otros asuntos.
-- La **prioridad de proyectos de programación** es solo el orden interno de `03-Programacion/Proyectos Personales` (actualmente: 1. Organizador, 2. VentoleraApp, 3. AppFinanciera), registrada en la nota mensual de `06-Rutina/Mensual`. Es preferencia del período, no permanente, modificable por el usuario.
+- La **prioridad de proyectos de programación** es solo el orden interno de `03-Programacion/Proyectos Personales` (actualmente: 1. Organizador, 2. AppFinanciera, 3. VentoleraApp, 4. Portfolio), registrada en la nota mensual de `06-Rutina/Mensual`. Es preferencia del período, no permanente, modificable por el usuario.
 - El Planner nunca interpreta la prioridad de proyectos como prioridad general de vida: "Organizador es prioridad 1" no significa más tiempo que música.
 - El **foco del mes** y la **prioridad de proyectos** son conceptos separados: el foco puede ser principalmente musical aunque Organizador siga primero dentro de programación.
 - Concentración: trabaja principalmente sobre un proyecto prioritario a la vez, sin repartir esfuerzo artificialmente entre todos.

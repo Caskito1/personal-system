@@ -14,6 +14,7 @@ Estructura:
 03-Programacion/
 ├── Trabajo/
 ├── Proyectos Personales/
+│   ├── Indice de Proyectos.md
 │   ├── AppFinanciera.md
 │   ├── VentoleraApp.md
 │   ├── Organizador Personal.md
@@ -47,23 +48,18 @@ Cada proyecto mantiene su propio contexto; no se mezclan los proyectos en una ú
 
 Aplicación de finanzas (Next.js + Firebase). Es la **fuente operacional** de información financiera; no confundir con el área 04-Finanzas.
 
-Próximos pasos:
+Objetivo actual: alcanzar el **mínimo funcional** para que Finanzas del Organizador pueda operar con datos reales (etapas 2–4 del roadmap financiero en `context/finanzas.md`). **El cierre de Finanzas no equivale al cierre de AppFinanciera:** las funcionalidades futuras propias quedan como backlog de la aplicación y se deciden posteriormente; el endpoint/API es parte de la automatización futura (Fase 6), no de estas etapas.
 
-- usar OpenCode dentro del proyecto;
-- corregir visualización de ingresos freelance;
-- agregar sistema de items pendientes;
-- agregar balance y estadísticas de productividad;
-- crear endpoint/API para futura automatización (el Organizador Personal podrá consultar información de AppFinanciera mediante ese endpoint).
-
-La automatización con Obsidian NO se implementa todavía (Fase 6).
+Estado: **Activo** — Etapa 2 (Auditoría) en curso vía el ciclo de proyectos con opencode (`HANDOFF-02` en el repo). Ver `Indice de Proyectos.md` y `03-Programacion/Proyectos Personales/AppFinanciera.md`.
 
 #### VentoleraApp
 
 Web de la banda La Ventolera (Next.js, Tailwind). Dashboard con login (Firebase) que incluye sistemas de partituras y recibos de sueldo. No confundir con **Fiesta Ventolera** (`02-Musica`, proyecto musical independiente).
 
-Próximos pasos:
+Estado: **En pausa** (detrás de AppFinanciera). Entrará al ciclo de proyectos con opencode (onboarding) cuando termine la parte de AppFinanciera.
 
-- incorporar OpenCode al proyecto;
+Etapas previstas:
+
 - armador de landings dentro del Dashboard;
 - sistema de audios por canción dentro del Dashboard, en la sección de partituras.
 
@@ -82,7 +78,24 @@ Flujo previsto:
 
 #### Portfolio
 
-Portfolio profesional personal con una sección de herramientas ("Tools") para el trabajo diario. Estado actual: **en pausa**. No se elimina.
+Portfolio profesional personal. Estado: **en pausa / en definición**. No se elimina. Dos pilares: (1) CV, carta de presentación y preparación para entrevistas (mantener actualizado con LinkedIn); (2) sección **Tools** con herramientas para optimizar procesos de trabajo (backlog inicial: optimizador/formateador de imágenes, armador de newsletter que toma datos de un PDF y los pasa a HTML). Antes de entrar al ciclo opencode se define el alcance de cada pilar.
+
+### Ciclo de proyectos con opencode
+
+- Cada proyecto personal puede tener su propio ciclo de trabajo con opencode, ejecutado en otra instancia de opencode dentro del repo del proyecto.
+- Componentes por repo: `AGENTS.md` (reglas), `ROADMAP.md` (roadmap propio), `HANDOFF-<etapa>.md` (orden de trabajo), `opencode.json` (config mínima), `.opencode/agent/` (subagentes) y `REPORT-<etapa>.md` (entregable de vuelta).
+- El Vault es el **panel de control y registro permanente**: `Indice de Proyectos.md` + nota por proyecto guardan estado, etapa, próxima acción y decisiones.
+- `personal-system` actúa como **coordinador**: redacta los HANDOFF, evalúa los REPORT y actualiza el panel tras cada decisión del usuario.
+- Estados: proyecto → En definición / Activo / En pausa / Bloqueado; etapa → Pendiente / En curso / En revisión / Aprobada / Ajustes.
+- Ciclo por etapa: HANDOFF → ejecución (en el repo) → REPORT → evaluación → decisión → actualización del Vault.
+
+#### Onboarding de un proyecto
+
+1. Pull/clonar el repo del proyecto.
+2. Instalar/abrir opencode en la carpeta del repo.
+3. Crear `AGENTS.md`, `ROADMAP.md` y `opencode.json` (+ subagentes si corresponden).
+4. Primera intervención: redactar el `HANDOFF` de la etapa inicial (auditoría).
+5. Registrar estado y próxima acción en la nota del Vault y en `Indice de Proyectos.md`.
 
 ### Freelance
 
@@ -94,7 +107,7 @@ Aprendizaje en programación mediante cursos y proyectos personales. Estado: sin
 
 ## Planner y Programación
 
-- La **prioridad interna de proyectos** pertenece a Programación (orden dentro de `03-Programacion/Proyectos Personales`). Actualmente: 1. Organizador Personal · 2. VentoleraApp · 3. AppFinanciera.
+- La **prioridad interna de proyectos** pertenece a Programación (orden dentro de `03-Programacion/Proyectos Personales`). Actualmente: **1. Organizador Personal · 2. AppFinanciera · 3. VentoleraApp · 4. Portfolio**. AppFinanciera va antes que VentoleraApp porque se necesita su mínimo funcional para cerrar Finanzas del Organizador; después de eso se vuelve al Organizador y luego se avanza con los demás.
 - Esta prioridad NO reemplaza la prioridad general de vida del Planner (rutinas/disciplina → trabajo fijo → proyectos de programación → otros asuntos).
 - Un proyecto fuera de foco en el período no genera tareas automáticamente.
 - Un proyecto bloqueado no genera tareas: solo se señala el bloqueo y el Planner espera el checkpoint.
@@ -105,7 +118,7 @@ Aprendizaje en programación mediante cursos y proyectos personales. Estado: sin
 
 - Estructura de 4 carpetas (Trabajo, Proyectos Personales, Freelance, Estudio) aprobada.
 - Los proyectos viven dentro del área correspondiente; los proyectos de programación viven en `03-Programacion/Proyectos Personales`. Ver modelo general en `context/arquitectura.md`.
-- Proyectos vigentes: AppFinanciera, VentoleraApp, Organizador Personal, Portfolio (en pausa).
+- Proyectos vigentes: AppFinanciera, VentoleraApp, Organizador Personal, Portfolio (en pausa/en definición).
 - No confundir AppFinanciera con el área 04-Finanzas; no confundir VentoleraApp con Fiesta Ventolera (02-Musica).
 - Prioridad interna de proyectos = orden dentro de Programación; independiente de la prioridad general de vida.
 

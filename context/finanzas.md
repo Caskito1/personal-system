@@ -106,6 +106,34 @@ Dirección de trabajo del sistema financiero. **Regla: el roadmap es dirección 
 - Las etapas 2–4 requieren trabajo sobre AppFinanciera: primero se audita y se diseña, y solo después se implementa.
 - No priorizar mejoras del Excel ni convertirlo en fuente de verdad; no crear estructuras nuevas en Obsidian sin aprobación.
 
+### Objetivo de las etapas 2–4 y cierre de Finanzas
+
+- Las etapas 2–4 tienen como objetivo llevar AppFinanciera al **mínimo funcional necesario** para que Finanzas pueda operar con datos reales y alimentar el análisis del Organizador (LEER → ANALIZAR → PROPONER); no para terminar la aplicación.
+- **El cierre de Finanzas no equivale al cierre de AppFinanciera.** Alcanzado y validado el mínimo funcional, Finanzas puede considerarse cerrada aunque la aplicación conserve funcionalidades futuras por desarrollar (estadísticas, visualizaciones, mejoras de UX u otros módulos; ejemplos conceptuales que quedan como backlog de la aplicación y se deciden posteriormente).
+- El endpoint y la automatización no son el "final" de AppFinanciera: son una posible etapa posterior del sistema de integración/automatización.
+
+### Criterio de cierre de Finanzas
+
+Finanzas se considera suficientemente cerrada cuando:
+
+1. El modelo financiero necesario está definido.
+2. AppFinanciera registra correctamente la información que se necesita.
+3. Están resueltos los casos relevantes de gastos propios, gastos de terceros/adelantos, reintegros y dinero a recuperar.
+4. AppFinanciera permite obtener los datos financieros necesarios para el Organizador.
+5. Esos datos permiten que el Organizador pueda: **LEER** la situación financiera; **ANALIZAR** evolución y cumplimiento; **PROPONER** acciones o decisiones.
+6. Se trabaja con datos reales durante un período y se generan los resúmenes financieros de Obsidian.
+7. Se puede revisar posteriormente si los datos, cálculos y el modelo funcionan correctamente.
+
+No es requisito para cerrar Finanzas: terminar todas las funcionalidades futuras de AppFinanciera, tener endpoint, automatizar la transferencia de datos al Organizador, integrar automáticamente Obsidian/Planner, ni resolver ahora la etapa 7. La obtención de datos puede ser inicialmente manual; lo importante es que existan, sean confiables y puedan ser utilizados por el Organizador.
+
+### Después del mínimo funcional
+
+1. Dejar Finanzas en **observación** durante un período real (~1 mes).
+2. Acumular datos reales y generar resumen financiero en Obsidian.
+3. Revisar/analizar y comprobar que el modelo y los datos sirven.
+4. Corregir únicamente si aparece un problema real.
+5. Después de esa validación, decidir si se continúa con AppFinanciera o se avanza con otra parte del Organizador/proyectos.
+
 ## Sin definir aún
 
 - Estrategia de inversión posterior a fin de año (se revisa en la revisión anual).
