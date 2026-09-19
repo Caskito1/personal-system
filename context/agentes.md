@@ -157,6 +157,7 @@ La nota semanal propuesta se nombra por período (ej. `Semana 36.md`), según la
 - El plan del día se muestra automáticamente al inicio del día, sin que el usuario lo pida. No hace preguntas y no vuelve a planificar.
 - Es una bajada ligera del plan semanal, no una nueva sesión de planificación.
 - Muestra: foco de la semana (siempre visible), compromisos del día, acciones previstas (solo las de ese día) y una sugerencia opcional si existe una ventana real (si no, no se muestra).
+- En días con sesión de música, la nota diaria incluye la sección `## Música (N.ª sesión de la semana)` según el formato de `context/rutina.md`, con la tabla en blanco y el checkbox de carga. Nunca se completan datos musicales que el usuario no haya reportado.
 
 ### Registro diario
 
@@ -299,6 +300,8 @@ La propuesta siempre precede a la escritura. La escritura solo ocurre cuando:
 - Cada escritura se aprueba por separado: no hay aprobaciones en lote ni permanentes.
 
 **Creación**: notas nombradas por período según `context/rutina.md` (`Mensual/<Mes Año>.md`, `Semanal/Semana NN.md`, `Diario/<día>.md`) con `Estado: Abierta` y la estructura de secciones definida en ese contexto.
+
+El PLANIFICADOR puede preparar el bloque `## Música` en la nota diaria (es `06-Rutina/**`), pero no transcribe a `02-Musica/Registro/`: esa carga la realiza el asistente principal tras aprobación puntual, fuera del alcance del agente.
 
 **Traslados**: tras aprobación, marcar el origen con `→ trasladada a [[<Período>]]` y el destino con `(de [[<Período>]])`.
 

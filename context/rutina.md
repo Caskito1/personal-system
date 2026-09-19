@@ -45,6 +45,7 @@ Las tres carpetas existen y están aún vacías.
 - **Nota mensual** (`Mensual/<Mes Año>.md`): `Estado`, vínculo a `[[H1]]`/`[[H2]]`, `## Foco del mes`, `## Rutinas (protegidas)`, `## Prioridad de proyectos`, `## Otros asuntos`, `## Finanzas`.
 - **Nota semanal** (`Semanal/Semana NN.md`): `Estado`, `## Foco de la semana`, `## Calendario`, `## Rutinas`, `## Acciones` (checkboxes, con enlace al objetivo cuando corresponda), `## Registro` (Hecho / No hecho / Extra / Nota; las secciones vacías se omiten).
 - **Nota diaria** (`Diario/<día>.md`): `## Compromisos`, `## Acciones`, `## Registro`.
+- **Bloque de música en notas diarias**: en días con sesión de música, la nota diaria incluye una sección `## Música (N.ª sesión de la semana)` que captura los datos de la sesión: tabla en blanco con filas por bloque (Nota larga, Flexibilidad, Cromáticos, Escalas, Arpegios, Progresiones armónicas, Tema de improvisación) y columnas `Bloque | Ej | Variación | Tempo | Min | Resultado`; más líneas `Repertorio` y `Observaciones`, y el checkbox `- [ ] Cargar en [[Registro/<AAAA-MM-DD>]]`. El checkbox se tilda cuando la sesión quedó cargada en `02-Musica/Registro/<AAAA-MM-DD>.md`.
 - **Cierre de período**: se cambia `Estado: Abierta` por `Estado: Cerrada` y se agrega `## Resumen` al final (plan vs realidad y pendientes, para notas mensuales y semanales). Requiere aprobación explícita. Las notas cerradas son inmutables; cualquier corrección requiere aprobación explícita.
 - **Traslados**: en el origen `→ trasladada a [[<Período>]]`; en el destino `(de [[<Período>]])`.
 

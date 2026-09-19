@@ -97,6 +97,7 @@ El sistema registra cambios de ejercicios/modalidades pero **no decide por sí m
 
 - Los ejercicios pueden indicarse junto a cada área de la rutina cuando se requiera precisión.
 - El registro debe permitir identificar **qué ejercicio/modalidad se utilizó** en cada momento histórico, para que el histórico no quede ambiguo cuando cambien los ejercicios.
+- La nota diaria de `06-Rutina/Diario/<día>.md` incluye el bloque `## Música` como lugar de captura de la sesión; los datos se transcriben luego a `Registro/<AAAA-MM-DD>.md`. La diaria es captura temporal; `Registro/` es el registro permanente.
 
 ### Estadísticas
 
