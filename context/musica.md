@@ -107,11 +107,19 @@ El sistema registra cambios de ejercicios/modalidades pero **no decide por sí m
 - El repertorio por toque se registra dentro de la nota del toque, solamente cuando corresponda, dividido en **Repaso** y **Nuevo**.
 - Fiesta Ventolera (proyecto musical) es independiente de VentoleraApp (programación, `03-Programacion/Proyectos Personales`).
 
+### Ensayos
+
+- Ensayo semanal con Ventolera: **jueves de 19:30 a 22:00**, salvo cancelación (lo avisa el usuario).
+- Es **independiente** de la rutina de 3 sesiones de estudio semanales (estudio = técnica, improvisación y repertorio).
+- El **repertorio** es lo único que influye en los toques; el estudio de repertorio y el ensayo **van de la mano** (lo que se estudia de repertorio se ve en el ensayo).
+- Si un ensayo requiere estudiar repertorio específico, el usuario lo comunica.
+
 ## Planner y Música
 
 - El Planner solo necesita conocer: el **objetivo base de 3 sesiones**, ensayos, toques, compromisos musicales y acciones de repertorio necesarias para eventos (cuando un evento lo requiera).
 - El Planner **NO necesita** conocer: detalle de cada ejercicio, tempos, duración individual por ejercicio ni historial técnico. Esa información permanece en Música.
 - El Planner coordina **cuándo proteger la práctica**; Música registra **qué ocurrió** durante ella.
+- Al abrir una semana nueva, el Planner pregunta por los ensayos (cancelaciones o cambios). El ensayo del jueves se incluye en la planificación semanal y en la daily del jueves.
 
 ## Decisiones
 
@@ -122,6 +130,7 @@ El sistema registra cambios de ejercicios/modalidades pero **no decide por sí m
 - Una nota de registro por sesión (`Registro/<AAAA-MM-DD>.md`).
 - Resúmenes semanales y mensuales persistentes en estadísticas.
 - El sistema registra pero no decide el cambio de ejercicios/modalidades.
+- Ensayo de Ventolera: jueves 19:30–22:00, aparte de las 3 sesiones de estudio. Solo el repertorio incide en los toques; ensayo y estudio de repertorio van de la mano.
 
 ## Sin definir aún
 
