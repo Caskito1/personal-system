@@ -94,16 +94,16 @@ Estructura:
 Dirección de trabajo del sistema financiero. **Regla: el roadmap es dirección de trabajo, no autorización de ejecución.** Flujo: Analizar → Proponer → Usuario decide → Planificar → Usuario aprueba → Ejecutar. No es una lista rígida de tareas.
 
 1. **Inversiones** — cargar y estructurar los datos reales históricos de Gletir. *(Ejecutada: `Inversiones/Historial de Inversiones.md` con datos 2026.)*
-2. **Auditoría AppFinanciera** — revisar cómo registra hoy gastos, tarjeta, ingresos, totales y balances.
-3. **Diseño gastos de terceros/reintegros** — proponer el cambio mínimo para representar gastos propios, gastos de terceros/adelantos, reintegros y dinero a recuperar, sin refactorizar innecesariamente.
-4. **Implementación AppFinanciera** — solo después de aprobar el diseño (etapa 3).
+2. **Auditoría AppFinanciera** — revisar cómo registra hoy gastos, tarjeta, ingresos, totales y balances. *(Ejecutada: `REPORT-02.md` en el repo, read-only.)*
+3. **Diseño gastos de terceros/reintegros** — proponer el cambio mínimo para representar gastos propios, gastos de terceros/adelantos, reintegros y dinero a recuperar, sin refactorizar innecesariamente. Se apoya en la evidencia de la Etapa 0 de AppFinanciera.
+4. **Implementación AppFinanciera** — solo después de aprobar el diseño.
 5. **Datos reales financieros** — incorporar ingresos (desde ~jun 2026), gastos, inversiones y evolución con las fuentes ordenadas.
 6. **Resúmenes financieros** — resúmenes mensuales en Obsidian con datos reales (evolución y cumplimiento de objetivos).
 7. **Automatización** — endpoint/API de AppFinanciera e integración con Obsidian/Planner cuando las fuentes estén estables.
 
-- **Estado actual:** etapa 1 completada (historial de inversiones 2026 cargado).
-- **Próximo paso:** etapa 2 — Auditoría de AppFinanciera.
-- Las etapas 2–4 requieren trabajo sobre AppFinanciera: primero se audita y se diseña, y solo después se implementa.
+- **Estado actual:** etapa 1 completada (historial de inversiones 2026 cargado). Etapa 2 (Auditoría de AppFinanciera) completada (`REPORT-02.md`, read-only).
+- **Próximo paso:** las etapas 3 y 4 (diseño e implementación de gastos de terceros/reintegros) se alimentan de la **Etapa 0 de AppFinanciera** (Relevamiento + contexto interno, en ejecución en el repo; ver `context/AppFinanciera.md` y `context/HANDOFF-ETAPA-0-MAPA-CONTEXTO.md`).
+- Las etapas 2–4 requieren trabajo sobre AppFinanciera: primero se releva/audita y se diseña, y solo después se implementa. La Etapa 0 de AppFinanciera (nuevo esquema de etapas 0–4 de la aplicación) es el relevamiento que sostiene este diseño.
 - No priorizar mejoras del Excel ni convertirlo en fuente de verdad; no crear estructuras nuevas en Obsidian sin aprobación.
 
 ### Objetivo de las etapas 2–4 y cierre de Finanzas
