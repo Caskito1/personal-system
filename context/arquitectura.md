@@ -142,6 +142,21 @@ Ciclo de planificación: **mensual → semanal → diaria → ejecución/registr
 - Sin métricas de energía o cansancio.
 - El plan no es un contrato: planificar → ejecutar → observar la realidad → ajustar → continuar.
 
+## Coordinación con OpenCode por proyecto
+
+Principio de arquitectura del trabajo con opencode en los proyectos personales:
+
+> **El Organizador planifica y coordina. El OpenCode de cada proyecto conserva y utiliza el conocimiento técnico necesario para ejecutar autónomamente esas planificaciones.**
+
+`personal-system` no es el repositorio del conocimiento técnico de cada proyecto.
+
+- **El Organizador conoce:** objetivos; prioridades; decisiones; roadmap; estado de cada proyecto; qué debe hacerse; qué resultado se espera; restricciones y criterios importantes.
+- **El repo del proyecto conserva:** conocimiento técnico; arquitectura; funcionamiento real; modelo de dominio; estructura de datos; convenciones; agentes; reglas de trabajo; contexto específico de la aplicación; decisiones técnicas relevantes.
+
+Aplicado a proyectos, el ciclo es: el Organizador redacta un HANDOFF relativamente conciso; el OpenCode del proyecto lo ejecuta respetando su propio contexto (estructura `context/` estándar, ver `context/programacion.md`); el proyecto devuelve un REPORT; el Organizador evalúa y actualiza el panel del Vault.
+
+**Relación conceptual dentro del modelo general:** la planificación que alimenta `PLANIFICACIÓN → EJECUCIÓN → REVISIÓN` es del Organizador; la ejecución técnica que la materializa vive en el repo de cada proyecto, organizada por su propio opencode.
+
 ## Definiciones
 
 ### Objetivos

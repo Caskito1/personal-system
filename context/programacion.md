@@ -50,7 +50,7 @@ Aplicación de finanzas (Next.js + Firebase). Es la **fuente operacional** de in
 
 Objetivo actual: alcanzar el **mínimo funcional** para que Finanzas del Organizador pueda operar con datos reales (etapas 2–4 del roadmap financiero en `context/finanzas.md`). **El cierre de Finanzas no equivale al cierre de AppFinanciera:** las funcionalidades futuras propias quedan como backlog de la aplicación y se deciden posteriormente; el endpoint/API es parte de la automatización futura (Fase 6), no de estas etapas.
 
-Estado: **Activo** — Etapa 3 (Diseño) en revisión: la auditoría (Etapa 2) está completada en el repo (`REPORT-02.md`). El borrador de diseño, las preguntas pendientes (P1–P8) y la memoria de sesión viven en `context/AppFinanciera-Stage3.md`; el respaldo del contexto de sesión está en `CONTEXTO-ETAPA3.md` del repo. Ver también `Indice de Proyectos.md` y `03-Programacion/Proyectos Personales/AppFinanciera.md`.
+Estado: **Activo** — Etapa 0 (Relevamiento + construcción del contexto interno) definida y **por ejecutar**. La auditoría (Etapa 2) está completada en el repo (`REPORT-02.md`). El roadmap (etapas 0–4), las decisiones funcionales cerradas y el estado viven en `context/AppFinanciera.md`; el HANDOFF pendiente de aprobación en `context/HANDOFF-ETAPA-0-MAPA-CONTEXTO.md`; el respaldo del contexto de sesión original está en `CONTEXTO-ETAPA3.md` del repo. Ver también `Indice de Proyectos.md` y `03-Programacion/Proyectos Personales/AppFinanciera.md`.
 
 #### VentoleraApp
 
@@ -82,8 +82,25 @@ Portfolio profesional personal. Estado: **en pausa / en definición**. No se eli
 
 ### Ciclo de proyectos con opencode
 
+- Principio de arquitectura: **el Organizador planifica y coordina; el OpenCode de cada proyecto conserva y utiliza el conocimiento técnico necesario para ejecutar autónomamente esas planificaciones**. Ver `context/arquitectura.md`.
 - Cada proyecto personal puede tener su propio ciclo de trabajo con opencode, ejecutado en otra instancia de opencode dentro del repo del proyecto.
 - Componentes por repo: `AGENTS.md` (reglas), `ROADMAP.md` (roadmap propio), `HANDOFF-<etapa>.md` (orden de trabajo), `opencode.json` (config mínima), `.opencode/agent/` (subagentes) y `REPORT-<etapa>.md` (entregable de vuelta).
+- Estructura de conocimiento estándar dentro del repo del proyecto (a confirmar/ajustar por relevamiento en cada etapa correspondiente):
+
+```
+<repo>/
+├── AGENTS.md                  (delgado: cómo trabajar + qué leer antes de trabajar)
+├── ROADMAP.md
+├── context/
+│   ├── MAPA-<PROYECTO>.md     (puerta de entrada: qué es, estructura, dónde está cada cosa, referencias)
+│   ├── arquitectura.md        (cómo funciona técnicamente)
+│   └── dominio.md             (cómo debe comportarse el sistema, separado de la implementación)
+├── .opencode/agent/           (agentes que el relevamiento justifique)
+├── HANDOFF-*.md
+└── REPORT-*.md
+```
+
+- Regla de contexto: el conocimiento técnico vive en el repo del proyecto (no en `personal-system`). El Organizador conserva en sus contextos: objetivos, prioridades, decisiones, roadmap, estado, qué debe hacerse, resultado esperado, y restricciones/criterios.
 - El Vault es el **panel de control y registro permanente**: `Indice de Proyectos.md` + nota por proyecto guardan estado, etapa, próxima acción y decisiones.
 - `personal-system` actúa como **coordinador**: redacta los HANDOFF, evalúa los REPORT y actualiza el panel tras cada decisión del usuario.
 - Estados: proyecto → En definición / Activo / En pausa / Bloqueado; etapa → Pendiente / En curso / En revisión / Aprobada / Ajustes.
