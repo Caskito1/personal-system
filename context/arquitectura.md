@@ -130,7 +130,7 @@ Sobre todo el proceso opera el **Planner como asistente de planificación** (Dis
 LEER → ANALIZAR → RECORDAR CONTEXTO → PROPONER → USUARIO DECIDE → PLANIFICAR
 ```
 
-Ciclo de planificación: **mensual → semanal → diaria → ejecución/registro → revisión ↺**.
+Ciclo de planificación: **mensual → semanal → diaria → ejecución/registro → revisión ↺**. La operación del ciclo —cierre del período → revisión (REVISOR) → persistencia de hallazgos → propuesta (PLANIFICADOR) → decisión → apertura— está definida en `context/agentes.md` (sección **Ciclo del sistema**).
 
 - El Planner sugiere y no manda; la decisión final siempre es del usuario.
 - Las rutinas de música y ejercicio son comportamiento estable, no proyectos que compiten por prioridad: se protegen antes de llenar espacios con proyectos.
@@ -218,7 +218,7 @@ Representará lo que realmente ocurrió, con registro diario liviano (Hecho / No
 
 ### Revisión
 
-Comparará lo planificado con lo ejecutado y alimentará el siguiente ciclo de planificación. Responde: qué se planeó, qué ocurrió, qué quedó pendiente, qué apareció sin estar previsto, qué se traslada, qué se descarta, qué se prioriza después. **No implementada aún.**
+La ejecuta el **REVISOR** (agente read-only, Fase 3.6 en curso) entre el cierre del período y la propuesta del siguiente (Ciclo del sistema, `context/agentes.md`). Compara lo planificado con lo ejecutado sobre el período **cerrado**, clasifica las acciones y responde: qué se planeó, qué ocurrió, qué quedó pendiente, qué apareció sin estar previsto, qué se traslada, qué se descarta, qué se prioriza después. Los hallazgos relevantes se persisten en la nota del período siguiente (sección `## Hallazgos de la revisión de <período>`) y los consume el **PLANIFICADOR** como contexto de la próxima propuesta. La operación completa está definida en `context/agentes.md` (sección **REVISOR**).
 
 ### Aclaraciones de proyectos
 
