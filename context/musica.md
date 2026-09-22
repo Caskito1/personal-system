@@ -42,12 +42,13 @@ Base: **3 sesiones de estudio por semana** (referencia del sistema y del Planner
 Orden estable de la rutina de estudio:
 
 1. Nota larga
-2. Flexibilidad
-3. Cromáticos
-4. Escalas
-5. Arpegios
-6. Progresiones armónicas
-7. Tema de improvisación
+2. Registro Bajo
+3. Flexibilidad
+4. Cromáticos
+5. Escalas
+6. Arpegios
+7. Progresiones armónicas
+8. Tema de improvisación
 
 El **tema de improvisación** se trabaja en tres pasadas: **Pasada 1 — Acordes**, **Pasada 2 — Melodía**, **Pasada 3 — Improvisación**.
 
@@ -60,7 +61,7 @@ El sistema registra cambios de ejercicios/modalidades pero **no decide por sí m
 ### Estudio / Ejercicios
 
 - `Estudio/Rutina de Estudio del Instrumento.md` = nota base que describe la rutina en sí. El texto se actualiza cuando cambian los ejercicios.
-- `Estudio/Ejercicios.md` = nota general con los ejercicios organizados por área (Nota larga, Flexibilidad, Cromáticos, Escalas, Arpegios, Progresiones armónicas, Tema de improvisación), en tabla o estructura organizada.
+- `Estudio/Ejercicios.md` = nota general con los ejercicios organizados por área (Nota larga, Registro Bajo, Flexibilidad, Cromáticos, Escalas, Arpegios, Progresiones armónicas, Tema de improvisación), en tabla o estructura organizada.
 - No existe una nota independiente por cada ejercicio.
 - Columnas/estructura de `Ejercicios.md`: ejercicio, modalidad, objetivo, tempo, PDF (referencia cuando corresponda), estado, observaciones e historial de cambios.
 - Los ejercicios van a crecer y evolucionar: cuando un ejercicio cambia, se registra el cambio y **se mantiene el anterior como histórico** (no se sobrescribe la historia). El registro de la fecha de cambio preserva qué modalidad era la vigente en cada momento.
@@ -88,7 +89,7 @@ El sistema registra cambios de ejercicios/modalidades pero **no decide por sí m
 ### Registro de sesión
 
 - Una nota independiente por cada sesión: `Registro/<AAAA-MM-DD>.md`.
-- La plantilla única de la sesión es `Registro/Plantilla de Sesion.md`: sigue el orden de la rutina (los 7 bloques, con ejercicio, variación, tempo, duración, resultado y observación por bloque), incluye el **Tema de improvisación** en sus 3 pasadas y una sección de **Repertorio**.
+- La plantilla única de la sesión es `Registro/Plantilla de Sesion.md`: sigue el orden de la rutina (los 8 bloques, con ejercicio, variación, tempo, duración, resultado y observación por bloque), incluye el **Tema de improvisación** en sus 3 pasadas y una sección de **Repertorio**.
 - El registro debe permitir identificar **qué ejercicio/modalidad se utilizó** en cada momento histórico, para que el histórico no quede ambiguo cuando cambien los ejercicios.
 - La nota diaria de `06-Rutina/Diario/<día>.md` incluye el bloque `## Música` con una tabla como captura temporal de la sesión; los datos se transcriben luego a `Registro/<AAAA-MM-DD>.md`. La diaria es captura temporal; `Registro/` es el registro permanente.
 
