@@ -695,7 +695,7 @@ No se ejecuta automáticamente. El usuario lo solicita ("corré el VERIFICADOR")
 ### Permisos
 
 Por configuración el VERIFICADOR puede:
-- Leer dentro del proyecto y de `Proyectos Personales` (`C:/Users/Usuario/Desktop/Proyectos Personales/**`).
+- Leer dentro del proyecto y de `Proyectos Personales` (`~/Desktop/Proyectos Personales/**`; base portable resuelta desde el home del usuario actual, sin rutas absolutas específicas de máquina).
 - Ejecutar comandos read-only de Git e inspección de estructura (`bash: allow`), con la disciplina de la sección **Comandos permitidos y prohibidos**.
 - **NO editar** (`edit: deny`).
 - NO lanzar tareas (`task: deny`).

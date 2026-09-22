@@ -10,12 +10,12 @@ permission:
   websearch: deny
   external_directory:
     "*": "deny"
-    "C:/Users/Usuario/Desktop/Proyectos Personales/**": "allow"
+    "~/Desktop/Proyectos Personales/**": "allow"
 ---
 
 Lee `AGENTS.md`, `roadmap.md` y `context/agentes.md` y aplica estrictamente la sección **VERIFICADOR** de `context/agentes.md`.
 
-ROOT: `C:/Users/Usuario/Desktop/Proyectos Personales`
+ROOT: `~/Desktop/Proyectos Personales` (base portable: `~` se resuelve como el home del usuario actual en cada máquina; nunca hardcodear el perfil ni una ruta absoluta específica)
 
 ESPERADOS (única fuente de verdad; actualizar al agregar proyectos):
 - personal-system
