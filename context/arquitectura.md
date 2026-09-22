@@ -42,7 +42,8 @@ Organizador Personal
 └── 09-Calendario
     ├── Toques
     ├── Eventos
-    └── Entregas
+    ├── Entregas
+    └── Recordatorios
 ```
 
 ## Áreas vs tipos
@@ -188,7 +189,14 @@ Criterio de clasificación: **objeto que se quiere comprar** → `08-Adquisicion
 
 ### Calendario
 
-Capa transversal en `09-Calendario`: representa restricciones y contexto temporal (toques, ensayos, eventos, entregas, grabaciones). No reemplaza el lugar donde vive la información original: sus notas son índices/contexto temporal que enlazan al contenido real. Los toques continúan viviendo en `02-Musica/Toques`; los eventos generales sin área natural pueden vivir en `09-Calendario/Eventos.md`. Ensayos, grabaciones y otros eventos musicales sin lugar preciso todavía viven su dato temporal en `Eventos.md` y luego se enlazan desde su ámbito natural cuando exista.
+Capa transversal en `09-Calendario`: representa restricciones y contexto temporal (toques, ensayos, eventos, entregas, grabaciones, recordatorios). No reemplaza el lugar donde vive la información original: sus notas son índices/contexto temporal que enlazan al contenido real. Los toques continúan viviendo en `02-Musica/Toques`; los eventos generales sin área natural pueden vivir en `09-Calendario/Eventos.md`. Ensayos, grabaciones y otros eventos musicales sin lugar preciso todavía viven su dato temporal en `Eventos.md` y luego se enlazan desde su ámbito natural cuando exista.
+
+Dentro de `09-Calendario`, los **recordatorios** viven separados de los eventos, en `09-Calendario/Recordatorios/`. Diferencia conceptual entre ambas entidades:
+
+- **Evento**: algo que ocurre en el calendario (ensayo, toque, cumpleaños, partido, clase, reunión, compromiso con fecha/hora).
+- **Recordatorio**: algo que se quiere tener presente. Puede estar asociado a una fecha/hora, pero no representa necesariamente un evento de calendario (p. ej. "Terapia Rebeca — 21:00", "Resultado de la resonancia de mi madre — 12:00").
+
+No se mezclan ambas entidades conceptualmente: los eventos salen de los archivos de evento (`Eventos.md`, `Toques.md`, `Entregas.md`) y los recordatorios de `09-Calendario/Recordatorios/*`.
 
 Las clases de conducir tienen su fuente original en el proyecto [[Licencia de Conducir]] (`05-Otros Objetivos`); el calendario solo indexa la fecha.
 

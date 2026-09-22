@@ -199,9 +199,12 @@ La nota semanal propuesta se nombra por período (ej. `Semana 36.md`), según la
 
 - El plan del día se muestra automáticamente al inicio del día, sin que el usuario lo pida. No hace preguntas y no vuelve a planificar.
 - Es una bajada ligera del plan semanal, no una nueva sesión de planificación.
-- Muestra: foco de la semana (siempre visible), compromisos del día, acciones previstas (solo las de ese día) y una sugerencia opcional si existe una ventana real (si no, no se muestra).
-- En días con sesión de música, la nota diaria incluye la sección `## Música (N.ª sesión de la semana)` según el formato de `context/rutina.md`, con la tabla en blanco y el checkbox de carga. El bloque se agrega al armar la daily; si el usuario reporta una sesión después (anuncia que va a tocar o confirma que tocó), se incorpora a la daily ya creada sin que deba pedirse. Nunca se completan datos musicales que el usuario no haya reportado.
-- Al armar la nota diaria, siempre leer `09-Calendario/**` (Toques.md, Eventos.md, Entregas.md) e incluir en `## Compromisos` todos los compromisos del día. Además, incorporar los eventos o cambios que el usuario haya informado en la conversación (aunque aún no estén registrados en el calendario), sin que eso reemplace al calendario como fuente base.
+- Muestra: `## Recordatorios` (solo los de HOY), `## Próximos Eventos` (solo los de HOY), `## Acciones` del día agrupadas por categoría, `## Panorama de la semana` (recordatorios y eventos de la semana + objetivos semanales) y una sugerencia opcional si existe una ventana real (si no, no se muestra). Las secciones/subsecciones solo se muestran si tienen contenido (no se generan encabezados vacíos). El foco semanal NO aparece como sección independiente del Daily: los objetivos semanales van en `Panorama de la semana`.
+- En días con sesión de música, la nota diaria incluye `### Música (N.ª sesión de la semana)` según el template de `context/rutina.md`, con la tabla en blanco, Repertorio, Observaciones y el checkbox de carga. El bloque se agrega al armar la daily; si el usuario reporta una sesión después (anuncia que va a tocar o confirma que tocó), se incorpora a la daily ya creada sin que deba pedirse. Nunca se completan datos musicales que el usuario no haya reportado.
+- En días con sesión de ejercicio planificada, la nota diaria incluye `### Ejercicio (N.ª sesión de la semana)` con la tabla `| Ejercicio | Series | Repeticiones | Observaciones |`, siguiendo la lógica de sesión semanal equivalente a Música.
+- Al armar la nota diaria, siempre leer `09-Calendario/**` (Recordatorios/, Toques.md, Eventos.md, Entregas.md): incluir en `## Próximos Eventos` los eventos de HOY y en `## Recordatorios` los recordatorios de HOY (desde `09-Calendario/Recordatorios/*` y avisos del usuario del día). Además, incorporar los eventos o cambios que el usuario haya informado en la conversación (aunque aún no estén registrados en el calendario), sin que eso reemplace al calendario como fuente base.
+- **Acciones ambiguas**: si una acción no encaja claramente en las categorías/subcategorías existentes, NO inventar ni modificar categorías, NO enviarla automáticamente a `Otros` ni decidir silenciosamente dónde colocarla. Preguntar: "Esta tarea no encaja claramente en las categorías actuales. ¿Dónde querés colocarla?" y esperar la decisión del usuario.
+- **Anotaciones de continuidad**: "Recordatorio para mañana", "Ver esto mañana", "Repasar X mañana" y similares NO se convierten en recordatorios de `09-Calendario/Recordatorios/`: pertenecen al flujo de cierre/apertura del Daily (traslado de información al día siguiente) y se conservan como parte de la planificación o registro diario. No existe integración automática entre el flujo de continuidad y el sistema de Recordatorios.
 
 ### Registro diario
 
@@ -310,9 +313,10 @@ La propuesta se entrega en un solo mensaje estructurado, con el orden del nivel 
 
 ```
 ## <Día> — <fecha>
-- Foco de la semana
-- Compromisos del día
-- Acciones previstas
+- Recordatorios de HOY (solo si existen, desde 09-Calendario/Recordatorios)
+- Próximos Eventos de HOY (solo si existen, desde 09-Calendario)
+- Acciones previstas (agrupadas por categoría; solo las de ese día)
+- Panorama de la semana (recordatorios, eventos y objetivos semanales)
 - Sugerencia (solo si existe)
 ```
 
