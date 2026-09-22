@@ -232,6 +232,7 @@ La ejecuta el **REVISOR** (agente read-only, Fase 3.6 en curso) entre el cierre 
 
 - **Ventolera (web)** = proyecto de programación (`03-Programacion/Proyectos Personales`): web de la banda La Ventolera, dashboard, Next.js/Tailwind.
 - **Fiesta Ventolera** = proyecto musical (`02-Musica`): evento/gala de la banda. Proyecto independiente del de programación.
+- **La Ventolera (categoría del Daily)** = categoría de presentación de `## Acciones` en la nota diaria (ver `context/rutina.md`): tareas que realizo para la banda que no son actividad musical ni desarrollo del proyecto web (producción, organización, diseño de afiches, comunicación, contenido/publicación/gestión del sitio). No es área física ni proyecto: no existe carpeta, nota ni estructura propia; solo clasifica tareas en el Daily. "Web" por sí sola no determina la categoría: desarrollo/funcionalidad → Ventolera (web); contenido/publicación/gestión → La Ventolera.
 
 ### Fuente financiera para seguimiento de objetivos
 
