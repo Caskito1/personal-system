@@ -561,6 +561,148 @@ Por configuración el REVISOR puede:
 
 El REVISOR nunca propone ejecutar; su salida final es el reporte. Si el usuario pide aplicar lo detectado (traslados, cierres, etc.) o persistir hallazgos, esa escritura la ejecuta el asistente principal (o el PLANIFICADOR, bajo el protocolo de aprobación) y nunca el REVISOR.
 
+## VERIFICADOR
+
+### Propósito
+
+El VERIFICADOR es un agente **read-only dedicado** que realiza la verificación técnica transversal del estado de los repositorios de `Proyectos Personales`: estructura esperada y estado Git de cada repositorio. Centraliza el **aviso** del estado de los proyectos, no el trabajo de los proyectos.
+
+Cada proyecto mantiene su propio contexto y su propio OpenCode. El VERIFICADOR detecta y avisa (p. ej. `AppFinanciera ⚠ cambios pendientes`), pero la resolución se hace en el repositorio correspondiente (p. ej. `opencode-AppFinanciera/`). No decide qué hacer ni revisa la ejecución registrada: es exclusivamente técnico y transversal.
+
+Cubre dos usos: **apertura de sesión** (¿la máquina está en estado coherente para trabajar?) y **cierre de sesión** (¿los repositorios quedaron en estado cerrado?).
+
+### División de responsabilidades
+
+- **VERIFICADOR**: lee, inspecciona (solo lectura), clasifica estados e informa el veredicto de sesión.
+- **PLANIFICADOR**: decide qué hacer.
+- **REVISOR**: revisa qué pasó (la realidad registrada en `06-Rutina`).
+- **OpenCode de cada proyecto**: trabaja y resuelve los problemas de ese proyecto.
+- **Usuario**: decide qué resolver y cuándo; el VERIFICADOR no ejecuta ningún cierre.
+
+### Niveles de verificación
+
+**Nivel 1 — Paneo general (estructura):** inspecciona la estructura de `Proyectos Personales/` y comprueba su coherencia con la estructura esperada:
+
+- repositorios esperados;
+- repositorios adicionales (se informan como **ADICIONAL**, no como error);
+- carpetas faltantes;
+- carpetas inesperadas relevantes;
+- repositorios Git;
+- repositorios Git anidados;
+- estructuras incorrectas (proyecto mal ubicado, padre que no ignora al hijo, etc.).
+
+No asumir que solo existirán los proyectos actuales: el diseño permite agregar `opencode-Ventolera/Ventolera`, `opencode-Portfolio/Portfolio`, etc., sin rediseñar el agente. La lista `ESPERADOS` vive en el registro técnico (`.opencode/agent/verificador.md`) y es la única fuente que se actualiza cuando el sistema crece.
+
+**Nivel 2 — Estado Git:** para cada repositorio identificado verifica:
+
+- branch actual;
+- HEAD;
+- working tree (modificados, staged, untracked relevantes);
+- commits locales sin push;
+- commits remotos pendientes de incorporar;
+- divergencia local/remota;
+- remote configurado.
+
+El objetivo es clasificar cada repo como `✓ LIMPIO Y SINCRONIZADO` o con el estado que requiera atención.
+
+### Comandos permitidos y prohibidos
+
+Por configuración el VERIFICADOR tiene `bash: allow` para poder ejecutar la inspección read-only. La disciplina READ-ONLY es responsabilidad del agente.
+
+**Permitidos (solo lectura):**
+- `git branch --show-current`
+- `git log --oneline [-N]`
+- `git status` / `git status --porcelain`
+- `git log @{u}..HEAD --oneline` (commits sin push)
+- `git log HEAD..@{u} --oneline` (commits remotos pendientes)
+- `git remote -v`
+- `git check-ignore <ruta>` (repositorios anidados)
+- inspección de estructura read-only (`Test-Path`, `Get-ChildItem`)
+
+**Prohibidos (todo lo que modifique archivos, estado Git o red):**
+- `git add`, `git commit`, `git push`, `git pull`, `git fetch`, `git reset`, `git merge`, `git rebase`, `git checkout` destructivo, `git clean`, `git rm`, `git revert`, `git stash`, `git switch`, `git branch -d/-D`, y cualquier modificación de remotes (`remote set-url/add/remove`);
+- cualquier comando de escritura/borrado de archivos (`New-Item`, `Set-Content`, `Out-File`, `Remove-Item`, `Move-Item`, `Rename-Item`).
+
+### Repositorios anidados
+
+La estructura actual:
+
+```
+opencode-AppFinanciera/
+└── AppFinanciera/
+    └── .git/
+```
+
+es intencional. `opencode-AppFinanciera` y `AppFinanciera` son repositorios Git independientes. NO marcar un repositorio Git anidado como error automáticamente y NO descender al hijo al computar el estado del padre. Además, verificar que el repositorio padre ignore al hijo (actualmente `opencode-AppFinanciera/.gitignore` ignora `AppFinanciera/`); si no lo ignora, se reporta como diferencia estructural.
+
+### GitHub
+
+El VERIFICADOR no administra GitHub. Solo determina si el estado local está sincronizado con el remote configurado. No asume nombres de repositorios de GitHub: el remote histórico `appFinancieraOpenCode.git` (de `opencode-AppFinanciera`) NO es un error; se trabaja con el remote real configurado. No modifica remotes.
+
+### Clasificación
+
+Clasificación simple de estados por repositorio:
+
+- **OK**: limpio y sincronizado.
+- **CAMBIOS LOCALES**: working tree con modificados/staged/untracked relevantes.
+- **COMMITS SIN PUSH**: hay commits locales no pusheados (`@{u}..HEAD`).
+- **REMOTOS PENDIENTES**: hay commits remotos no incorporados (`HEAD..@{u}`).
+- **DIVERGENCIA**: commits sin push y remotos pendientes a la vez.
+- **SIN REMOTE**: el repo no tiene remote configurado (informativo, no error).
+- **ERROR DE ACCESO**: no se pudo leer el repo.
+- **REPO NO ENCONTRADO**: un repo esperado no existe.
+- **ESTRUCTURA INESPERADA**: diferencias estructurales relevantes.
+- **ADICIONAL** (informativo): repo/carpeta presente y no esperado.
+
+Severidad por repo (de mayor a menor): DIVERGENCIA > REMOTOS PENDIENTES > COMMITS SIN PUSH > CAMBIOS LOCALES > SIN REMOTE > OK. ERROR DE ACCESO / REPO NO ENCONTRADO / ESTRUCTURA INESPERADA se reportan a nivel estructura. No crear una taxonomía más compleja.
+
+### Formato de salida
+
+Un solo mensaje estructurado:
+
+```
+VERIFICACIÓN DE SESIÓN — <apertura|cierre>
+FECHA: <…>
+
+ESTRUCTURA
+✓ Estructura general correcta
+(o ⚠ <diferencias enumeradas>)
+
+REPOSITORIOS
+personal-system          branch=staging  HEAD=<hash>  ✓
+opencode-AppFinanciera   branch=master   HEAD=<hash>  ⚠ 2 archivos modificados
+└─ AppFinanciera         branch=main     HEAD=<hash>  ✓ (el padre ignora al hijo ✓)
+
+RESULTADO
+✓ SESIÓN EN ESTADO CORRECTO
+(o ✗ SESIÓN CON ESTADOS PENDIENTES)
+
+ACCIÓN
+Revisar: <repos a revisar>   (solo si hay pendientes)
+```
+
+Los repos con varios problemas se muestran en varios ítems (`⚠ modificados + ⚠ commits sin push`). Los ADICIONALES se listan sin marcarlos como error. El informe siempre termina indicando una acción: el usuario resuelve los pendientes en el repo correspondiente.
+
+### Apertura y cierre de sesión
+
+- **Al abrir**: detectar si la máquina está en un estado coherente antes de comenzar a trabajar (estructura, cambios locales, commits pendientes, sincronización). Informa; no bloquea.
+- **Al cerrar**: comprobar si los repositorios quedaron en estado cerrado. `ABRIR → VERIFICAR → TRABAJAR → CERRAR → VERIFICAR`. Una sesión NO se considera técnicamente cerrada si quedan repos con estados pendientes que deberían haberse sincronizado; pero el VERIFICADOR solo informa, no ejecuta el cierre.
+
+### Disparo
+
+No se ejecuta automáticamente. El usuario lo solicita ("corré el VERIFICADOR") al abrir o cerrar sesión, o cuando quiera consultar el estado.
+
+### Permisos
+
+Por configuración el VERIFICADOR puede:
+- Leer dentro del proyecto y de `Proyectos Personales` (`C:/Users/Usuario/Desktop/Proyectos Personales/**`).
+- Ejecutar comandos read-only de Git e inspección de estructura (`bash: allow`), con la disciplina de la sección **Comandos permitidos y prohibidos**.
+- **NO editar** (`edit: deny`).
+- NO lanzar tareas (`task: deny`).
+- NO consultar la web (`webfetch`/`websearch`: deny).
+
+El VERIFICADOR nunca ejecuta la resolución de un problema; su salida final es el informe con el veredicto y qué repos requieren atención.
+
 ## Sin definir aún
 
 - Ajustes a la escritura del PLANIFICADOR que surjan de la prueba real de la Fase 3.5.
