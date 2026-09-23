@@ -121,7 +121,7 @@ Entradas:
 - Los objetivos y su contenido real en `01-Objetivos/2026/**`.
 - La planificación y ejecución previas en `06-Rutina/**`.
 - Los hallazgos persistidos de la revisión del período anterior (sección `## Hallazgos de la revisión de <período>` en la nota del período en curso).
-- El calendario (`09-Calendario/**`), proyectos de programación (`03-Programacion/Proyectos Personales/**`), música (`02-Musica/**`), otros asuntos (`05-Otros Objetivos/**`).
+- El calendario (`09-Calendario/**`), proyectos de programación (`03-Programacion/Proyectos Personales/**`), música (`02-Musica/**`), otros asuntos (`05-Otros/**`).
 
 ### Contextos que consulta
 
@@ -143,7 +143,7 @@ Cuando corresponda:
 - `09-Calendario/**`
 - `03-Programacion/Proyectos Personales/**`
 - `02-Musica/Toques/**`
-- `05-Otros Objetivos/**`
+- `05-Otros/**`
 - `07-Ideas/**`
 
 También puede consultar otros contextos solamente si el objetivo solicitado lo requiere.
@@ -191,7 +191,7 @@ Secuencia de la propuesta semanal:
 - **Partidos de Peñarol**: fechas y horarios, provistos por el usuario en la conversación o leídos de `09-Calendario/Eventos` si los cargó con anticipación.
 - **Estado actual de la madre del usuario**: estudios/procedimientos pendientes y viajes a Pando, derivado del calendario y de lo que cuente el usuario.
 
-Las acciones que provienen de Otros Objetivos o del hogar se proponen siempre con su enlace o etiqueta (p. ej. `Otros objetivos: [[Arreglo del Pasillo]]`) para no confundirlas con repertorio ni con otros bloques.
+Las acciones que provienen de Otros o del hogar se proponen siempre con su enlace o etiqueta (p. ej. `Otros: [[Arreglo del Pasillo]]`) para no confundirlas con repertorio ni con otros bloques.
 
 La nota semanal propuesta se nombra por período (ej. `Semana 36.md`), según la convención definida en `context/rutina.md`.
 
@@ -440,7 +440,7 @@ Cuando corresponda al período:
 - `09-Calendario/**`
 - `03-Programacion/Proyectos Personales/**`
 - `02-Musica/Toques/**`
-- `05-Otros Objetivos/**`
+- `05-Otros/**`
 
 ### Flujo de lectura
 

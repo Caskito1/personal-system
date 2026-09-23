@@ -28,7 +28,7 @@ Organizador Personal
 │   ├── Inversiones
 │   └── Resumenes
 │
-├── 05-Otros Objetivos
+├── 05-Otros
 │
 ├── 06-Rutina
 │   ├── Mensual
@@ -48,7 +48,7 @@ Organizador Personal
 
 ## Áreas vs tipos
 
-- Las carpetas principales representan **áreas de vida**: Objetivos, Música, Programación, Finanzas, Otros Objetivos, Rutina, Ideas.
+- Las carpetas principales representan **áreas de vida**: Objetivos, Música, Programación, Finanzas, Otros, Rutina, Ideas.
 - Las categorías/tipos representan otra dimensión conceptual: Objetivos, Rutinas, Proyectos, Adquisiciones, Eventos, Ideas, Planificación, Ejecución, Revisión.
 - No existe una carpeta transversal `Proyectos` ni una carpeta transversal `Tareas`.
 - Los proyectos viven dentro del área correspondiente.
@@ -168,7 +168,7 @@ Indican qué se quiere conseguir y determinan prioridades. Viven en `01-Objetivo
 
 Actividades recurrentes que no tienen un cierre definitivo. Ejemplos: estudio de instrumento, estudio de programación, trabajo fijo, ejercicio, rutina financiera.
 
-- La **definición** de cada rutina vive en su área natural (Música → `02-Musica/Estudio`; ejercicio → `05-Otros Objetivos`).
+- La **definición** de cada rutina vive en su área natural (Música → `02-Musica/Estudio`; ejercicio → `05-Otros`).
 - La **ejecución** vive en `06-Rutina` (notas mensual/semanal/diaria), que enlaza a la definición sin copiarla.
 
 ### Proyectos
@@ -185,7 +185,7 @@ idea → investigar → decidir → comprar → adquirido
 
 No generan automáticamente tareas. Viven en `08-Adquisiciones`. Las compras grandes/patrimoniales (p. ej. un auto) siguen viviendo en `04-Finanzas/Objetivos Financieros`.
 
-Criterio de clasificación: **objeto que se quiere comprar** → `08-Adquisiciones`; **trabajo/instalación/reparación** → `05-Otros Objetivos`. Los materiales de una reparación no se registran como adquisición separada.
+Criterio de clasificación: **objeto que se quiere comprar** → `08-Adquisiciones`; **trabajo/instalación/reparación** → `05-Otros`. Los materiales de una reparación no se registran como adquisición separada.
 
 ### Calendario
 
@@ -198,7 +198,7 @@ Dentro de `09-Calendario`, los **recordatorios** viven separados de los eventos,
 
 No se mezclan ambas entidades conceptualmente: los eventos salen de los archivos de evento (`Eventos.md`, `Toques.md`, `Entregas.md`) y los recordatorios de `09-Calendario/Recordatorios/*`.
 
-Las clases de conducir tienen su fuente original en el proyecto [[Licencia de Conducir]] (`05-Otros Objetivos`); el calendario solo indexa la fecha.
+Las clases de conducir tienen su fuente original en el proyecto [[Licencia de Conducir]] (`05-Otros`); el calendario solo indexa la fecha.
 
 ### Contexto dinámico semanal
 

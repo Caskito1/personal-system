@@ -39,7 +39,12 @@ G:\Mi unidad\Organizador Personal\
 │   ├── Objetivos Financieros\
 │   ├── Inversiones\
 │   └── Resumenes\
-├── 05-Otros Objetivos\
+├── 05-Otros\
+│   ├── Otros Objetivos\
+│   ├── Rutina de Ejercicio\
+│   │   └── Registro\
+│   └── NotasPsicologicas\
+│       └── Registro\
 ├── 06-Rutina\
 │   ├── Mensual\
 │   ├── Semanal\
@@ -80,7 +85,7 @@ El Planner funciona como asistente de planificación, no como jefe. El diseño f
 | Música | `context/musica.md` | `02-Musica` |
 | Programación | `context/programacion.md` | `03-Programacion` |
 | Finanzas | `context/finanzas.md` | `04-Finanzas` |
-| Otros Objetivos | `context/otros-objetivos.md` | `05-Otros Objetivos` |
+| Otros | `context/otros-objetivos.md` | `05-Otros` |
 | Rutina | `context/rutina.md` | `06-Rutina` |
 | Ideas | `context/ideas.md` | `07-Ideas` |
 | Agentes | `context/agentes.md` | — |

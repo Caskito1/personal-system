@@ -32,7 +32,7 @@ La carpeta existe y está vacía. La implementación interna del sistema de Idea
 
 ## Decisiones
 
-- `07-Ideas` es una carpeta independiente, separada de `05-Otros Objetivos`.
+- `07-Ideas` es una carpeta independiente, separada de `05-Otros`.
 - Una idea no implica compromiso ni se convierte automáticamente en acción.
 - La revisión de ideas es un proceso posterior, no automático.
 - La implementación interna del sistema de Ideas no está definida todavía.
