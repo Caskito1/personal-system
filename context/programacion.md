@@ -50,7 +50,7 @@ Aplicación de finanzas (Next.js + Firebase). Es la **fuente operacional** de in
 
 Objetivo actual: alcanzar el **mínimo funcional** para que Finanzas del Organizador pueda operar con datos reales (etapas 2–4 del roadmap financiero en `context/finanzas.md`). **El cierre de Finanzas no equivale al cierre de AppFinanciera:** las funcionalidades futuras propias quedan como backlog de la aplicación y se deciden posteriormente; el endpoint/API es parte de la automatización futura (Fase 6), no de estas etapas.
 
-Estado: **Activo** — Etapa 0 (Relevamiento + construcción del contexto interno) definida y **por ejecutar**. La auditoría (Etapa 2) está completada en el repo (`REPORT-02.md`). El roadmap (etapas 0–4), las decisiones funcionales cerradas y el estado viven en `context/AppFinanciera.md`; el HANDOFF pendiente de aprobación en `context/HANDOFF-ETAPA-0-MAPA-CONTEXTO.md`; el respaldo del contexto de sesión original está en `CONTEXTO-ETAPA3.md` del repo. Ver también `Indice de Proyectos.md` y `03-Programacion/Proyectos Personales/AppFinanciera.md`.
+Estado: **Activo** — Etapa 0 (Relevamiento + construcción del contexto interno) **en ejecución vía el OpenCode del repo de AppFinanciera**. La auditoría (Etapa 2) está completada en el repo (`REPORT-02.md`). El roadmap (etapas 0–4), las decisiones funcionales cerradas y el estado viven en `context/AppFinanciera.md`; el HANDOFF aprobado y entregado está en `context/HANDOFF-ETAPA-0-MAPA-CONTEXTO.md` (fuente) y commiteado en el repo destino (`opencode-AppFinanciera`); el respaldo del contexto de sesión original está en `CONTEXTO-ETAPA3.md` del repo. Ver también `Indice de Proyectos.md` y `03-Programacion/Proyectos Personales/AppFinanciera.md`.
 
 #### VentoleraApp
 
