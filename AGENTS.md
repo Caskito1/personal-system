@@ -55,8 +55,7 @@ G:\Mi unidad\Organizador Personal\
     ├── Toques.md
     ├── Eventos.md
     ├── Entregas.md
-    └── Recordatorios\
-        └── Recordatorios.md
+    └── Recordatorios.md
 ```
 
 La relación conceptual es: **Objetivos → Rutina → Revisión → Planificación**: los Objetivos definen qué quiero conseguir; la Rutina define qué voy a hacer y registra qué ocurrió; la Revisión analiza qué ocurrió; la Planificación propone qué debería ocurrir después. Revisión y Planificación son funciones de los agentes (Revisor y Planificador); las áreas del Vault son Objetivos y Rutina.
