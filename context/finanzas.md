@@ -102,7 +102,7 @@ Dirección de trabajo del sistema financiero. **Regla: el roadmap es dirección 
 7. **Automatización** — endpoint/API de AppFinanciera e integración con Obsidian/Planner cuando las fuentes estén estables.
 
 - **Estado actual:** etapa 1 completada (historial de inversiones 2026 cargado). Etapa 2 (Auditoría de AppFinanciera) completada (`REPORT-02.md`, read-only).
-- **Próximo paso:** las etapas 3 y 4 (diseño e implementación de gastos de terceros/reintegros) se alimentan de la **Etapa 0 de AppFinanciera** (Relevamiento + contexto interno, en ejecución en el repo; ver `context/AppFinanciera.md` y `context/HANDOFF-ETAPA-0-MAPA-CONTEXTO.md`).
+- **Próximo paso:** las etapas 3 y 4 (diseño e implementación de gastos de terceros/reintegros) se alimentan de la **Etapa 0 de AppFinanciera** (Relevamiento + contexto interno, completada; ver `context/AppFinanciera.md` y `context/HANDOFF-ETAPA-0-MAPA-CONTEXTO.md`).
 - Las etapas 2–4 requieren trabajo sobre AppFinanciera: primero se releva/audita y se diseña, y solo después se implementa. La Etapa 0 de AppFinanciera (nuevo esquema de etapas 0–4 de la aplicación) es el relevamiento que sostiene este diseño.
 - No priorizar mejoras del Excel ni convertirlo en fuente de verdad; no crear estructuras nuevas en Obsidian sin aprobación.
 
