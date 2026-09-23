@@ -170,6 +170,8 @@ Secuencia de la propuesta mensual:
 5. **Preguntas**: solo si la respuesta puede cambiar la propuesta. Si no hay, se omiten.
 6. Esperar la decisión del usuario antes de escribir la nota mensual. Tras la decisión se ajustan foco y prioridad si cambiaron.
 
+El Planner recuerda antes del cierre de mes la relectura mensual de las Notas Psicológicas (`05-Otros/NotasPsicologicas/Registro/`): la escritura es de frecuencia personal (~1–2 semanas) y la relectura del mes completo se hace al cerrar el mes.
+
 Foco del mes y prioridad de proyectos son conceptos separados: el foco puede ser principalmente musical aunque la prioridad de programación no cambie.
 
 La nota mensual propuesta se nombra por período (ej. `Octubre 2026.md`) y enlaza al semestral correspondiente (`[[H1]]`/`[[H2]]`), según la convención definida en `context/rutina.md`.

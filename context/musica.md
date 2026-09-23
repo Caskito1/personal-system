@@ -89,9 +89,9 @@ El sistema registra cambios de ejercicios/modalidades pero **no decide por sí m
 ### Registro de sesión
 
 - Una nota independiente por cada sesión: `Registro/<AAAA-MM-DD>.md`.
-- La plantilla única de la sesión es `Registro/Plantilla de Sesion.md`: sigue el orden de la rutina (los 8 bloques, con ejercicio, variación, tempo, duración, resultado y observación por bloque), incluye el **Tema de improvisación** en sus 3 pasadas y una sección de **Repertorio**.
+- La plantilla única de la sesión es `Registro/Plantilla de Sesion.md`: sigue el orden de la rutina (los 8 bloques, con ejercicio, variación, tempo, duración, resultado y observación por bloque), incluye el **Tema de improvisación** en sus 3 pasadas, las secciones de **Repertorio** y **Nota** (Observaciones generales) y un **Resumen de la sesión** (síntesis narrativa breve y opcional de cómo fue la sesión en conjunto; no reemplaza las observaciones puntuales). Estructura final: `## Sesión` → `## Rutina` → `## Repertorio` → `## Nota` → `## Resumen de la sesión`.
 - El registro debe permitir identificar **qué ejercicio/modalidad se utilizó** en cada momento histórico, para que el histórico no quede ambiguo cuando cambien los ejercicios.
-- La nota diaria de `06-Rutina/Diario/<día>.md` incluye el bloque `## Música` con una tabla como captura temporal de la sesión; los datos se transcriben luego a `Registro/<AAAA-MM-DD>.md`. La diaria es captura temporal; `Registro/` es el registro permanente.
+- La nota diaria de `06-Rutina/Diario/<día>.md` incluye el bloque `## Música` con una tabla como captura temporal de la sesión; los datos se transcriben luego a `Registro/<AAAA-MM-DD>.md`. El bloque diario incluye `### Repertorio`, `### Observaciones` y `### Resumen de la sesión`, y el resumen se transcribe al registro permanente junto con el resto de la sesión. La diaria es captura temporal; `Registro/` es el registro permanente.
 
 ### Estadísticas
 
