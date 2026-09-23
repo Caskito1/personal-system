@@ -593,34 +593,60 @@ Cubre dos usos: **apertura de sesión** (¿la máquina está en estado coherente
 
 No asumir que solo existirán los proyectos actuales: el diseño permite agregar `opencode-Ventolera/Ventolera`, `opencode-Portfolio/Portfolio`, etc., sin rediseñar el agente. La lista `ESPERADOS` vive en el registro técnico (`.opencode/agent/verificador.md`) y es la única fuente que se actualiza cuando el sistema crece.
 
-**Nivel 2 — Estado Git:** para cada repositorio identificado verifica:
+**Nivel 2 — Verificación Git:** comprobaciones de estado git por repositorio (branch, HEAD, working tree, commits sin push, remotos pendientes, divergencia, remote), con actualización previa de las referencias remotas. Procedimiento completo en la subsección **Nivel 2 — Verificación Git**.
 
-- branch actual;
-- HEAD;
-- working tree (modificados, staged, untracked relevantes);
-- commits locales sin push;
-- commits remotos pendientes de incorporar;
-- divergencia local/remota;
-- remote configurado.
+### Nivel 2 — Verificación Git
 
-El objetivo es clasificar cada repo como `✓ LIMPIO Y SINCRONIZADO` o con el estado que requiera atención.
+Antes de realizar cualquier comparación entre el estado local y el remote, actualizar las referencias remotas:
 
-### Comandos permitidos y prohibidos
+```bash
+git fetch origin
+```
 
-Por configuración el VERIFICADOR tiene `bash: allow` para poder ejecutar la inspección read-only. La disciplina READ-ONLY es responsabilidad del agente.
+`git fetch origin` es una operación de solo lectura respecto del trabajo local: únicamente actualiza las referencias remotas locales (`refs/remotes/origin/*`). No modifica el working tree, `HEAD` ni las ramas locales.
 
-**Permitidos (solo lectura):**
-- `git branch --show-current`
-- `git log --oneline [-N]`
+Después del `fetch`, realizar las comprobaciones habituales del repositorio:
+
+- estado del working tree;
+- rama actual;
+- commit `HEAD`;
+- commits locales pendientes de push;
+- commits remotos pendientes de traer;
+- divergencia respecto del upstream;
+- estado de sincronización con el remote.
+
+Las comparaciones contra `@{u}` o `origin/<branch>` deben realizarse después del `git fetch origin`, para garantizar que las referencias utilizadas representan el estado actualizado del remote.
+
+El VERIFICADOR informa las diferencias encontradas pero no las resuelve. `pull`, `merge`, `rebase`, `reset`, `push`, `stash`, `revert` y cualquier otra operación que modifique el estado local o remoto continúan prohibidas.
+
+Cuando la verificación haya actualizado las referencias remotas mediante `git fetch origin`, el informe debe indicarlo explícitamente como:
+
+```text
+✓ Verificación remota realizada con refs actualizadas mediante git fetch origin
+```
+
+### VERIFICADOR — Comandos permitidos y prohibidos
+
+El VERIFICADOR es de solo lectura respecto del trabajo y de los repositorios. Puede consultar el estado de Git y actualizar las referencias remotas necesarias para que la verificación represente el estado actual del remote.
+
+#### Comandos permitidos
+
 - `git status` / `git status --porcelain`
-- `git log @{u}..HEAD --oneline` (commits sin push)
-- `git log HEAD..@{u} --oneline` (commits remotos pendientes)
+- `git branch` / `git branch --show-current`
+- `git log` / `git log --oneline [-N]` / `git log @{u}..HEAD --oneline` (commits sin push) / `git log HEAD..@{u} --oneline` (commits remotos pendientes)
+- `git rev-parse`
 - `git remote -v`
+- `git show`
+- `git diff`
 - `git check-ignore <ruta>` (repositorios anidados)
+- `git fetch origin`
 - inspección de estructura read-only (`Test-Path`, `Get-ChildItem`)
 
-**Prohibidos (todo lo que modifique archivos, estado Git o red):**
-- `git add`, `git commit`, `git push`, `git pull`, `git fetch`, `git reset`, `git merge`, `git rebase`, `git checkout` destructivo, `git clean`, `git rm`, `git revert`, `git stash`, `git switch`, `git branch -d/-D`, y cualquier modificación de remotes (`remote set-url/add/remove`);
+`git fetch origin` está permitido exclusivamente para actualizar las referencias remotas locales (`refs/remotes/origin/*`) antes de verificar el estado frente al remote. Es una operación de solo lectura respecto del trabajo local: no modifica el working tree, `HEAD` ni las ramas locales.
+
+#### Prohibidos (todo lo que modifique archivos, estado Git o red)
+
+- `git add`, `git commit`, `git push`, `git pull`, `git reset`, `git merge`, `git rebase`, `git checkout` destructivo, `git clean`, `git rm`, `git revert`, `git stash`, `git switch`, `git branch -d/-D`, y cualquier modificación de remotes (`remote set-url/add/remove`);
 - cualquier comando de escritura/borrado de archivos (`New-Item`, `Set-Content`, `Out-File`, `Remove-Item`, `Move-Item`, `Rename-Item`).
 
 ### Repositorios anidados
@@ -696,7 +722,7 @@ No se ejecuta automáticamente. El usuario lo solicita ("corré el VERIFICADOR")
 
 Por configuración el VERIFICADOR puede:
 - Leer dentro del proyecto y de `Proyectos Personales` (`~/Desktop/Proyectos Personales/**`; base portable resuelta desde el home del usuario actual, sin rutas absolutas específicas de máquina).
-- Ejecutar comandos read-only de Git e inspección de estructura (`bash: allow`), con la disciplina de la sección **Comandos permitidos y prohibidos**.
+- Ejecutar comandos read-only de Git e inspección de estructura (`bash: allow`), con la disciplina de la sección **VERIFICADOR — Comandos permitidos y prohibidos**.
 - **NO editar** (`edit: deny`).
 - NO lanzar tareas (`task: deny`).
 - NO consultar la web (`webfetch`/`websearch`: deny).
