@@ -19,8 +19,9 @@ La intención es poder enviar a futuro HANDOFFs relativamente concisos al OpenCo
 - **Etapa 2 (Auditoría): completada.** Read-only, `REPORT-02.md` en el repo de AppFinanciera. Base de partida, no verdad absoluta.
 - **Etapa 0 (Relevamiento + construcción del contexto interno): COMPLETADA.** Contexto y agentes de Etapa 0 commiteados en `opencode-AppFinanciera` (commit `d0c6fec`), con `REPORT-ETAPA-0.md` incluido (no se copia a `personal-system`); commits commiteados y pusheados (verificado 23/09).
   - `HANDOFF-ETAPA-0-MAPA-CONTEXTO.md` aprobado y entregado: commiteado en el repo `opencode-AppFinanciera`.
-  - Etapa 0 cerrada; no avanzar a la Etapa 1 sin decisión.
-- **Etapas 1–4: NO iniciadas.** Solo se definen aquí su alcance (sección Roadmap).
+  - Etapa 0 cerrada.
+- **Etapa 1 (Base estructural): HANDOFF entregado (24/09).** `HANDOFF-ETAPA-1-BASE-ESTRUCTURAL.md` aprobado y commiteado en `opencode-AppFinanciera` (`9f969c8`). Etapa de diseño/estructura (NO implementa funcionalidades); **pendiente de decisión/inicio**.
+- **Etapas 2–4: NO iniciadas.** Solo se definen aquí su alcance (sección Roadmap).
 - Regla de flujo: **LEER → ANALIZAR → PROPONER → USUARIO DECIDE → PLANIFICAR → USUARIO APRUEBA → EJECUTAR**.
 - Regla permanente de despliegue (cuando haya implementación): **Local → Staging → Producción → Verificación**. Nunca asumir terminado solo porque funciona localmente; verificar tras producción; no modificar producción directamente.
 - Relación con el Organizador: AppFinanciera es un proyecto separado. El Organizador coordina, prioriza, analiza, propone, registra decisiones y controla estado. El OpenCode de AppFinanciera ejecuta y trabaja sobre su repo. El cierre de Finanzas del Organizador **no implica terminar AppFinanciera como producto**.
@@ -105,6 +106,8 @@ No eliminar, migrar, normalizar ni modificar datos durante la Etapa 0. Las decis
 - **Estado del proyecto:** Activo.
 - **Etapa 2 (Auditoría):** completada (`REPORT-02.md`, read-only).
 - **Etapa 0 (Relevamiento + contexto):** completada (contexto y agentes commiteados, `d0c6fec`, con `REPORT-ETAPA-0.md`; pusheados, verificado 23/09). `HANDOFF-ETAPA-0-MAPA-CONTEXTO.md` aprobado y entregado (commiteado en `opencode-AppFinanciera`, 22–23/09).
-- **Etapas 1–4:** no iniciadas.
-- **Próxima acción:** Etapa 1 (Base estructural) — pendiente de decisión; no iniciar.
+- **Etapa 1 (Base estructural):** HANDOFF entregado (24/09, `HANDOFF-ETAPA-1-BASE-ESTRUCTURAL.md`, commit `9f969c8`); pendiente de decisión/inicio. Etapa de diseño → entrega `PROPUESTA-ETAPA-1.md`.
+- **Etapas 2–4:** no iniciadas.
+- **Acceso Firestore:** read-only aprobado por el usuario (24/09) para la Etapa 1, acotado a lo que condiciona la base estructural; sin escrituras/migraciones/índices/reglas.
+- **Próxima acción:** evaluar la `PROPUESTA-ETAPA-1.md` cuando el repo la entregue; decidir el inicio de Etapa 1.
 - **Sesión de origen:** 21/09/2026 (redefinición de la Etapa 0, nuevo esquema de etapas 0–4 y decisiones funcionales cerradas).
