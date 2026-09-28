@@ -27,9 +27,11 @@ G:\Mi unidad\Organizador Personal\
 │       └── H2.md
 ├── 02-Musica\
 │   ├── Estudio\
-│   ├── Instrumento\
 │   ├── Partituras\
-│   └── Toques\
+│   ├── Toques\
+│   ├── Registro\
+│   ├── Clases\
+│   └── Estadisticas\
 ├── 03-Programacion\
 │   ├── Trabajo\
 │   ├── Proyectos Personales\

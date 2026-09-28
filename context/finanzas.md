@@ -94,15 +94,15 @@ Estructura:
 Dirección de trabajo del sistema financiero. **Regla: el roadmap es dirección de trabajo, no autorización de ejecución.** Flujo: Analizar → Proponer → Usuario decide → Planificar → Usuario aprueba → Ejecutar. No es una lista rígida de tareas.
 
 1. **Inversiones** — cargar y estructurar los datos reales históricos de Gletir. *(Ejecutada: `Inversiones/Historial de Inversiones.md` con datos 2026.)*
-2. **Auditoría AppFinanciera** — revisar cómo registra hoy gastos, tarjeta, ingresos, totales y balances. *(Ejecutada: `REPORT-02.md` en el repo, read-only.)*
+2. **Auditoría inicial de AppFinanciera** — revisar cómo registra hoy gastos, tarjeta, ingresos, totales y balances. *(Ejecutada: `REPORT-02.md` en el repo, read-only.)*
 3. **Diseño gastos de terceros/reintegros** — proponer el cambio mínimo para representar gastos propios, gastos de terceros/adelantos, reintegros y dinero a recuperar, sin refactorizar innecesariamente. Se apoya en la evidencia de la Etapa 0 de AppFinanciera.
 4. **Implementación AppFinanciera** — solo después de aprobar el diseño.
 5. **Datos reales financieros** — incorporar ingresos (desde ~jun 2026), gastos, inversiones y evolución con las fuentes ordenadas.
 6. **Resúmenes financieros** — resúmenes mensuales en Obsidian con datos reales (evolución y cumplimiento de objetivos).
 7. **Automatización** — endpoint/API de AppFinanciera e integración con Obsidian/Planner cuando las fuentes estén estables.
 
-- **Estado actual:** etapa 1 completada (historial de inversiones 2026 cargado). Etapa 2 (Auditoría de AppFinanciera) completada (`REPORT-02.md`, read-only).
-- **Próximo paso:** las etapas 3 y 4 (diseño e implementación de gastos de terceros/reintegros) se alimentan de la **Etapa 0 de AppFinanciera** (Relevamiento + contexto interno, completada; ver `context/AppFinanciera.md` y `context/HANDOFF-ETAPA-0-MAPA-CONTEXTO.md`).
+- **Estado actual:** etapa 1 completada (historial de inversiones 2026 cargado). Etapa 2 (Auditoría inicial de AppFinanciera) completada (`REPORT-02.md`, read-only). Del lado de la aplicación, AppFinanciera está en su **Etapa 2 en curso**: 2.1 (taxonomía de gastos fijos + `Otros`) **cerrada** (25/09/2026, commit de producción `b46b570`) y 2.2 (totales del mes con gastos fijos) **pendiente, no implementada** (detalle en `context/AppFinanciera.md`).
+- **Próximo paso:** las etapas 3 y 4 (diseño e implementación de gastos de terceros/reintegros) se alimentan de la **Etapa 0 de AppFinanciera** (Relevamiento + contexto interno, completada; ver `context/AppFinanciera.md` y `opencode-AppFinanciera/HANDOFF-ETAPA-0-MAPA-CONTEXTO.md`).
 - Las etapas 2–4 requieren trabajo sobre AppFinanciera: primero se releva/audita y se diseña, y solo después se implementa. La Etapa 0 de AppFinanciera (nuevo esquema de etapas 0–4 de la aplicación) es el relevamiento que sostiene este diseño.
 - No priorizar mejoras del Excel ni convertirlo en fuente de verdad; no crear estructuras nuevas en Obsidian sin aprobación.
 

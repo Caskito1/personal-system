@@ -24,7 +24,7 @@ Estructura actual:
 - Los niveles Mensual, Semanal y Diario NO se duplican aquí: viven principalmente en 06-Rutina y se vinculan mediante enlaces internos.
 - Una carpeta por año (2026, 2027, …). Cada año nuevo, crear su carpeta.
 - Dentro de cada año: una nota anual (`Objetivos Anuales.md`) y una nota por semestre (`H1.md` = primer semestre, `H2.md` = segundo semestre).
-- Estado actual: las notas 2026 solo contienen su título; el contenido de objetivos aún no existe.
+- Estado actual: `H1.md` y `H2.md` tienen contenido real; `Objetivos Anuales.md` todavía contiene únicamente su título.
 
 ## Decisiones
 

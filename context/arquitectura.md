@@ -13,9 +13,11 @@ Organizador Personal
 │
 ├── 02-Musica
 │   ├── Estudio
-│   ├── Instrumento
 │   ├── Partituras
-│   └── Toques
+│   ├── Toques
+│   ├── Registro
+│   ├── Clases
+│   └── Estadisticas
 │
 ├── 03-Programacion
 │   ├── Trabajo

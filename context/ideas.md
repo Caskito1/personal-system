@@ -8,13 +8,17 @@ Espacio independiente para capturar ideas que quiero conservar y revisar posteri
 
 Carpeta del Vault: `07-Ideas`
 
-Estructura actual:
+Estructura actual (una nota por idea):
 
 ```
 07-Ideas/
+├── Google Calendar desde OpenCode.md
+├── Fixtures de fútbol desde OpenCode.md
+├── Analizador de finanzas.md
+└── Recordatorios de Regalo.md
 ```
 
-La carpeta existe y está vacía. La implementación interna del sistema de Ideas no está definida.
+La carpeta existe y está en uso. La implementación interna del sistema de Ideas (revisión, estados, decisión) sigue sin definirse.
 
 ## Cómo funciona
 
@@ -35,11 +39,11 @@ La carpeta existe y está vacía. La implementación interna del sistema de Idea
 - `07-Ideas` es una carpeta independiente, separada de `05-Otros`.
 - Una idea no implica compromiso ni se convierte automáticamente en acción.
 - La revisión de ideas es un proceso posterior, no automático.
-- La implementación interna del sistema de Ideas no está definida todavía.
+- La captura en uso es una nota por idea dentro de `07-Ideas/`.
+- El sistema de revisión de ideas (revisión, estados, decisión) no está definido todavía.
 
 ## Sin definir aún
 
-- Formato de captura de una idea (¿una nota por idea, otra forma?).
 - Cadencia o mecanismo de la etapa de revisión de ideas.
 - Cómo se registra la decisión final de cada idea (mantener, descartar,
   convertir).
