@@ -134,6 +134,8 @@ El agente debe detectar y señalar posibles necesidades de actualización cuando
 
 No debe considerar necesario actualizar el contexto por cambios puntuales u operativos que no alteren la estructura, las reglas o el funcionamiento general del sistema.
 
+La **detección** puede delegarse al agente **MANTENIMIENTO** (Fase 3.8; sección **MANTENIMIENTO** de `context/agentes.md`, registro técnico en `.opencode/agent/mantenimiento.md`): es read-only, emite hallazgos (`M1, M2…`) con propuesta y severidad, y **no tiene autoridad de escritura**. Las correcciones siguen el flujo completo de esta sección: propuesta → aprobación explícita → aplicación por el asistente principal.
+
 ### Propuesta de mantenimiento
 
 Cuando detecte una posible desincronización, el agente debe **informarla como una propuesta de mantenimiento**, indicando claramente:
