@@ -668,6 +668,8 @@ Después del `fetch`, realizar las comprobaciones habituales del repositorio:
 
 Las comparaciones contra `@{u}` o `origin/<branch>` deben realizarse después del `git fetch origin`, para garantizar que las referencias utilizadas representan el estado actualizado del remote.
 
+`git status` por sí solo **no garantiza la sincronización con el remote**: compara contra las referencias remotas **locales** (`origin/<branch>`), que pueden estar desactualizadas si no se ejecutó un `git fetch origin` reciente. Para verificar la sincronización remota, el protocolo comienza con `git fetch origin` y solo después compara contra `origin/<branch>` (o `@{u}`).
+
 El VERIFICADOR informa las diferencias encontradas pero no las resuelve. `pull`, `merge`, `rebase`, `reset`, `push`, `stash`, `revert` y cualquier otra operación que modifique el estado local o remoto continúan prohibidas.
 
 Cuando la verificación haya actualizado las referencias remotas mediante `git fetch origin`, el informe debe indicarlo explícitamente como:
@@ -762,8 +764,16 @@ Los repos con varios problemas se muestran en varios ítems (`⚠ modificados + 
 
 ### Apertura y cierre de sesión
 
-- **Al abrir**: detectar si la máquina está en un estado coherente antes de comenzar a trabajar (estructura, cambios locales, commits pendientes, sincronización). Informa; no bloquea.
+- **Al abrir**: detectar si la máquina está en un estado coherente antes de comenzar a trabajar (estructura, cambios locales, commits pendientes, sincronización). Informa; no bloquea. Si hubo trabajo o push desde otro dispositivo, la verificación de apertura es **obligatoria** al retomar en la máquina actual (ver **Cobertura por máquina**).
 - **Al cerrar**: comprobar si los repositorios quedaron en estado cerrado. `ABRIR → VERIFICAR → TRABAJAR → CERRAR → VERIFICAR`. Una sesión NO se considera técnicamente cerrada si quedan repos con estados pendientes que deberían haberse sincronizado; pero el VERIFICADOR solo informa, no ejecuta el cierre.
+
+### Cobertura por máquina
+
+El veredicto del VERIFICADOR es válido **únicamente para la máquina/checkout donde se ejecutó**. Git no sincroniza automáticamente entre dispositivos: un repositorio puede estar sincronizado en la máquina donde se hizo el push y, sin tocar nada, aparecer como **REMOTOS PENDIENTES** o **DIVERGENCIA** en otra máquina que no actualizó sus refs locales.
+
+- Al **retomar una sesión desde otro dispositivo** después de haber trabajado o pusheado desde otra máquina, **se debe ejecutar el VERIFICADOR nuevamente** en la máquina actual antes de informar el estado o de asumir sincronización.
+- Un veredicto **OK** en una máquina **no implica OK** en las demás: el informe vale solo donde corrió.
+- En la **apertura de sesión** con trabajo o push previo desde otro dispositivo, la verificación es obligatoria en la máquina actual aunque todo parezca sincronizado (ver `git status` y refs locales en **Nivel 2 — Verificación Git**).
 
 ### Disparo
 
