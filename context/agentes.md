@@ -4,7 +4,7 @@
 
 Especificación central de los agentes de OpenCode del Personal System: responsabilidades, límites, protocolo de aprobación y comportamiento. Es la fuente de verdad del comportamiento de cada agente; el registro técnico en `.opencode/agent/` solo contiene la configuración mínima y referencia a este archivo.
 
-Estado actual: un agente (**PLANIFICADOR**) implementado (Fase 3.3, READ-ONLY) y probado en condiciones reales (**Fase 3.4**: Semana 38, veredicto A). La escritura de notas de Rutina (**3.5**, completada) habilita al PLANIFICADOR a escribir en `06-Rutina/**` con aprobación explícita (sección **Escritura de notas de Rutina**). El **REVISOR** (3.6) está especificado en este archivo, con registro técnico en `.opencode/agent/revisor.md`, y su diseño fue ajustado tras la prueba real (integración con el PLANIFICADOR y persistencia de hallazgos, regla temporal, niveles semanal/mensual, cierre como acción visible del período). El veredicto del usuario sobre el diseño de la Fase 3.6 se dio el 27/09/2026, tras su uso real en el cierre de la Semana 39.
+Estado actual: un agente (**PLANIFICADOR**) implementado (Fase 3.3, READ-ONLY) y probado en condiciones reales (**Fase 3.4**: Semana 38, veredicto A). La escritura de notas de Rutina (**3.5**, completada) habilita al PLANIFICADOR a escribir en `06-Rutina/**` con aprobación explícita (sección **Escritura de notas de Rutina**). **REVISOR (3.6): implementado y cerrado (27/09/2026)** — especificado en este archivo, registro técnico en `.opencode/agent/revisor.md`; diseño ajustado tras la prueba real (integración con el PLANIFICADOR y persistencia de hallazgos, regla temporal, niveles semanal/mensual, cierre como acción visible del período) y uso real en el cierre de la Semana 39. **VERIFICADOR (3.7): implementado y cerrado (27/09/2026)** — agente read-only de verificación técnica transversal de los repositorios de Proyectos Personales, sección **VERIFICADOR** en este archivo, registro técnico en `.opencode/agent/verificador.md`; uso real en apertura/cierre de sesión 22–23/09 y en el cierre de la Semana 39.
 
 ## Ubicación
 
@@ -54,7 +54,7 @@ Los 7 pasos, en detalle:
 PLANIFICAR SEMANA
 → ejecutar
 → CERRAR SEMANA                    ← acción visible del período
-→ REVISOR                          ← disparado por el cierre, no manual
+→ REVISOR                          ← tras el cierre, lo solicita el usuario (no automático)
 → CONVERSACIÓN DE CIERRE           ← instancia explícita, previa a la apertura
 → propuesta siguiente semana
 → usuario decide
@@ -68,7 +68,7 @@ PLANIFICAR SEMANA
 PLANIFICAR MES
 → ejecutar semanas
 → CERRAR MES                       ← acción visible del período
-→ REVISOR MENSUAL                  ← disparado por el cierre
+→ REVISOR MENSUAL                  ← tras el cierre, lo solicita el usuario (no automático)
 → CONVERSACIÓN DE CIERRE           ← instancia explícita, previa a la apertura
 → propuesta siguiente mes
 → usuario decide
@@ -103,7 +103,7 @@ El Planner es un asistente de planificación, no un jefe que asigna tareas. El D
 
 - **Ciclo**: LEER → ANALIZAR → RECORDAR CONTEXTO → PROPONER → el usuario decide → PLANIFICAR.
 - **Ciclo de planificación**: mensual → semanal → diaria → ejecución/registro → revisión ↺, operado según el **Ciclo del sistema** (CERRAR → REVISAR/VERIFICAR → CONVERSACIÓN DE CIERRE → PROPONER → DECIDIR → ABRIR → PLANIFICAR/EJECUTAR). La revisión de ejecución la produce el **REVISOR**; el PLANIFICADOR consume sus hallazgos persistidos como contexto (sección **REVISOR**).
-- **La CONVERSACIÓN DE CIERRE es requisito previo a PROPONER**: el PLANIFICADOR propone sobre un período ya abierto y decidido, no en nombre propio. Su paso de propuesta no puede usarse para saltarse la conversación ni la aprobación previa (ver **Ciclo del sistema**).
+- **PROPONER precede a la apertura**: el PLANIFICADOR elabora su propuesta en la CONVERSACIÓN DE CIERRE / PRE-PLANIFICACIÓN, sobre la información del período **cerrado** y de la conversación, **antes** de que el usuario decida y de que se abra el período siguiente. No propone en nombre propio; "proponer sobre un período ya abierto y decidido" corresponde al paso PLANIFICAR/EJECUTAR (paso 7), no a PROPONER (paso 4). Su paso de propuesta no puede usarse para saltarse la conversación ni la aprobación previa (ver **Ciclo del sistema**).
 - Sugiere, no manda. La decisión final siempre es del usuario; no decide por él ni asume trabajo.
 
 Las rutinas y los proyectos no compiten en el mismo plano:
@@ -130,7 +130,7 @@ Criterio de capacidad (qué proteger antes de llenar):
 - No pregunta nada cuya respuesta ya esté disponible: si la información está en el Vault, se muestra. Solo pregunta si la respuesta puede cambiar la propuesta.
 - Recordatorio contextual de lunes: breve, no un interrogatorio; siempre incluye los recordatorios recurrentes (partidos de Peñarol y estado de la madre).
 - Para el seguimiento del objetivo financiero, la fuente es el **Excel**; la aplicación financiera queda para los movimientos/datos operativos.
-- Examen de conducir: referencia temporal en la primera quincena de octubre.
+- Examen de conducir: miércoles 30/09, 08:15 (ver `09-Calendario/Eventos.md`).
 - El plan no es un contrato: planificar → ejecutar → observar la realidad → ajustar → continuar.
 - Considera el contexto dinámico semanal (visitas, partidos, toques/ensayos, compromisos puntuales) sin convertirlo en eventos permanentes del calendario.
 
@@ -361,6 +361,7 @@ La propuesta se entrega en un solo mensaje estructurado, con el orden del nivel 
 - Recordatorios de HOY (solo si existen, desde 09-Calendario/Recordatorios.md)
 - Próximos Eventos de HOY (solo si existen, desde 09-Calendario)
 - Acciones previstas (agrupadas por categoría; solo las de ese día)
+- Notas del día (bandeja de captura rápida; no implica tarea)
 - Panorama de la semana (recordatorios, eventos y objetivos semanales)
 - Sugerencia (solo si existe)
 ```
