@@ -133,7 +133,7 @@ Sobre todo el proceso opera el **Planner como asistente de planificación** (Dis
 LEER → ANALIZAR → RECORDAR CONTEXTO → PROPONER → USUARIO DECIDE → PLANIFICAR
 ```
 
-Ciclo de planificación: **mensual → semanal → diaria → ejecución/registro → revisión ↺**. La operación del ciclo —cierre del período → revisión (REVISOR) → persistencia de hallazgos → propuesta (PLANIFICADOR) → decisión → apertura— está definida en `context/agentes.md` (sección **Ciclo del sistema**).
+Ciclo de planificación: **mensual → semanal → diaria → ejecución/registro → revisión ↺**. La operación del ciclo —cierre del período → revisión (REVISOR) → conversación de cierre → propuesta (PLANIFICADOR) → decisión del usuario → apertura → planificación— está definida en `context/agentes.md` (sección **Ciclo del sistema**). El período siguiente no se abre antes de que exista una decisión explícita del usuario: su nota se crea en ese momento, junto con los hallazgos persistidos de la revisión anterior.
 
 - El Planner sugiere y no manda; la decisión final siempre es del usuario.
 - Las rutinas de música y ejercicio son comportamiento estable, no proyectos que compiten por prioridad: se protegen antes de llenar espacios con proyectos.
@@ -200,6 +200,13 @@ Dentro de `09-Calendario`, los **recordatorios** viven separados de los eventos,
 
 No se mezclan ambas entidades conceptualmente: los eventos salen de los archivos de evento (`Eventos.md`, `Toques.md`, `Entregas.md`) y los recordatorios de `09-Calendario/Recordatorios.md`.
 
+Además, en un eje distinto al anterior, el calendario distingue **compromisos propios** de **eventos contextuales o de terceros** (regla completa en `context/agentes.md`, sección **Compromisos propios y eventos contextuales**):
+
+- **Compromiso propio y verificable**: actividad cuya ejecución puede verificarse —un ensayo al que el usuario debe asistir, una clase de conducir o de instrumento, un toque propio, un examen—. Puede generar una acción tickeable en `## Acciones`; si no se realiza, queda como pendiente o falla real y aparece en la revisión.
+- **Evento contextual o de terceros**: algo cuyo cumplimiento no depende de una acción propia del usuario —un cumpleaños de otra persona, el tratamiento médico de un familiar, una fiesta a la que se asiste—. No genera automáticamente una tarea: vive en `## Próximos Eventos`, en `## Notas del día` o como contexto de la revisión.
+
+Un evento contextual registrado solo en el calendario no se convierte retroactivamente en pendiente ni en acción incumplida. Los eventos del calendario que no fueron convertidos en acciones no son automáticamente acciones incumplidas. Esta distinción no crea áreas ni categorías nuevas: se resuelve con las secciones que ya existen.
+
 Las clases de conducir tienen su fuente original en el proyecto [[Licencia de Conducir]] (`05-Otros`); el calendario solo indexa la fecha.
 
 ### Contexto dinámico semanal
@@ -220,15 +227,15 @@ Utilizará objetivos, rutinas, proyectos, calendario, bloqueos y contexto para d
 - **Semanal**: organiza y distribuye el trabajo según la realidad, considerando calendario, bloqueos, rutinas, proyectos activos y lo ocurrido la semana previa. El contexto dinámico se registra de forma ligera en la nota semanal.
 - **Diaria**: bajada liviana del plan semanal a días concretos; no es una tercera sesión compleja de planificación.
 
-**No implementada aún.**
+**Implementada en uso real** por el agente PLANIFICADOR en niveles mensual, semanal y diario, bajo el protocolo de aprobación de escritura y con alcance limitado a `06-Rutina/**` (ver `context/agentes.md`, sección **PLANIFICADOR**).
 
 ### Ejecución
 
-Representará lo que realmente ocurrió, con registro diario liviano (Hecho / No hecho / Extra / Nota). Las secciones vacías se omiten; no es un formulario. **No implementada aún.**
+Representará lo que realmente ocurrió, con registro diario liviano (Hecho / No hecho / Extra / Nota). Las secciones vacías se omiten; no es un formulario. **Implementada en uso real** en las notas diarias de `06-Rutina/Diario`.
 
 ### Revisión
 
-La ejecuta el **REVISOR** (agente read-only, Fase 3.6 en curso) entre el cierre del período y la propuesta del siguiente (Ciclo del sistema, `context/agentes.md`). Compara lo planificado con lo ejecutado sobre el período **cerrado**, clasifica las acciones y responde: qué se planeó, qué ocurrió, qué quedó pendiente, qué apareció sin estar previsto, qué se traslada, qué se descarta, qué se prioriza después. Los hallazgos relevantes se persisten en la nota del período siguiente (sección `## Hallazgos de la revisión de <período>`) y los consume el **PLANIFICADOR** como contexto de la próxima propuesta. La operación completa está definida en `context/agentes.md` (sección **REVISOR**).
+La ejecuta el **REVISOR** (agente read-only, Fase 3.6 completada) entre el cierre del período y la apertura del siguiente (Ciclo del sistema, `context/agentes.md`). Compara lo planificado con lo ejecutado sobre el período **cerrado**, clasifica las acciones y responde: qué se planeó, qué ocurrió, qué quedó pendiente, qué apareció sin estar previsto, qué se traslada, qué se descarta, qué se prioriza después. Los hallazgos relevantes se persisten en la nota del período siguiente —que se crea en el paso **ABRIR**, después de la decisión del usuario— como sección `## Hallazgos de la revisión de <período>`, y los consume el **PLANIFICADOR** como contexto de la próxima propuesta. La operación completa está definida en `context/agentes.md` (sección **REVISOR**).
 
 ### Aclaraciones de proyectos
 

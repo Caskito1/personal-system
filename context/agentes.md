@@ -4,7 +4,7 @@
 
 Especificación central de los agentes de OpenCode del Personal System: responsabilidades, límites, protocolo de aprobación y comportamiento. Es la fuente de verdad del comportamiento de cada agente; el registro técnico en `.opencode/agent/` solo contiene la configuración mínima y referencia a este archivo.
 
-Estado actual: un agente (**PLANIFICADOR**) implementado (Fase 3.3, READ-ONLY) y probado en condiciones reales (**Fase 3.4**: Semana 38, veredicto A). La escritura de notas de Rutina (**3.5**, completada) habilita al PLANIFICADOR a escribir en `06-Rutina/**` con aprobación explícita (sección **Escritura de notas de Rutina**). El **REVISOR** (3.6) está especificado en este archivo, con registro técnico en `.opencode/agent/revisor.md`, y su diseño fue ajustado tras la prueba real (integración con el PLANIFICADOR y persistencia de hallazgos, regla temporal, niveles semanal/mensual, cierre como acción visible del período); queda pendiente el veredicto del usuario.
+Estado actual: un agente (**PLANIFICADOR**) implementado (Fase 3.3, READ-ONLY) y probado en condiciones reales (**Fase 3.4**: Semana 38, veredicto A). La escritura de notas de Rutina (**3.5**, completada) habilita al PLANIFICADOR a escribir en `06-Rutina/**` con aprobación explícita (sección **Escritura de notas de Rutina**). El **REVISOR** (3.6) está especificado en este archivo, con registro técnico en `.opencode/agent/revisor.md`, y su diseño fue ajustado tras la prueba real (integración con el PLANIFICADOR y persistencia de hallazgos, regla temporal, niveles semanal/mensual, cierre como acción visible del período). El veredicto del usuario sobre el diseño de la Fase 3.6 se dio el 27/09/2026, tras su uso real en el cierre de la Semana 39.
 
 ## Ubicación
 
@@ -34,22 +34,32 @@ No existe carpeta correspondiente en el Vault: los agentes no poseen contenido p
 
 ## Ciclo del sistema
 
-El sistema opera en dos ciclos por período (semanal y mensual) con la misma secuencia:
+El sistema opera en dos ciclos por período (semanal y mensual) con la **misma secuencia** de 7 pasos:
 
-**CERRAR → REVISAR → USAR HALLAZGOS → PLANIFICAR → DECIDIR → ABRIR**
+**CERRAR → REVISAR/VERIFICAR → CONVERSACIÓN DE CIERRE → PROPONER → USUARIO DECIDE → ABRIR → PLANIFICAR/EJECUTAR**
+
+Los 7 pasos, en detalle:
+
+1. **CERRAR** — el usuario y el asistente cierran el período anterior: reconciliación de `## Acciones`, revisión de pendientes y verificación del estado del período. Requiere aprobación explícita.
+2. **REVISAR / VERIFICAR** — el REVISOR analiza la realidad del período **cerrado**: ejecución, acciones, pendientes, desvíos, hallazgos, restricciones e información relevante para el período siguiente. Es read-only y no se dispara solo.
+3. **CONVERSACIÓN DE CIERRE / PRE-PLANIFICACIÓN** — instancia explícita de conversación entre asistente y usuario **antes** de crear o abrir el período siguiente. Sirve para revisar los hallazgos, analizar pendientes, distinguir qué sigue siendo relevante, detectar tareas o eventos que aparecieron durante el período, revisar capacidad y restricciones del período siguiente, aclarar ambigüedades y preparar la propuesta. **No es la apertura del período.** No es necesariamente una reunión formal o extensa: su profundidad depende de lo ocurrido en el período. Si no hay nada complejo que analizar puede ser breve, pero **no se omite en silencio**.
+4. **PROPONER** — el asistente presenta una propuesta concreta: foco, acciones, pendientes trasladados, nuevas acciones, rutinas, compromisos, restricciones relevantes y prioridades derivadas de los hallazgos.
+5. **USUARIO DECIDE** — el usuario acepta, modifica, rechaza o reformula la propuesta. **Una propuesta no se considera aprobada por silencio.**
+6. **ABRIR** — solo después de la decisión explícita se materializa el período siguiente: se crea o completa la nota, se persisten los hallazgos de la revisión anterior, se incorporan las decisiones aprobadas, se construye `## Acciones` y el período queda listo para funcionar. **Antes de este paso la nota del período siguiente no existe.**
+7. **PLANIFICAR / EJECUTAR** — el PLANIFICADOR trabaja sobre el período ya abierto y decidido. Este paso no puede usarse para saltarse la conversación ni la aprobación previa.
 
 **Ciclo semanal:**
 
 ```
 PLANIFICAR SEMANA
 → ejecutar
-→ CERRAR SEMANA      ← acción visible del período
-→ REVISOR            ← disparado por el cierre, no manual
-→ hallazgos
-→ PLANIFICADOR
+→ CERRAR SEMANA                    ← acción visible del período
+→ REVISOR                          ← disparado por el cierre, no manual
+→ CONVERSACIÓN DE CIERRE           ← instancia explícita, previa a la apertura
 → propuesta siguiente semana
 → usuario decide
-→ ABRIR SIGUIENTE SEMANA
+→ ABRIR SIGUIENTE SEMANA           ← aquí se crea la nota con los hallazgos
+→ ejecutar
 ```
 
 **Ciclo mensual:**
@@ -57,13 +67,13 @@ PLANIFICAR SEMANA
 ```
 PLANIFICAR MES
 → ejecutar semanas
-→ CERRAR MES         ← acción visible del período
-→ REVISOR MENSUAL    ← disparado por el cierre
-→ hallazgos
-→ PLANIFICADOR
+→ CERRAR MES                       ← acción visible del período
+→ REVISOR MENSUAL                  ← disparado por el cierre
+→ CONVERSACIÓN DE CIERRE           ← instancia explícita, previa a la apertura
 → propuesta siguiente mes
 → usuario decide
-→ ABRIR SIGUIENTE MES
+→ ABRIR SIGUIENTE MES              ← aquí se crea la nota con los hallazgos
+→ ejecutar
 ```
 
 Reglas del ciclo:
@@ -71,8 +81,19 @@ Reglas del ciclo:
 - **El cierre es una acción visible del período**: forma parte del funcionamiento normal del sistema y aparece en los objetivos/acciones del período (p. ej. `- [ ] Cerrar la semana (Estado → Cerrada + Resumen)`). El PLANIFICADOR la incluye al proponer el período.
 - **La revisión NO es una tarea diaria ni una acción independiente**: no se agenda dentro de la semana como un ítem más que el usuario deba recordar; queda conceptualmente encadenada al cierre (**CERRAR → REVISAR**).
 - **El cierre habilita la revisión**: el REVISOR se usa en el flujo normal sobre períodos ya cerrados. El disparo lo solicita el usuario tras el cierre (no es automático; ver **Disparo** en la sección REVISOR).
-- **La secuencia no se da vuelta**: no se abre un período y se revisa el anterior después. El período siguiente nace con los hallazgos de la revisión del anterior.
-- Los hallazgos relevantes de la revisión se persisten en la nota del período siguiente para que el siguiente PLANIFICADOR los use como contexto (ver **Persistencia de hallazgos** en la sección REVISOR).
+- **La secuencia no se da vuelta**: no se abre un período y se revisa el anterior después.
+- **Los hallazgos no se persisten en una nota que todavía no existe**: la nota del período siguiente se crea en el paso **ABRIR**, y los hallazgos de la revisión del período anterior se escriben como parte de su creación (ver **Persistencia de hallazgos** en la sección REVISOR).
+
+### Protección al abrir un período
+
+Antes de abrir un período nuevo, verificar que:
+
+1. el período anterior fue revisado;
+2. hubo **CONVERSACIÓN DE CIERRE** con propuesta;
+3. existe una **decisión explícita** del usuario;
+4. si corresponde persistir hallazgos de la revisión anterior, la sección `## Hallazgos de la revisión de <período>` queda incluida en la nota que se crea.
+
+Si alguno de estos elementos falta, el flujo **se detiene y pregunta** en vez de continuar silenciosamente.
 
 ## PLANIFICADOR
 
@@ -81,7 +102,8 @@ Reglas del ciclo:
 El Planner es un asistente de planificación, no un jefe que asigna tareas. El Diseño Funcional V2 es su especificación funcional base.
 
 - **Ciclo**: LEER → ANALIZAR → RECORDAR CONTEXTO → PROPONER → el usuario decide → PLANIFICAR.
-- **Ciclo de planificación**: mensual → semanal → diaria → ejecución/registro → revisión ↺, operado según el **Ciclo del sistema** (CERRAR → REVISAR → USAR HALLAZGOS → PLANIFICAR → DECIDIR → ABRIR). La revisión de ejecución la produce el **REVISOR**; el PLANIFICADOR consume sus hallazgos persistidos como contexto (sección **REVISOR**).
+- **Ciclo de planificación**: mensual → semanal → diaria → ejecución/registro → revisión ↺, operado según el **Ciclo del sistema** (CERRAR → REVISAR/VERIFICAR → CONVERSACIÓN DE CIERRE → PROPONER → DECIDIR → ABRIR → PLANIFICAR/EJECUTAR). La revisión de ejecución la produce el **REVISOR**; el PLANIFICADOR consume sus hallazgos persistidos como contexto (sección **REVISOR**).
+- **La CONVERSACIÓN DE CIERRE es requisito previo a PROPONER**: el PLANIFICADOR propone sobre un período ya abierto y decidido, no en nombre propio. Su paso de propuesta no puede usarse para saltarse la conversación ni la aprobación previa (ver **Ciclo del sistema**).
 - Sugiere, no manda. La decisión final siempre es del usuario; no decide por él ni asume trabajo.
 
 Las rutinas y los proyectos no compiten en el mismo plano:
@@ -197,6 +219,21 @@ Las acciones que provienen de Otros o del hogar se proponen siempre con su enlac
 
 La nota semanal propuesta se nombra por período (ej. `Semana 36.md`), según la convención definida en `context/rutina.md`.
 
+### Compromisos propios y eventos contextuales
+
+El calendario (`09-Calendario/**`) mezcla dos cosas distintas. La distinción no crea categorías nuevas: se resuelve con las secciones que ya existen (`## Acciones`, `## Calendario`, `## Próximos Eventos`, `## Notas del día`).
+
+**Compromiso propio y verificable**: una actividad cuya ejecución del usuario puede verificarse. Ejemplos: un ensayo al que el usuario debe asistir, una clase de conducir, una clase de instrumento, un toque propio, un examen, u otra actividad similar. Puede generar una acción tickeable en `## Acciones`. Si no se realiza, queda como pendiente o falla real y debe aparecer en la revisión.
+
+**Evento contextual o de terceros**: un evento cuyo cumplimiento no depende de una acción propia del usuario. Ejemplos: un cumpleaños de otra persona, el tratamiento médico de un familiar, una fiesta a la que el usuario simplemente asiste. No genera automáticamente una tarea. Puede aparecer en `## Próximos Eventos`, en `## Notas del día` o en la revisión como contexto.
+
+Consecuencias operativas:
+
+- Un evento contextual registrado solo en el calendario **no se convierte retroactivamente en un pendiente** ni en una acción incumplida.
+- Los eventos del calendario que no fueron convertidos en acciones **no son automáticamente acciones incumplidas**.
+- Un toque o festival de terceros registrado solo como evento contextual no genera acción por el hecho de estar en el calendario; uno propio o preparado por el usuario sí puede generarla.
+- Ante la duda no se inventa la acción: convertir un evento en compromiso propio es decisión del usuario, en la conversación de cierre o en la propuesta.
+
 ### Comportamiento diario
 
 - El plan del día se muestra automáticamente al inicio del día, sin que el usuario lo pida. No hace preguntas y no vuelve a planificar.
@@ -204,7 +241,7 @@ La nota semanal propuesta se nombra por período (ej. `Semana 36.md`), según la
 - Muestra: `## Recordatorios` (solo los de HOY), `## Próximos Eventos` (solo los de HOY), `## Acciones` del día agrupadas por categoría, `## Panorama de la semana` (recordatorios y eventos de la semana + objetivos semanales) y una sugerencia opcional si existe una ventana real (si no, no se muestra). Las secciones/subsecciones solo se muestran si tienen contenido (no se generan encabezados vacíos). El foco semanal NO aparece como sección independiente del Daily: los objetivos semanales van en `Panorama de la semana`.
 - En días con sesión de música planificada, la nota diaria incluye el bloque de sesión **dentro de `## Acciones`**, como `### Música (N.ª sesión de la semana)`, con la tabla en blanco (Bloque | Ej | Variación | Tempo | Min | Resultado), `### Repertorio`, `### Observaciones` y el checkbox `- [ ] Cargar en [[Registro/<AAAA-MM-DD>]]`, junto a las tareas musicales del día. El bloque se genera **al armar la daily** y es condicional como todos los bloques de la daily: solo aparece si ese día hay sesión planificada; si no la hay, no se genera. Si el usuario reporta una sesión después (anuncia que va a tocar o confirma que tocó), se incorpora a la daily ya creada sin que deba pedirse. Nunca se completan datos musicales que el usuario no haya reportado.
 - En días con sesión de ejercicio planificada, la nota diaria incluye el bloque `### Ejercicio (N.ª sesión de la semana)` dentro de `## Acciones`, con la tabla `| Ejercicio | Series | Repeticiones | Observaciones |` y el checkbox de carga, siguiendo la lógica de sesión semanal equivalente a Música (bloque condicional: solo aparece si ese día hay sesión planificada; si no la hay, no se genera).
-- Al armar la nota diaria, siempre leer `09-Calendario/**` (Recordatorios.md, Toques.md, Eventos.md, Entregas.md): incluir en `## Próximos Eventos` los eventos de HOY y en `## Recordatorios` los recordatorios de HOY (desde `09-Calendario/Recordatorios.md` y avisos del usuario del día). Además, incorporar los eventos o cambios que el usuario haya informado en la conversación (aunque aún no estén registrados en el calendario), sin que eso reemplace al calendario como fuente base.
+- Al armar la nota diaria, siempre leer `09-Calendario/**` (Recordatorios.md, Toques.md, Eventos.md, Entregas.md): incluir en `## Próximos Eventos` los eventos de HOY y en `## Recordatorios` los recordatorios de HOY (desde `09-Calendario/Recordatorios.md` y avisos del usuario del día). Además, incorporar los eventos o cambios que el usuario haya informado en la conversación (aunque aún no estén registrados en el calendario), sin que eso reemplace al calendario como fuente base. Clasificar cada uno según **Compromisos propios y eventos contextuales**: un compromiso propio y verificable puede generar acción tickeable en `## Acciones`; un evento contextual va solo a `## Próximos Eventos` y no genera acción por sí solo.
 - **Acciones ambiguas**: si una acción no encaja claramente en las categorías/subcategorías existentes, NO inventar ni modificar categorías, NO enviarla automáticamente a `Otros` ni decidir silenciosamente dónde colocarla. Preguntar: "Esta tarea no encaja claramente en las categorías actuales. ¿Dónde querés colocarla?" y esperar la decisión del usuario.
 - **Regla de clasificación La Ventolera**: la categoría `### La Ventolera` (solo presentación del Daily; no es área, carpeta, nota ni proyecto) representa tareas para la banda que NO son actividad musical ni desarrollo del proyecto web. Diferencia entre las categorías relacionadas:
   - **Música**: actividad musical como rol de músico (tocar, estudiar/practicar, repertorio, preparación musical de toques o ensayos, cualquier otra tarea específicamente musical).
@@ -364,6 +401,16 @@ El PLANIFICADOR puede preparar el bloque `## Música` en la nota diaria (es `06-
 
 **Traslados**: tras aprobación, marcar el origen con `→ trasladada a [[<Período>]]` y el destino con `(de [[<Período>]])`.
 
+**Reconciliación de `## Acciones` (previa al cierre)**: antes de marcar un período como `Estado: Cerrada`, hay que reconciliar `## Acciones` contra lo ocurrido realmente y contra la revisión del REVISOR:
+
+- Acción realizada → `[x]`.
+- Acción descartada o cancelada → `[x]`, dejando constancia si corresponde.
+- Acción que realmente quedó pendiente → permanece `[ ]`.
+- **Una semana no debe quedar `Cerrada` con checkboxes que contradigan lo ocurrido.**
+- Todo pendiente real debe analizarse en la **CONVERSACIÓN DE CIERRE** para decidir si se traslada, se redefine, se descarta o requiere otra acción.
+
+El REVISOR puede detectar y clasificar el estado de una acción (incluida la categoría Fantasma), pero es read-only: la reconciliación de la nota la realiza el cierre, no el REVISOR. No se inventan estados nuevos ni estructura técnica adicional; se usan los checkboxes existentes.
+
 **Cierre**: el cierre de un período requiere aprobación explícita del usuario. Se cambia `Estado: Abierta` por `Estado: Cerrada` y se agrega `## Resumen` (plan vs realidad y pendientes, sin juzgar ni inventar). Una nota `Estado: Cerrada` es inmutable: no se modifica, mueve ni reabre sin aprobación explícita.
 
 ## REVISOR
@@ -465,6 +512,8 @@ Cuando corresponda al período:
 - **Deserciones**: planificado sin registro de ejecución ni traslado en un período **cerrado** (posible caída silenciosa).
 - **Rutinas**: música y ejercicio planificadas vs registradas (sin inventar sesiones; usar solo `02-Musica/Registro/**` y los checkboxes/registros diarios).
 - **Patrones relevantes**: desvíos recurrentes, compromisos omitidos, acciones que vuelven a aparecer, bloqueos.
+- **Compromisos propios no registrados**: actividades verificables del usuario (ensayo, clase, examen, toque propio) que aparecen en `09-Calendario/**` o en `## Registro` y no están registradas como acción en `## Acciones`. Se reportan para corregir la omisión.
+- **Eventos contextuales no convertidos**: eventos de terceros o de asistencia (cumpleaños, tratamientos médicos de un familiar, fiestas a las que se asiste) registrados solo en el calendario. **No son acciones incumplidas, deserciones ni pendientes reales** y no deben convertirse retroactivamente en tales (ver **Compromisos propios y eventos contextuales**).
 - **Períodos cerrados**: usa `Estado: Cerrada` solo como fuente de lectura; no propone modificar ni reabrir sin aprobación.
 
 ### Manifiesto de no-duplicación
@@ -535,20 +584,20 @@ Las observaciones temporales de períodos abiertos no persisten una vez cerrado 
 
 Ubicación: los hallazgos se escriben como sección `## Hallazgos de la revisión de <período>` en la **nota del período siguiente** (semanal: `06-Rutina/Semanal/Semana NN.md`; mensual: `06-Rutina/Mensual/<Mes Año>.md`). No se crea un sistema paralelo de archivos de revisiones: la sección es opcional y solo existe cuando hay hallazgos.
 
-Escritura: la persistencia es una **etapa explícita y controlada** del flujo (paso 5 del **Disparo**) que ejecuta el **asistente principal** como parte de la apertura del período siguiente, bajo el protocolo de aprobación de escritura (sección **Escritura de notas de Rutina**). El REVISOR no escribe; la persistencia no lo convierte en agente escritor.
+Escritura: la persistencia ocurre en el paso **ABRIR** (paso 7 del **Disparo**), nunca antes. La nota del período siguiente **no existe** hasta ese momento: se crea en ABRIR y los hallazgos se escriben como parte de su creación, bajo el protocolo de aprobación de escritura (sección **Escritura de notas de Rutina**). La ejecuta el **asistente principal**. El REVISOR no escribe; la persistencia no lo convierte en agente escritor.
 
 ### Disparo
 
 El REVISOR **no se ejecuta automáticamente**. Uso normal:
 
-1. El usuario cierra el período (acción visible del período).
+1. El usuario cierra el período (acción visible del período), reconciliando `## Acciones`.
 2. El usuario solicita la revisión del período cerrado.
 3. El REVISOR ejecuta la retrospectiva.
 4. Se obtienen reporte y hallazgos.
-5. Los hallazgos relevantes se persisten (asistente principal, tras aprobación).
-6. El PLANIFICADOR puede usarlos para proponer el siguiente período.
-7. El usuario decide.
-8. Se abre el siguiente período.
+5. **Conversación de cierre / pre-planificación**: el asistente y el usuario revisan los hallazgos, analizan los pendientes reales, detectan tareas o eventos que aparecieron, revisan capacidad y restricciones del período siguiente y acuerdan una propuesta. La nota del período siguiente todavía **no** existe.
+6. El usuario decide sobre la propuesta.
+7. Se **abre** el período siguiente: se crea la nota, se persisten los hallazgos como sección `## Hallazgos de la revisión de <período>`, se incorporan las decisiones aprobadas y se construye `## Acciones`.
+8. El PLANIFICADOR trabaja sobre el período ya abierto y decidido; comienza la ejecución.
 
 No hay automatización del disparo.
 
@@ -734,6 +783,6 @@ El VERIFICADOR nunca ejecuta la resolución de un problema; su salida final es e
 ## Sin definir aún
 
 - Ajustes a la escritura del PLANIFICADOR que surjan de la prueba real de la Fase 3.5.
-- El **veredicto del usuario** sobre el diseño de la Fase 3.6 (tras su rediseño) y la validación del ciclo completo en el primer uso real (cierre → REVISOR → persistencia de hallazgos → propuesta → apertura).
+- La validación del ciclo completo en un nuevo uso real, ahora con el flujo refinado (cierre → REVISOR → conversación de cierre → propuesta → decisión → apertura → planificación). El primer uso real del flujo original (Semana 39) ya dio veredicto del usuario y cerró la Fase 3.6 el 27/09/2026.
 - Si la división PLANIFICADOR/REVISOR se mantiene tal cual tras la evaluación de la Fase 3.6.
 - La lectura automática de calendario/proyectos/adquisiciones y la integración con Calendar o automatizaciones: fases posteriores (el V2 define quién consulta qué, no la automatización).

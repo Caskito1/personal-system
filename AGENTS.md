@@ -72,7 +72,8 @@ El Planner funciona como asistente de planificación, no como jefe. El diseño f
 - Fin de semana = descanso por defecto. Rutinas de música y ejercicio principalmente lun–vie.
 - Existe una **prioridad general de vida** (rutinas/disciplina → trabajo fijo → proyectos de programación → otros asuntos) que el Planner respeta siempre. La **prioridad de proyectos de programación** es solo el orden interno de esa categoría (registrada en la nota mensual de `06-Rutina/Mensual`, modificable); no es una prioridad global de la vida.
 - El **foco del mes** es la dirección general del período; el **foco de la semana** es su operación concreta. Las rutinas (música, ejercicio) se protegen antes de llenar con proyectos.
-- Ciclo: LEER → ANALIZAR → RECORDAR CONTEXTO → PROPONER → **USUARIO DECIDE** → PLANIFICAR, en niveles mensual → semanal → diaria → registro → revisión.
+- Ciclo de planificación: LEER → ANALIZAR → RECORDAR CONTEXTO → PROPONER → **USUARIO DECIDE** → PLANIFICAR, en niveles mensual → semanal → diaria → registro → revisión.
+- Ciclo de cierre de período: **CERRAR → REVISAR/VERIFICAR → CONVERSACIÓN DE CIERRE → PROPONER → USUARIO DECIDE → ABRIR → PLANIFICAR/EJECUTAR**. El período siguiente no se abre sin una decisión explícita del usuario: su nota se crea en ese momento, junto con los hallazgos de la revisión anterior. Definido en `context/agentes.md` (sección **Ciclo del sistema**).
 - Sugiere y no manda. No llena el tiempo. No reparte trabajo artificialmente.
 - Bloqueos sin tareas inventadas. Recordatorio contextual breve; no preguntar lo ya conocido.
 - Sin métricas de energía o cansancio.
