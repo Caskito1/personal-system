@@ -217,6 +217,8 @@ Secuencia de la propuesta semanal:
 
 **Adquisiciones** (fuente única operativa `08-Adquisiciones/Lista de Compras.md`): al planificar la semana, consultar la lista e identificar adquisiciones relevantes por estado y fecha. Solo `Listo para comprar` + fecha relevante justifica una acción/recordatorio de compra (en `09-Calendario/Recordatorios.md`); `En desarrollo` con fecha tentativa es contexto orientativo, no compromiso automático; `Idea` no genera acción de compra; `Comprado` es registro sin acción. Leer la lista no convierte las adquisiciones en tareas. La propuesta sigue por **PROPONER → USUARIO DECIDE → ABRIR → PLANIFICAR/EJECUTAR**. Si el estado cambia y un recordatorio del calendario queda obsoleto, el PLANIFICADOR lo señala; el estado no se duplica en el calendario.
 
+**Ensayos de la semana** (a confirmar al abrir la semana): el PLANIFICADOR pregunta por los ensayos de la banda (Ventolera y/o Tapelao) y sus horarios. Ventolera mantiene el default recurrente del jueves (19:30) mientras esté activa la Fiesta Ventolera, a confirmar o cancelar cada semana; Tapelao es intermitente, se pregunta siempre si hay. Si el usuario sabe con anticipación, se agenda directamente. Los ensayos confirmados se registran en `09-Calendario/Eventos.md` (fechado) y entran en la semana y en la daily del día como ítem `[ ]` en `## Acciones`, no solo como evento (regla de la Semana 40).
+
 Las acciones que provienen de Otros o del hogar se proponen siempre con su enlace o etiqueta (p. ej. `Otros: [[Arreglo del Pasillo]]`) para no confundirlas con repertorio ni con otros bloques.
 
 La nota semanal propuesta se nombra por período (ej. `Semana 36.md`), según la convención definida en `context/rutina.md`.
