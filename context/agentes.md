@@ -187,7 +187,7 @@ Secuencia de la propuesta mensual:
 
 1. **Revisión del mes anterior**: leer los hallazgos persistidos de la revisión anterior (sección `## Hallazgos de la revisión de <período>` en la nota mensual en curso) y el `## Resumen` del mes cerrado (qué objetivos estaban activos, rutinas propuestas, proyectos trabajados, logros, no logros, pendientes, cambios, bloqueos, y lo que ocurrió sin estar previsto). No reconstruir la revisión: es función del REVISOR. Descriptivo, sin juzgar ni generar culpa. No inventar métricas.
 2. **Referencia a H2**: extracto conciso de los objetivos semestrales como contexto ("dónde estoy respecto al semestre"), sin repetir toda la documentación.
-3. **Estado actual del sistema**: calendario del mes, rutinas (definición actual), proyectos de programación (estado, último avance, pendiente principal, próxima acción, bloqueo), otros asuntos, finanzas (fuente Excel; no inventar datos), ideas y adquisiciones relevantes sin convertirlas automáticamente en tareas.
+3. **Estado actual del sistema**: calendario del mes, rutinas (definición actual), proyectos de programación (estado, último avance, pendiente principal, próxima acción, bloqueo), otros asuntos, finanzas (fuente Excel; no inventar datos), ideas y adquisiciones relevantes (desde `08-Adquisiciones/Lista de Compras.md`) sin convertirlas automáticamente en tareas.
 4. **Propuesta**: foco del mes, rutinas protegidas, prioridad de proyectos de programación (con justificación breve), otros asuntos y finanzas. La propuesta incluye la acción visible de cierre del período (por ejemplo `- [ ] Cerrar el mes (Estado → Cerrada + Resumen)`), como parte del funcionamiento normal del sistema. La decisión es del usuario.
 5. **Preguntas**: solo si la respuesta puede cambiar la propuesta. Si no hay, se omiten.
 6. Esperar la decisión del usuario antes de escribir la nota mensual. Tras la decisión se ajustan foco y prioridad si cambiaron.
@@ -214,6 +214,8 @@ Secuencia de la propuesta semanal:
 **Recordatorios semanales recurrentes** (solo en la propuesta semanal, no en la diaria): el Recordatorio contextual siempre incluye:
 - **Partidos de Peñarol**: fechas y horarios, provistos por el usuario en la conversación o leídos de `09-Calendario/Eventos` si los cargó con anticipación.
 - **Estado actual de la madre del usuario**: estudios/procedimientos pendientes y viajes a Pando, derivado del calendario y de lo que cuente el usuario.
+
+**Adquisiciones** (fuente única operativa `08-Adquisiciones/Lista de Compras.md`): al planificar la semana, consultar la lista e identificar adquisiciones relevantes por estado y fecha. Solo `Listo para comprar` + fecha relevante justifica una acción/recordatorio de compra (en `09-Calendario/Recordatorios.md`); `En desarrollo` con fecha tentativa es contexto orientativo, no compromiso automático; `Idea` no genera acción de compra; `Comprado` es registro sin acción. Leer la lista no convierte las adquisiciones en tareas. La propuesta sigue por **PROPONER → USUARIO DECIDE → ABRIR → PLANIFICAR/EJECUTAR**. Si el estado cambia y un recordatorio del calendario queda obsoleto, el PLANIFICADOR lo señala; el estado no se duplica en el calendario.
 
 Las acciones que provienen de Otros o del hogar se proponen siempre con su enlace o etiqueta (p. ej. `Otros: [[Arreglo del Pasillo]]`) para no confundirlas con repertorio ni con otros bloques.
 
