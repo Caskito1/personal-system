@@ -23,8 +23,11 @@ La intención es poder enviar a futuro HANDOFFs relativamente concisos al OpenCo
 - **Etapa 1 (Base estructural): CERRADA (25/09/2026).** Commit `78e1461` en el repo `opencode-AppFinanciera`. Entregables: `opencode-AppFinanciera/HANDOFF-ETAPA-1-BASE-ESTRUCTURAL.md` y `opencode-AppFinanciera/PROPUESTA-ETAPA-1.md`. Etapa de diseño/estructura (NO implementa funcionalidades).
 - **Etapa 2 (Correcciones y limpieza): EN CURSO.** Estructura de subetapas aprobada en `opencode-AppFinanciera/HANDOFF-ETAPA-2.md`:
   - **2.1 — Taxonomía de gastos fijos unificada + `Otros`: CERRADA (25/09/2026).** Commit de producción `b46b570`; validada en Local (build + 27 invariantes), Staging y Producción. Sin cambios en Firestore.
-  - **2.2 — Totales del mes con gastos fijos: definición funcional CERRADA (25/09/2026), NO implementada.** Plan completo en `opencode-AppFinanciera/PROPUESTA-2.2.md`. La implementación **no está aprobada**.
-  - **2.3 – 2.6: sin empezar.**
+  - **2.2 — Totales del mes con gastos fijos: CERRADA (30/09/2026).** Commit `119cc4a`; Local (build + fixtures 24/24) y Producción PASS (cuenta real).
+  - **2.3 — Ingresos (labels de bandas + sección `Otros`): CERRADA (30/09/2026).** Commit `7d71fb5`; gate read-only PASS, Local 8/8, Staging PASS y Producción PASS (cuenta real, solo lectura, 0 escrituras).
+  - **2.8 — Header `Personal` / `Total registrado` en `/gastos-fijos`: CERRADA (30/09/2026).** Commit `66ba009`; verificada en Producción.
+  - **2.4 · 2.5 · 2.6: sin empezar.**
+  - **2.7 — Guard de integridad `groupId` en el alta de compartidos: NO implementada, requiere aprobación propia** (surgió de la validación runtime de 2.2).
 - **Etapas 3–4: NO iniciadas.** Solo se definen aquí su alcance (sección Roadmap).
 - Regla de flujo: **LEER → ANALIZAR → PROPONER → USUARIO DECIDE → PLANIFICAR → USUARIO APRUEBA → EJECUTAR**.
 - Regla permanente de despliegue (cuando haya implementación): **Local → Staging → Producción → Verificación**. Nunca asumir terminado solo porque funciona localmente; verificar tras producción; no modificar producción directamente.
@@ -51,11 +54,13 @@ Con la evidencia de la Etapa 0: modelo de gastos; gastos compartidos; gastos fij
 
 Solo aquello que la Etapa 0 justifique: código obsoleto; transferencias antiguas; código muerto; bugs; taxonomías; `Otros`; robustez; schemas/types; inconsistencias; otras mejoras concretas.
 
-**Estado real (verificado en el repo `opencode-AppFinanciera`):** no se implementa como un bloque grande, sino en subetapas pequeñas, independientes y verificables, con el flujo Local → Staging → Producción → Verificación. Estructura aprobada en `opencode-AppFinanciera/HANDOFF-ETAPA-2.md`: 2.1 (taxonomía de fijos + `Otros`), 2.2 (totales del mes con gastos fijos), 2.3 (ids de bandas + sección `Otros` de ingresos), 2.4 (robustez de sesión/redirección), 2.5 (retirar flujo legacy de gastos fijos), 2.6 (limpieza de código muerto). No hay subetapa 2.7: las transferencias quedan para la Etapa 3.
+**Estado real (verificado en el repo `opencode-AppFinanciera`):** no se implementa como un bloque grande, sino en subetapas pequeñas, independientes y verificables, con el flujo Local → Staging → Producción → Verificación. Estructura aprobada en `opencode-AppFinanciera/HANDOFF-ETAPA-2.md`: 2.1 (taxonomía de fijos + `Otros`), 2.2 (totales del mes con gastos fijos), 2.3 (ids de bandas + sección `Otros` de ingresos), 2.4 (robustez de sesión/redirección), 2.5 (retirar flujo legacy de gastos fijos), 2.6 (limpieza de código muerto); además existen **2.7 (guard de integridad `groupId`) y 2.8 (header `Personal` / `Total registrado` en `/gastos-fijos`)**, surgidas de la validación runtime de 2.2. Las transferencias quedan para la Etapa 3.
 
 - **2.1 CERRADA (25/09/2026)**, commit de producción `b46b570`; sin cambios en Firestore.
-- **2.2 con definición funcional cerrada y NO implementada.** Regla acordada: los totales de `/gastos` incluyen solo gastos fijos **efectivamente pagados** (criterio técnico `paidByUid`, no `estado`); *pagado* ≠ *saldado*, y liquidar un saldo no altera los totales. Alcance: solo lectura/cálculo; no toca históricos ni estructura de datos.
-- **Gate previo a implementar 2.2:** crear un sandbox de pruebas dentro del mismo Firebase, con dos usuarios de test y un grupo aislado, y ejecutar la auditoría Firestore **read-only** sobre `fixed_expense_entries`. Si la auditoría detecta entries sin `paidByUid` → STOP y redefinir el criterio; si `paidByUid` ausente = 0 → se puede implementar. No se hicieron migraciones ni escrituras en Firestore.
+- **2.2 CERRADA (30/09/2026)**, commit `119cc4a`. Regla aplicada: los totales de `/gastos` incluyen solo gastos fijos **efectivamente pagados** (`esPagado = !!paidByUid || (pagoHasta > periodo)`, no `estado`); *pagado* ≠ *saldado*, y liquidar un saldo no altera los totales. Gate histórico read-only PASS (34 entries, 0 inconsistentes); prueba runtime en sandbox 6/6 PASS con limpieza verificada. No tocó históricos ni estructura de datos.
+- **2.3 CERRADA (30/09/2026)**, commit `7d71fb5`; gate read-only PASS (`idsLegacy` = 0), 8/8 en Local, Staging y Producción (solo lectura, 0 escrituras).
+- **2.8 CERRADA (30/09/2026)**, commit `66ba009`; bloque `Personal` con `Personal` (cubierto) y `Total registrado`, verificado en Producción.
+- **2.4 · 2.5 · 2.6 sin empezar.** **2.7 (guard `groupId`) NO implementada**, requiere aprobación propia.
 
 ### Etapa 3 — Nuevas funcionalidades financieras
 
@@ -117,8 +122,8 @@ No eliminar, migrar, normalizar ni modificar datos durante la Etapa 0. Las decis
 - **Auditoría inicial:** completada (`REPORT-02.md`, read-only; previa al esquema 0–4).
 - **Etapa 0 (Relevamiento + contexto):** completada (contexto y agentes commiteados, `d0c6fec`, con `REPORT-ETAPA-0.md`; pusheados, verificado 23/09). `opencode-AppFinanciera/HANDOFF-ETAPA-0-MAPA-CONTEXTO.md` aprobado y entregado (commiteado en `opencode-AppFinanciera`, 22–23/09).
 - **Etapa 1 (Base estructural):** **CERRADA (25/09/2026)**, commit `78e1461`. Entregables: `opencode-AppFinanciera/HANDOFF-ETAPA-1-BASE-ESTRUCTURAL.md` y `opencode-AppFinanciera/PROPUESTA-ETAPA-1.md`.
-- **Etapa 2 (Correcciones y limpieza):** **en curso**. 2.1 CERRADA (25/09/2026, producción `b46b570`); 2.2 con definición funcional cerrada y **no implementada** (`opencode-AppFinanciera/PROPUESTA-2.2.md`); 2.3–2.6 sin empezar.
+- **Etapa 2 (Correcciones y limpieza):** **en curso**. 2.1 CERRADA (25/09/2026, `b46b570`); **2.2, 2.3 y 2.8 CERRADAS (30/09/2026)** (`119cc4a` · `7d71fb5` · `66ba009`, Producción PASS con cuenta real); 2.4 · 2.5 · 2.6 sin empezar; **2.7 (guard `groupId`) NO implementada, requiere aprobación propia**. Ambientes alineados en el repo (rama `master`).
 - **Etapas 3–4:** no iniciadas.
 - **Acceso Firestore:** read-only aprobado por el usuario; sin escrituras, migraciones, índices ni cambios de reglas. La Etapa 2.1 no modificó Firestore.
-- **Próxima acción:** crear el sandbox de pruebas (dos usuarios de test y un grupo aislado dentro del mismo Firebase), ejecutar la auditoría Firestore read-only sobre `fixed_expense_entries` y usar ese resultado como **gate** antes de implementar 2.2. La implementación de 2.2 sigue sin aprobar.
+- **Próxima acción:** planificar la siguiente subetapa disponible de la Etapa 2 (2.4 robustez de sesión/redirección, 2.5 retirar flujo legacy, 2.6 limpieza de código muerto, o 2.7 guard `groupId`), cada una con su propia planificación y aprobación antes de implementar.
 - **Sesión de origen:** 21/09/2026 (redefinición de la Etapa 0, nuevo esquema de etapas 0–4 y decisiones funcionales cerradas).
