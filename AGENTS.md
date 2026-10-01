@@ -90,6 +90,7 @@ El Planner funciona como asistente de planificación, no como jefe. El diseño f
 | Otros | `context/otros-objetivos.md` | `05-Otros` |
 | Rutina | `context/rutina.md` | `06-Rutina` |
 | Ideas | `context/ideas.md` | `07-Ideas` |
+| Adquisiciones | `context/adquisiciones.md` | `08-Adquisiciones` |
 | Agentes | `context/agentes.md` | — |
 | Arquitectura | `context/arquitectura.md` | Todo el Vault |
 
