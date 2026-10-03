@@ -45,7 +45,7 @@ Los 7 pasos, en detalle:
 3. **CONVERSACIÓN DE CIERRE / PRE-PLANIFICACIÓN** — instancia explícita de conversación entre asistente y usuario **antes** de crear o abrir el período siguiente. Sirve para revisar los hallazgos, analizar pendientes, distinguir qué sigue siendo relevante, detectar tareas o eventos que aparecieron durante el período, revisar capacidad y restricciones del período siguiente, aclarar ambigüedades y preparar la propuesta. **No es la apertura del período.** No es necesariamente una reunión formal o extensa: su profundidad depende de lo ocurrido en el período. Si no hay nada complejo que analizar puede ser breve, pero **no se omite en silencio**.
 4. **PROPONER** — el asistente presenta una propuesta concreta: foco, acciones, pendientes trasladados, nuevas acciones, rutinas, compromisos, restricciones relevantes y prioridades derivadas de los hallazgos.
 5. **USUARIO DECIDE** — el usuario acepta, modifica, rechaza o reformula la propuesta. **Una propuesta no se considera aprobada por silencio.**
-6. **ABRIR** — solo después de la decisión explícita se materializa el período siguiente: se crea o completa la nota, se persisten los hallazgos de la revisión anterior, se incorporan las decisiones aprobadas, se construye `## Acciones` y el período queda listo para funcionar. **Antes de este paso la nota del período siguiente no existe.**
+6. **ABRIR** — solo después de la decisión explícita se materializa el período siguiente: se crea o completa la nota, se persisten los hallazgos de la revisión anterior, se incorporan las decisiones aprobadas, se construye `## Acciones` **en las notas que lo llevan —la semanal y la diaria—** y el período queda listo para funcionar. **La mensual no lleva `## Acciones`**: registra dirección y cierre, no es una lista de ejecución, y su acción de cierre vive en `## Cierre`, que se crea en `Estado: Pendiente` (ver `context/rutina.md`, sección **Estructura de las notas de Rutina**, y **Reglas del ciclo** en esta misma sección, sobre el cierre como acción visible del período). Las **decisiones** aprobadas en la conversación de cierre quedan registradas como decisiones en la nota del período que se cerró (mensual o anual); lo que requieren **ejecución** se traslada a la nota del período de ejecución con la referencia `(de [[<Período>]])`, y la mensual no se convierte en una lista de tareas (ver **Decisiones de cierre y su ejecución** en `context/rutina.md`). **Antes de este paso la nota del período siguiente no existe.**
 7. **PLANIFICAR / EJECUTAR** — el PLANIFICADOR trabaja sobre el período ya abierto y decidido. Este paso no puede usarse para saltarse la conversación ni la aprobación previa.
 
 **Ciclo semanal:**
@@ -96,7 +96,7 @@ El cierre anual **se construye desde los meses cerrados** (`## Resumen` y `## Ha
 
 Reglas del ciclo:
 
-- **El cierre es una acción visible del período**: forma parte del funcionamiento normal del sistema y aparece en los objetivos/acciones del período (p. ej. `- [ ] Cerrar la semana (Estado → Cerrada + Resumen)`). El PLANIFICADOR la incluye al proponer el período.
+- **El cierre es una acción visible del período**: forma parte del funcionamiento normal del sistema. En la **semana** y la **daily** aparece como ítem en `## Acciones` (p. ej. `- [ ] Cerrar la semana (Estado → Cerrada + Resumen)`). En la **mensual** aparece en la sección `## Cierre`, con su estado y la fecha, porque la mensual no lleva `## Acciones` (ver `context/rutina.md`, sección **Estructura de las notas de Rutina**). El PLANIFICADOR la incluye al proponer el período.
 - **La revisión NO es una tarea diaria ni una acción independiente**: no se agenda dentro de la semana como un ítem más que el usuario deba recordar; queda conceptualmente encadenada al cierre (**CERRAR → REVISAR**).
 - **El cierre habilita la revisión**: el REVISOR se usa en el flujo normal sobre períodos ya cerrados. El disparo lo solicita el usuario tras el cierre (no es automático; ver **Disparo** en la sección REVISOR).
 - **La secuencia no se da vuelta**: no se abre un período y se revisa el anterior después.
@@ -109,9 +109,12 @@ Antes de abrir un período nuevo, verificar que:
 1. el período anterior fue revisado;
 2. hubo **CONVERSACIÓN DE CIERRE** con propuesta;
 3. existe una **decisión explícita** del usuario;
-4. si corresponde persistir hallazgos de la revisión anterior, la sección `## Hallazgos de la revisión de <período>` queda incluida en la nota que se crea.
+4. los hallazgos de la revisión anterior quedaron incorporados en la nota que se crea, como sección `## Hallazgos de la revisión de <período>` si existen, **o** se dejó constancia explícita de que no había hallazgos persistibles, **o** se dejó constancia de que la revisión anterior no se ejecutó (las tres en el `## Registro` del Daily del día de apertura; ver abajo);
+5. la superficie de cierre del período nuevo está presente: en la mensual, `## Cierre` en `Estado: Pendiente`.
 
 Si alguno de estos elementos falta, el flujo **se detiene y pregunta** en vez de continuar silenciosamente.
+
+Esta verificación la realiza el **asistente principal** al ejecutar el paso **ABRIR**: el REVISOR no escribe y no participa de la apertura. La constancia de que no hay hallazgos **no crea un encabezado vacío** — la sección de hallazgos sigue siendo condicional (`context/rutina.md`). Si la revisión anterior **no se hizo**, o su resultado es indeterminado, se registra como tal y se pregunta: nunca se asume que no había hallazgos. **Dónde se registra la constancia:** cuando corresponde dejar constancia operativa de apertura, es una línea más del **`## Registro` del Daily del día en que se abre el período** — convive con el resto del registro de ese día y no crea sección propia. No va en el `## Resumen` de la nota nueva (que se escribe al cerrar ese período), ni en un encabezado nuevo.
 
 ## PLANIFICADOR
 
@@ -206,7 +209,7 @@ Secuencia de la propuesta mensual:
 1. **Revisión del mes anterior**: leer los hallazgos persistidos de la revisión anterior (sección `## Hallazgos de la revisión de <período>` en la nota mensual en curso) y el `## Resumen` del mes cerrado (qué objetivos estaban activos, rutinas propuestas, proyectos trabajados, logros, no logros, pendientes, cambios, bloqueos, y lo que ocurrió sin estar previsto). No reconstruir la revisión: es función del REVISOR. Descriptivo, sin juzgar ni generar culpa. No inventar métricas.
 2. **Referencia a H2**: extracto conciso de los objetivos semestrales como contexto ("dónde estoy respecto al semestre"), sin repetir toda la documentación.
 3. **Estado actual del sistema**: calendario del mes, rutinas (definición actual), proyectos de programación (estado, último avance, pendiente principal, próxima acción, bloqueo), otros asuntos, finanzas (fuente Excel; no inventar datos), ideas y el listado completo de ideas activas de Adquisiciones (desde `08-Adquisiciones/Lista de Compras.md`), sin convertirlas automáticamente en tareas: la revisión mensual muestra **todas** las ideas activas y el usuario decide cuáles desarrollar, cuáles dejar en espera y cuáles descartar.
-4. **Propuesta**: foco del mes, rutinas protegidas, prioridad de proyectos de programación (con justificación breve), otros asuntos y finanzas. La propuesta incluye la acción visible de cierre del período (por ejemplo `- [ ] Cerrar el mes (Estado → Cerrada + Resumen)`), como parte del funcionamiento normal del sistema. La decisión es del usuario.
+4. **Propuesta**: foco del mes, rutinas protegidas, prioridad de proyectos de programación (con justificación breve), otros asuntos y finanzas. La propuesta incluye la acción visible de cierre del período en la sección `## Cierre` de la nota mensual (`Estado: Pendiente`, que pasa a `Estado: Ejecutado` con la fecha al cerrar el mes), como parte del funcionamiento normal del sistema. La decisión es del usuario.
 5. **Preguntas**: solo si la respuesta puede cambiar la propuesta. Si no hay, se omiten.
 6. Esperar la decisión del usuario antes de escribir la nota mensual. Tras la decisión se ajustan foco y prioridad si cambiaron.
 
@@ -490,9 +493,18 @@ Los estados conceptuales no requieren representación técnica en las notas: son
 - **REVISOR MENSUAL** (tras cerrar el mes): objetivos del mes vs realidad, evolución de proyectos, rutinas, resultados, pendientes acumulados, patrones del mes, cambios de contexto e información para el próximo mes. **No** es la repetición de 4 revisiones semanales: opera a nivel mes (dirección, evolución, acumulados).
 - **REVISOR ANUAL** (tras cerrar el año): evalúa el año **desde los meses cerrados**, no desde semanas ni dailies. Compara resultados contra los objetivos anuales, identifica tendencias y cambios, determina qué funcionó y qué no, detecta qué debería mantenerse, qué optimizarse y qué abandonarse, detecta nuevas necesidades u oportunidades, reordena prioridades y define qué continúa, qué cambia y qué se incorpora o deja atrás en el año siguiente. **No** es la repetición de las revisiones mensuales: agrega el año (dirección, continuidad y decisión del año siguiente).
 
-**Cadena de revisión acumulativa:** el circuito **Daily → Semana → Mes → Año → siguiente año** está definido en `context/rutina.md`. Cada nivel consume la síntesis del nivel anterior.
+**Cadena de revisión acumulativa:** el circuito **Daily → Semana → Mes → Año → siguiente año** está definido en `context/rutina.md`. Cada nivel consume la síntesis del nivel anterior. El Monthly recibe normalmente información de las Weekly cerradas. **No debe recorrer los Daily para reconstruir o completar sistemáticamente el mes.**
 
 **Regla de la cadena:** si una revisión de nivel N puede rehacerse releyendo directamente el nivel N−2 o inferior, en lugar de utilizar la síntesis del nivel N−1, se está rompiendo la cadena. El REVISOR ANUAL trabaja sobre los `## Resumen` y `## Hallazgos` mensuales; no re-lee semanas ni dailies para construir la evaluación global.
+
+**Excepción de cierre — última Weekly abierta:** cuando la última Weekly que contiene días del mes todavía está abierta al momento de cerrar el Monthly, el agente puede consultar directamente los Daily correspondientes únicamente a los días del tramo final del mes que esa Weekly todavía no consolidó. La excepción:
+
+1. se limita al tramo final del mes;
+2. se utiliza solamente para completar el cierre mensual;
+3. no modifica la jerarquía Daily → Weekly → Monthly;
+4. no convierte Daily en fuente primaria o habitual del Monthly;
+5. no habilita reconstruir retrospectivamente el mes desde los Daily;
+6. debe quedar identificada en el cierre/resumen mensual cuando haya sido utilizada.
 
 **Ámbito por nivel:**
 
@@ -507,7 +519,7 @@ Los estados conceptuales no requieren representación técnica en las notas: son
 - Entradas:
   - El período a revisar (semana, mes o año) **cerrado**, solicitado por el usuario.
   - La planificación del período: nota semanal/mensual en `06-Rutina/Semanal` o `06-Rutina/Mensual`; para el año, `01-Objetivos/<Año>/Objetivos Anuales.md`.
-  - La ejecución registrada: notas diarias en `06-Rutina/Diario`, `## Registro` de las dailies, `## Resumen` de los períodos cerrados. **En el nivel anual el insumo son los meses cerrados**, no las dailies.
+  - La ejecución registrada, con una fuente distinta por nivel: **semanal** → `## Registro` de las dailies de esa semana; **mensual** → `## Resumen` + `## Hallazgos` de las semanas cerradas; **anual** → `## Resumen` + `## Hallazgos` de los meses cerrados. Es la cadena **Daily → Semana → Mes → Año**: la daily (`06-Rutina/Diario`) es **fuente primaria solo del nivel semanal**. En el nivel mensual y en el anual queda disponible únicamente como **fuente secundaria de verificación excepcional**, cuando la síntesis del nivel inferior no permite verificar un hecho concreto (regla de la cadena, `context/rutina.md`).
   - El calendario (`09-Calendario/**`) y otros contextos que aporten a entender los desvíos.
 - Salida: un **reporte** estructurado (sección **Formato de salida**) que se entrega al usuario y contiene los **hallazgos** que se persisten en la nota del período siguiente para el PLANIFICADOR.
 
@@ -536,6 +548,8 @@ Cuando corresponda al período:
 2. Leer `context/rutina.md` (formato de notas, circuito de revisión acumulativo y registro).
 3. Leer la planificación del período a revisar (`06-Rutina/Semanal/<Semana>`, `06-Rutina/Mensual/<Mes>`; para el año, `01-Objetivos/<Año>/Objetivos Anuales.md`).
 4. **Según el nivel:** leer las notas diarias del período con su `## Registro` (semanal); leer los `## Resumen` y `## Hallazgos` de las semanas cerradas (mensual); leer los `## Resumen` y `## Hallazgos` de los meses cerrados (anual). **En los niveles mensual y anual no se releen las dailies**: se usa la síntesis del nivel inferior.
+
+**Excepción de verificación (única forma de bajar un nivel).** El REVISOR mensual —y solo el mensual— puede consultar el `## Registro` de los días del mes que caen en la última semana del mes, todavía abierta, cuando esa semana no consolidó un dato necesario. Límites: (a) **no cambia la jerarquía** Daily → Semana → Mes → Año ni convierte la daily en fuente primaria del mensual; (b) **no permite reconstruir el mes** desde los dailies, ni releer dailies de días de otros meses; (c) se usa **solo** para verificar un hecho concreto, completar un dato que la consolidación no dejó o resolver una contradicción; (d) **solo cuando la información consolidada no basta**; (e) si se usa, debe quedar **declarada** en el `## Resumen` del mes, indicando qué se consultó y por qué. Regla completa en `context/rutina.md`.
 5. Leer calendario y contextos relevantes para interpretar desvíos (sin convertirlos en excusas ni en eventos).
 6. Cruzar planificación vs ejecución y construir el reporte.
 
@@ -629,7 +643,7 @@ Para el nivel anual, la nota del período siguiente es la **nota anual del año 
 
 Escritura: la persistencia ocurre en el paso **ABRIR** (paso 7 del **Disparo**), nunca antes. La nota del período siguiente **no existe** hasta ese momento: se crea en ABRIR y los hallazgos se escriben como parte de su creación, bajo el protocolo de aprobación de escritura (sección **Escritura de notas de Rutina**). La ejecuta el **asistente principal**. El REVISOR no escribe; la persistencia no lo convierte en agente escritor.
 
-**Verificación de la persistencia:** al abrir un período, comprobar que la sección `## Hallazgos de la revisión de <período>` existe en la nota nueva y que su contenido corresponde al período anterior. Si falta, el ciclo se detiene y se pregunta, en lugar de continuar en silencio. Esta verificación existe porque la persistencia puede omitirse sin dejar señal visible.
+**Verificación de la persistencia:** al abrir un período, comprobar que los hallazgos de la revisión anterior **quedaron incorporados** en la nota nueva, como sección `## Hallazgos de la revisión de <período>` cuando existen, **o** como constancia explícita de que no hay hallazgos persistibles cuando no los hay. No se exige una sección vacía: la sección de hallazgos sigue siendo condicional. Si la revisión anterior no se hizo, o su resultado es indeterminado, se registra ese hecho y se pregunta; **nunca se asume que no había hallazgos**. **Dónde va la constancia:** es una línea de apertura y se escribe en el **`## Registro` del Daily del día en que se abre el período**, junto al resto del registro de ese día; no crea encabezado propio y no va en el `## Resumen` de la nota nueva, que se escribe al cerrar ese período. La verificación la realiza el **asistente principal** durante el paso **ABRIR**. Si falta la incorporación o la constancia, el ciclo se detiene y se pregunta, en lugar de continuar en silencio. Esta verificación existe porque la persistencia puede omitirse sin dejar señal visible.
 
 ### Disparo
 
@@ -854,6 +868,10 @@ Detecta, agrupa en hallazgos (**M1, M2…**) y propone; **no corrige nada** y no
 - **Usuario**: decide qué se corrige y cuándo.
 
 MANTENIMIENTO no revisa qué pasó (REVISOR) ni el estado git de los repos (VERIFICADOR): si se necesita esa información la consulta como contexto, sin duplicarla.
+
+**Frontera con el REVISOR.** REVISOR responde *qué pasó con el período*; MANTENIMIENTO responde *qué problema tiene el sistema con independencia del período*. La pregunta que los separa: si el mismo hecho, en otro período, dejaría de ser relevante, es del REVISOR; si se repetiría en cualquier período, es de MANTENIMIENTO.
+
+**Regla de deduplicación.** Si el REVISOR ya detectó un hecho, MANTENIMIENTO no lo repite salvo que identifique además un defecto estructural, documental u operativo que pueda repetirse en otros períodos. Un mismo hecho puede tener entonces dos entradas —una de período (REVISOR) y una de sistema (MANTENIMIENTO)—, pero la entrada de sistema se limita al defecto y no vuelve a narrar la desviación del período.
 
 ### Alcance
 
