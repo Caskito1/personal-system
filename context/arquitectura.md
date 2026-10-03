@@ -48,6 +48,17 @@ Organizador Personal
     └── Recordatorios.md
 ```
 
+## Respaldo y versionado del Vault
+
+- El Vault se encuentra actualmente en **Google Drive**, que es el mecanismo vigente de protección y sincronización.
+- **No hay Git ni versionado adicional** sobre el Vault.
+- Esto es una **decisión consciente por ahora**, no una omisión.
+- Existe una **necesidad identificada** de contar con un respaldo recuperable, originada en un incidente real de pérdida de datos detectado el 30/09/2026.
+- Se evaluará como **evolución futura** un sistema de backups periódicos **independiente del Vault**; hoy no está especificado ni comprometido.
+- La futura solución debe considerar el uso del Vault **desde la PC y desde la laptop**.
+- Como parte de esta decisión actual **no se utiliza un remoto Git ni infraestructura corporativa** para el Vault.
+- La idea asociada vive en `07-Ideas/Backup periódico del Vault.md`.
+
 ## Áreas vs tipos
 
 - Las carpetas principales representan **áreas de vida**: Objetivos, Música, Programación, Finanzas, Otros, Rutina, Ideas.

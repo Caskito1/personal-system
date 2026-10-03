@@ -15,7 +15,8 @@ Estructura actual (una nota por idea):
 ├── Google Calendar desde OpenCode.md
 ├── Fixtures de fútbol desde OpenCode.md
 ├── Analizador de finanzas.md
-└── Recordatorios de Regalo.md
+├── Recordatorios de Regalo.md
+└── Backup periódico del Vault.md
 ```
 
 La carpeta existe y está en uso. La implementación interna del sistema de Ideas (revisión, estados, decisión) sigue sin definirse.

@@ -79,6 +79,5 @@ Adquisiciones registra **qué quiero comprar**. Finanzas registra **cuánta plat
 
 ## Sin definir aún
 
-- Cadencia de la revisión mensual cuando el listado de ideas activas crezca mucho.
-- Si conviene acotar o subcontractar la revisión mensual cuando haya muchas ideas activas.
+- Si la lista de ideas activas crece mucho: cómo ajustar la revisión mensual (cambiar su cadencia, acotarla o subcontractarla).
 - Automatización o integración con Calendar/Tasks (fase posterior, no aprobada).
