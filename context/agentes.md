@@ -34,7 +34,7 @@ No existe carpeta correspondiente en el Vault: los agentes no poseen contenido p
 
 ## Ciclo del sistema
 
-El sistema opera en dos ciclos por período (semanal y mensual) con la **misma secuencia** de 7 pasos:
+El sistema opera en tres ciclos por período (semanal, mensual y anual) con la **misma secuencia** de 7 pasos:
 
 **CERRAR → REVISAR/VERIFICAR → CONVERSACIÓN DE CIERRE → PROPONER → USUARIO DECIDE → ABRIR → PLANIFICAR/EJECUTAR**
 
@@ -75,6 +75,24 @@ PLANIFICAR MES
 → ABRIR SIGUIENTE MES              ← aquí se crea la nota con los hallazgos
 → ejecutar
 ```
+
+**Ciclo anual:**
+
+Es la **tercera instancia del mismo ciclo**, no un sistema nuevo. El único nivel de REVISOR que se agrega es el ANUAL, sobre los meses cerrados.
+
+```
+CERRAR MES DE DICIEMBRE
+→ ejecutar el circuito completo del año (Daily → Semana → Mes)
+→ CERRAR AÑO                        ← la nota anual pasa a evaluarse
+→ REVISOR ANUAL                     ← sobre los meses cerrados, lo solicita el usuario
+→ CONVERSACIÓN DE CIERRE            ← instancia explícita, previa a la apertura del año siguiente
+→ propuesta de objetivos y prioridades para el año siguiente
+→ usuario decide
+→ ABRIR SIGUIENTE AÑO               ← aquí se crea Objetivos Anuales.md del año siguiente con los hallazgos
+→ ejecutar
+```
+
+El cierre anual **se construye desde los meses cerrados** (`## Resumen` y `## Hallazgos` mensuales), no desde la relectura de semanas ni de dailies. El resultado se escribe en la nota anual del año cerrado (`01-Objetivos/<Año>/Objetivos Anuales.md`) y los hallazgos se persisten en la nota del año siguiente.
 
 Reglas del ciclo:
 
@@ -425,7 +443,7 @@ En las **dailies** el cierre consiste en reconciliar `## Acciones`, completar `#
 
 ### Propósito
 
-El REVISOR es un agente **read-only dedicado**, separado del PLANIFICADOR. Es la **herramienta de cierre y retrospectiva** del sistema: revisa la ejecución registrada en `06-Rutina` y responde **"¿cómo salió realmente este período respecto de lo planificado?"**. Detecta pendientes, traslados, deserciones, fantasmas y patrones relevantes, y produce un **reporte** con **hallazgos utilizables** por el PLANIFICADOR para el siguiente ciclo de planificación. Opera en dos niveles: **REVISOR SEMANAL** y **REVISOR MENSUAL**. **No modifica el Vault ni archivos: todo su resultado es un reporte.**
+El REVISOR es un agente **read-only dedicado**, separado del PLANIFICADOR. Es la **herramienta de cierre y retrospectiva** del sistema: revisa la ejecución registrada en `06-Rutina` y responde **"¿cómo salió realmente este período respecto de lo planificado?"**. Detecta pendientes, traslados, deserciones, fantasmas y patrones relevantes, y produce un **reporte** con **hallazgos utilizables** por el PLANIFICADOR para el siguiente ciclo de planificación. Opera en tres niveles: **REVISOR SEMANAL**, **REVISOR MENSUAL** y **REVISOR ANUAL**. Es la **misma herramienta en tres niveles**: cambia el insumo y el ámbito, no el método. **No modifica el Vault ni archivos: todo su resultado es un reporte.**
 
 ### División de responsabilidades
 
@@ -466,17 +484,30 @@ El REVISOR es un agente **read-only dedicado**, separado del PLANIFICADOR. Es la
 
 Los estados conceptuales no requieren representación técnica en las notas: son criterios de clasificación del REVISOR.
 
-### REVISOR SEMANAL y REVISOR MENSUAL
+### REVISOR SEMANAL, REVISOR MENSUAL y REVISOR ANUAL
 
 - **REVISOR SEMANAL** (tras cerrar la semana): plan semanal vs realidad, acciones, rutinas, compromisos, traslados, deserciones y fantasmas de la semana, patrones inmediatos, pendientes reales e información para la próxima semana.
 - **REVISOR MENSUAL** (tras cerrar el mes): objetivos del mes vs realidad, evolución de proyectos, rutinas, resultados, pendientes acumulados, patrones del mes, cambios de contexto e información para el próximo mes. **No** es la repetición de 4 revisiones semanales: opera a nivel mes (dirección, evolución, acumulados).
+- **REVISOR ANUAL** (tras cerrar el año): evalúa el año **desde los meses cerrados**, no desde semanas ni dailies. Compara resultados contra los objetivos anuales, identifica tendencias y cambios, determina qué funcionó y qué no, detecta qué debería mantenerse, qué optimizarse y qué abandonarse, detecta nuevas necesidades u oportunidades, reordena prioridades y define qué continúa, qué cambia y qué se incorpora o deja atrás en el año siguiente. **No** es la repetición de las revisiones mensuales: agrega el año (dirección, continuidad y decisión del año siguiente).
+
+**Cadena de revisión acumulativa:** el circuito **Daily → Semana → Mes → Año → siguiente año** está definido en `context/rutina.md`. Cada nivel consume la síntesis del nivel anterior.
+
+**Regla de la cadena:** si una revisión de nivel N puede rehacerse releyendo directamente el nivel N−2 o inferior, en lugar de utilizar la síntesis del nivel N−1, se está rompiendo la cadena. El REVISOR ANUAL trabaja sobre los `## Resumen` y `## Hallazgos` mensuales; no re-lee semanas ni dailies para construir la evaluación global.
+
+**Ámbito por nivel:**
+
+| Nivel | Ámbito | Insumo principal | Resultado |
+|---|---|---|---|
+| Semanal | Semana | `## Registro` de los dailies + `## Resumen` de la semana cerrada | Hallazgos para la semana siguiente |
+| Mensual | Mes | `## Resumen` + `## Hallazgos` de las semanas cerradas | Hallazgos para el mes siguiente |
+| Anual | Año | `## Resumen` + `## Hallazgos` de los meses cerrados | Evaluación global + hallazgos para el año siguiente |
 
 ### Propósito y entradas
 
 - Entradas:
-  - El período a revisar (semana o mes) **cerrado**, solicitado por el usuario.
-  - La planificación del período: nota semanal/mensual en `06-Rutina/Semanal` o `06-Rutina/Mensual`.
-  - La ejecución registrada: notas diarias en `06-Rutina/Diario`, `## Registro` de las dailies y `## Resumen` del período cerrado.
+  - El período a revisar (semana, mes o año) **cerrado**, solicitado por el usuario.
+  - La planificación del período: nota semanal/mensual en `06-Rutina/Semanal` o `06-Rutina/Mensual`; para el año, `01-Objetivos/<Año>/Objetivos Anuales.md`.
+  - La ejecución registrada: notas diarias en `06-Rutina/Diario`, `## Registro` de las dailies, `## Resumen` de los períodos cerrados. **En el nivel anual el insumo son los meses cerrados**, no las dailies.
   - El calendario (`09-Calendario/**`) y otros contextos que aporten a entender los desvíos.
 - Salida: un **reporte** estructurado (sección **Formato de salida**) que se entrega al usuario y contiene los **hallazgos** que se persisten en la nota del período siguiente para el PLANIFICADOR.
 
@@ -502,9 +533,9 @@ Cuando corresponda al período:
 ### Flujo de lectura
 
 1. Leer `AGENTS.md` y la sección **REVISOR** de este archivo.
-2. Leer `context/rutina.md` (formato de notas y registro).
-3. Leer la planificación del período a revisar (`06-Rutina/Semanal/<Semana>`, `06-Rutina/Mensual/<Mes>`).
-4. Leer las notas diarias del período (`06-Rutina/Diario/**`) con su `## Registro` y acciones.
+2. Leer `context/rutina.md` (formato de notas, circuito de revisión acumulativo y registro).
+3. Leer la planificación del período a revisar (`06-Rutina/Semanal/<Semana>`, `06-Rutina/Mensual/<Mes>`; para el año, `01-Objetivos/<Año>/Objetivos Anuales.md`).
+4. **Según el nivel:** leer las notas diarias del período con su `## Registro` (semanal); leer los `## Resumen` y `## Hallazgos` de las semanas cerradas (mensual); leer los `## Resumen` y `## Hallazgos` de los meses cerrados (anual). **En los niveles mensual y anual no se releen las dailies**: se usa la síntesis del nivel inferior.
 5. Leer calendario y contextos relevantes para interpretar desvíos (sin convertirlos en excusas ni en eventos).
 6. Cruzar planificación vs ejecución y construir el reporte.
 
@@ -579,6 +610,8 @@ Reporte en un solo mensaje estructurado:
 
 El reporte **se muestra al usuario** y separa el resultado de la revisión (reporte completo, que no se copia al Vault) de los **hallazgos persistentes** (sección siguiente). No escribe en el Vault.
 
+**Nivel anual:** usa el mismo formato. La evaluación global del año y las decisiones para el año siguiente **sí se escriben** en `01-Objetivos/<Año>/Objetivos Anuales.md`, porque esa nota es el destino propio del cierre anual (no es una copia del reporte: es el registro del cierre). Los hallazgos persistentes van a la nota del año siguiente.
+
 ### Persistencia de hallazgos
 
 Separación conceptual:
@@ -590,9 +623,13 @@ Son persistibles, por ejemplo: un pendiente real que requiere decisión; un tras
 
 Las observaciones temporales de períodos abiertos no persisten una vez cerrado el período, salvo que tengan relevancia posterior.
 
-Ubicación: los hallazgos se escriben como sección `## Hallazgos de la revisión de <período>` en la **nota del período siguiente** (semanal: `06-Rutina/Semanal/Semana NN.md`; mensual: `06-Rutina/Mensual/<Mes Año>.md`). No se crea un sistema paralelo de archivos de revisiones: la sección es opcional y solo existe cuando hay hallazgos.
+Ubicación: los hallazgos se escriben como sección `## Hallazgos de la revisión de <período>` en la **nota del período siguiente** (semanal: `06-Rutina/Semanal/Semana NN.md`; mensual: `06-Rutina/Mensual/<Mes Año>.md`; **anual: `01-Objetivos/<Año+1>/Objetivos Anuales.md`**). No se crea un sistema paralelo de archivos de revisiones: la sección es opcional y solo existe cuando hay hallazgos.
+
+Para el nivel anual, la nota del período siguiente es la **nota anual del año siguiente**, que queda creada en el paso **ABRIR** con los hallazgos persistidos y las decisiones del cierre. Esa nota es a la vez el objetivo del año siguiente y el punto de partida de su propia cadena de revisión.
 
 Escritura: la persistencia ocurre en el paso **ABRIR** (paso 7 del **Disparo**), nunca antes. La nota del período siguiente **no existe** hasta ese momento: se crea en ABRIR y los hallazgos se escriben como parte de su creación, bajo el protocolo de aprobación de escritura (sección **Escritura de notas de Rutina**). La ejecuta el **asistente principal**. El REVISOR no escribe; la persistencia no lo convierte en agente escritor.
+
+**Verificación de la persistencia:** al abrir un período, comprobar que la sección `## Hallazgos de la revisión de <período>` existe en la nota nueva y que su contenido corresponde al período anterior. Si falta, el ciclo se detiene y se pregunta, en lugar de continuar en silencio. Esta verificación existe porque la persistencia puede omitirse sin dejar señal visible.
 
 ### Disparo
 
@@ -606,6 +643,8 @@ El REVISOR **no se ejecuta automáticamente**. Uso normal:
 6. El usuario decide sobre la propuesta.
 7. Se **abre** el período siguiente: se crea la nota, se persisten los hallazgos como sección `## Hallazgos de la revisión de <período>`, se incorporan las decisiones aprobadas y se construye `## Acciones`.
 8. El PLANIFICADOR trabaja sobre el período ya abierto y decidido; comienza la ejecución.
+
+Para el **nivel anual**, el mismo flujo se aplica al año: se cierra diciembre, se solicita el REVISOR ANUAL sobre los meses cerrados, la conversación de cierre toma las decisiones del año siguiente, y en ABRIR se crea `01-Objetivos/<Año+1>/Objetivos Anuales.md` con `## Hallazgos de la revisión de <Año>` y `## Decisiones para <Año+1>`.
 
 No hay automatización del disparo.
 

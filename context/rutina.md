@@ -21,12 +21,34 @@ Las tres carpetas están en uso (Mensual, Semanal y Diario).
 
 ## Cómo funciona
 
-- Se organiza por períodos en tres niveles: Mensual, Semanal y Diario.
+- Se organiza por períodos en tres niveles: Mensual, Semanal y Diario. El nivel Anual vive en 01-Objetivos (`Objetivos Anuales.md`) y también participa en la cadena de revisión.
 - Las notas se nombran **por período**, con nombres en lenguaje natural: mensual `Septiembre 2026.md` en `Mensual/`, semanal `Semana 36.md` en `Semanal/`, diaria `9 de Septiembre.md` en `Diario/`.
 - Los niveles Mensual, Semanal y Diario de la jerarquía general (Anual → Semestral → Mensual → Semanal → Diario) viven aquí, no en Objetivos.
 - NO se duplican los objetivos dentro de Rutina: las notas de rutina pueden enlazar a los objetivos correspondientes mediante enlaces internos de Obsidian.
 - Esta área es el lugar donde se materializan las acciones concretas derivadas de objetivos, rutinas y proyectos (planificación, ejecución y revisión). El modelo general está en `context/arquitectura.md` y su operación, incluido el orden de cierre, revisión y apertura de períodos, está definida en `context/agentes.md` (sección **Ciclo del sistema**).
 - Estado actual: el sistema de rutina está en uso (nota mensual en curso, notas semanales y diarias creadas).
+
+## Circuito de revisión acumulativo
+
+La revisión es una **cadena acumulativa**: **Daily → Semana → Mes → Año → siguiente año**. Cada nivel consume **la síntesis del nivel anterior** y aumenta el nivel de análisis. El circuito no crea una infraestructura de reportes: reutiliza las notas y secciones que ya existen.
+
+**Regla de la cadena:** si una revisión de nivel N puede rehacerse releyendo directamente el nivel N−2 o inferior, en lugar de utilizar la síntesis del nivel N−1, se está rompiendo la cadena. Cada nivel nombra a su nivel inferior, nunca a las fuentes originales.
+
+| Nivel | Insumo | Función | Resultado | Qué NO hace |
+|---|---|---|---|---|
+| **Daily** | Plan de la semana + calendario | Registrar lo realizado · registrar información relevante · detectar pendientes · cerrar el día | `## Registro` | No analiza. No resume la semana. No decide prioridades. No lleva `## Resumen` |
+| **Semana** | `## Registro` de los dailies de la semana | Ver qué ocurrió · detectar pendientes y desvíos · revisar rutinas y proyectos · ajustar prioridades · definir la próxima semana | `## Resumen` + `## Hallazgos de la revisión de <semana>` → semana siguiente | No re-lista las dailies. No lleva detalle de sesión. No copia el `## Registro` día por día |
+| **Mes** | `## Resumen` + `## Hallazgos` de las semanas cerradas | Evaluar cómo fue el mes · detectar tendencias · analizar adherencia y resultados · revisar proyectos y áreas · reordenar prioridades · decidir ajustes | `## Resumen` + `## Hallazgos de la revisión de <mes>` → mes siguiente | No es copia de las semanas. No re-lee dailies |
+| **Año** | `## Resumen` + `## Hallazgos` de los meses cerrados | Evaluar el año · comparar con los objetivos anuales · mantener / optimizar / abandonar · detectar nuevas necesidades · reordenar prioridades | Evaluación en `01-Objetivos/<Año>/Objetivos Anuales.md` + `## Hallazgos de la revisión de <Año>` → nota del año siguiente | No re-lee semanas ni dailies. No produce una auditoría. No copia resúmenes mensuales |
+| **→ Año siguiente** | `## Hallazgos` + decisiones del cierre | Convertir la evaluación en objetivos y prioridades del año siguiente | `Objetivos Anuales.md` del año siguiente con hallazgos y decisiones | No arrastra objetivos automáticamente |
+
+**Qué sube en cada tramo:**
+
+- **Daily → Semana:** acciones completadas / no hechas / extra / pendientes con origen · rutinas planificadas vs registradas · eventos del calendario ejecutados · notas del día resueltas.
+- **Semana → Mes:** adherencia de rutinas del mes · evolución de proyectos · pendientes que sobrevivieron una semana · patrones repetidos en el mes · desvíos del foco del mes · balance por área.
+- **Mes → Año:** resultados contra los objetivos anuales · tendencias que atravesaron el año · qué funcionó y qué no · nuevas necesidades · decisiones para el año siguiente.
+
+**Cierre correcto de cada período:** una semana o un mes está correctamente cerrado cuando tiene su `## Resumen` con contenido de su nivel, su revisión ejecutada, la conversación de cierre realizada con decisión del usuario, y los hallazgos persistidos en la nota del período siguiente. El año se construye desde los meses cerrados, no desde los dailies.
 
 ## Decisiones
 
@@ -58,7 +80,8 @@ Las tres carpetas están en uso (Mensual, Semanal y Diario).
 - **Bloque de nota psicológica en notas diarias**: la tarea de escribir nota psicológica va en `### Otros` (no se crea una categoría propia). Cuando la tarea está presente, la nota diaria incluye `### Nota Psicológica de hoy` como espacio de escritura libre (cómo me siento en el presente, qué me está pasando), con el checkbox `- [ ] Cargar en [[NotasPsicologicas/Registro/<AAAA-MM-DD>]]`. Al cierre del día el contenido se transcribe a `05-Otros/NotasPsicologicas/Registro/<AAAA-MM-DD>.md` (misma lógica que la carga de música). Frecuencia de escritura personal (~1–2 semanas); relectura mensual recordada por el Planner antes del cierre de mes.
 - **Bloque de Adquisiciones en notas diarias y semanales**: en las diarias vive como `### Adquisiciones` dentro de `## Acciones`, y en las semanales dentro de `## Acciones`. Contiene solo **acciones concretas** sobre ítems de `08-Adquisiciones/Lista de Compras.md` (investigar opciones, comparar precios o características, revisar modelos, decidir, o ejecutar la compra de un ítem en `Listo para comprar`). El Daily **nunca** muestra el inventario: ni la lista de ítems, ni sus estados, ni sus fechas. Un ítem entra en la daily solo si tiene una acción concreta para ese día, normalmente trasladada de la semana de investigación que se le asignó, conservando la trazabilidad `(de [[Semana NN]])`. No hay tope de ítems. La información de estado vive únicamente en la lista; la semana asignada a cada investigación vive en la nota semanal. Fuente única operativa y reglas de compra: `context/adquisiciones.md`.
 - **Reconciliación de `## Acciones` previa al cierre**: antes de pasar a `Estado: Cerrada`, las acciones de la nota se reconcilian contra lo ocurrido realmente y contra la revisión del REVISOR. Acción realizada o descartada → `[x]` (dejando constancia si corresponde); acción realmente pendiente → `[ ]`. Una nota no debe quedar `Cerrada` con checkboxes que contradigan lo ocurrido, y todo pendiente real se analiza en la conversación de cierre para decidir si se traslada, se redefine, se descarta o requiere otra acción (regla completa en `context/agentes.md`, sección **Escritura de notas de Rutina**).
-- **Cierre de período**: se cambia `Estado: Abierta` por `Estado: Cerrada` y se agrega `## Resumen` al final (plan vs realidad y pendientes, para notas mensuales y semanales). En las **notas diarias** el cierre es más liviano: se cambia `Estado: Abierta` por `Estado: Cerrada` y se completa `## Registro` (Hecho / No hecho / Extra / Nota); la daily **no** lleva `## Resumen`, porque el Registro ya cumple esa función. Requiere aprobación explícita. Las notas cerradas son inmutables; cualquier corrección requiere aprobación explícita.
+- **Cierre de período**: se cambia `Estado: Abierta` por `Estado: Cerrada` y se agrega `## Resumen` al final (para notas mensuales y semanales). En las **notas diarias** el cierre es más liviano: se cambia `Estado: Abierta` por `Estado: Cerrada` y se completa `## Registro` (Hecho / No hecho / Extra / Nota); la daily **no** lleva `## Resumen`, porque el Registro ya cumple esa función. Requiere aprobación explícita. Las notas cerradas son inmutables; cualquier corrección requiere aprobación explícita.
+- **Contenido del `## Resumen` según el nivel del período:** el resumen nombra a su nivel inferior, nunca a las fuentes originales. En la **semana**: qué ocurrió por área · rutinas planificadas vs registradas · desvíos · pendientes con origen. En el **mes**: adherencia acumulada · tendencias · evolución de proyectos y áreas · pendientes que sobrevivieron el mes · decisiones de reordenamiento de prioridades. Un resumen mensual que solo concatena los resúmenes semanales no cumple su función: debe agregar el mes.
 - **Traslados**: en el origen `→ trasladada a [[<Período>]]`; en el destino `(de [[<Período>]])`.
 
 ## Sin definir aún

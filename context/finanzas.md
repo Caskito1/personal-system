@@ -58,7 +58,9 @@ Estructura:
 
 ### Inversiones
 
-- **Objetivos 2026**: Fondo local ≈ **USD 5.000**; ETF **VOO** → aporte anual de **USD 1.500 en diciembre**.
+- **Definición canónica 2026** (documentada en `04-Finanzas/Objetivos Financieros/Objetivos 2026.md`, y no repetida aquí):
+  - **Fondo local:** saldo **equivalente a USD 5.000** al cierre de diciembre de 2026, convertido desde UYU con la **cotización de diciembre**. No es una meta fija en pesos ni una obligación de aportes mensuales: depende del excedente disponible.
+  - **VOO:** **+USD 1.500 adicionales** durante diciembre de 2026, sobre la posición ya existente. El **rendimiento no forma parte del aporte** y **no se fija un saldo final** para VOO.
 - El historial de inversiones vive en `Inversiones/Historial de Inversiones.md`.
 - No se registran montos, porcentajes ni asignación de cartera en tiempo real; eso lo custodia Gletir.
 
@@ -66,7 +68,7 @@ Estructura:
 
 - Objetivos patrimoniales y de inversión, con su estrategia de ahorro correspondiente.
 - Las compras grandes/patrimoniales viven aquí; las adquisiciones corrientes viven en `08-Adquisiciones`.
-- **Objetivo 2026 registrado**: alcanzar aproximado USD 5.000 en fondo local y realizar el aporte anual de USD 1.500 a VOO en diciembre.
+- **Objetivo 2026 registrado**: ver la definición canónica en `Objetivos Financieros/Objetivos 2026.md` (fondo local ≈ USD 5.000 equivalente al cierre de diciembre convertido a la cotización de diciembre, y +USD 1.500 a VOO durante diciembre). Esta sección resume; no redefine las metas.
 - Posible objetivo futuro (aún no decidido): crecimiento del fondo local hacia aproximadamente USD 7.000–8.000 para utilizar eventualmente parte como entrada para un vehículo. Los ETFs se mantienen como inversión de largo plazo.
 
 ### Revisión anual
@@ -74,6 +76,7 @@ Estructura:
 - Revisión de metas vs realidad, evaluación de la estrategia del año.
 - Evaluación de diversificación, otros ETFs, alternativas en USD, etc.
 - Decide y actualiza `Estrategia Financiera.md` para el año siguiente.
+- **Relación con el cierre global del año:** esta revisión financiera es una **revisión propia del área**, y su resultado alimenta el cierre anual global del sistema (`01-Objetivos/<Año>/Objetivos Anuales.md`, REVISOR ANUAL). El REVISOR ANUAL **no la reemplaza ni la recalcula**: la toma como insumo para evaluar la línea de finanzas del año. Ver `context/agentes.md` (REVISOR) y `context/rutina.md` (circuito de revisión acumulativo).
 
 ### Relación con el Planner
 
@@ -111,6 +114,17 @@ Dirección de trabajo del sistema financiero. **Regla: el roadmap es dirección 
 - Las etapas 2–4 tienen como objetivo llevar AppFinanciera al **mínimo funcional necesario** para que Finanzas pueda operar con datos reales y alimentar el análisis del Organizador (LEER → ANALIZAR → PROPONER); no para terminar la aplicación.
 - **El cierre de Finanzas no equivale al cierre de AppFinanciera.** Alcanzado y validado el mínimo funcional, Finanzas puede considerarse cerrada aunque la aplicación conserve funcionalidades futuras por desarrollar (estadísticas, visualizaciones, mejoras de UX u otros módulos; ejemplos conceptuales que quedan como backlog de la aplicación y se deciden posteriormente).
 - El endpoint y la automatización no son el "final" de AppFinanciera: son una posible etapa posterior del sistema de integración/automatización.
+
+### Alcance funcional aprobado para 2026 (AppFinanciera)
+
+Documentado en `context/programacion.md`. Estos casos deben quedar resueltos para que Finanzas pueda operar; **no se implementan en este BUILD**:
+
+1. **Modelo de recuperaciones / settlements** para gastos propios, gastos de terceros, adelantos y reintegros, sin refactor innecesario.
+2. **Corrección semántica:** el reintegro **no** es ingreso.
+3. **Dinero a recuperar**, vinculado a gastos de terceros y adelantos.
+4. **Liquidación de saldos** que preserva el historial.
+5. **Gastos con tarjeta** dentro del modelo de recuperaciones (medio de pago y monto recuperable); **módulo propio de tarjeta fuera de alcance**.
+6. **Extracción de datos manual**: suficiente; no requiere endpoint ni automatización.
 
 ### Criterio de cierre de Finanzas
 

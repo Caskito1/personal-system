@@ -50,6 +50,18 @@ Aplicación de finanzas (Next.js + Firebase). Es la **fuente operacional** de in
 
 Objetivo actual: alcanzar el **mínimo funcional** para que Finanzas del Organizador pueda operar con datos reales (etapas 2–4 del roadmap financiero en `context/finanzas.md`). **El cierre de Finanzas no equivale al cierre de AppFinanciera:** las funcionalidades futuras propias quedan como backlog de la aplicación y se deciden posteriormente; el endpoint/API es parte de la automatización futura (Fase 6), no de estas etapas.
 
+**Mínimo 2026 (alcance funcional aprobado, a documentar; no implementado en este BUILD):**
+
+- Diseño aprobado del modelo de **recuperaciones / settlements** para representar gastos propios, gastos de terceros, adelantos y reintegros, **sin** refactor innecesario.
+- **Corrección semántica:** los reintegros no son ingresos.
+- Modelo de **dinero a recuperar** y su relación con gastos de terceros y adelantos.
+- **Liquidación de saldos** que preserva el historial (no borra el pasado para cuadrar el presente).
+- **Gastos con tarjeta** representados dentro del modelo de recuperaciones/settlements: la tarjeta es medio de pago y monto recuperable, **no un módulo propio de tarjeta** (fuera de alcance en 2026).
+- **Cierre de los 11 puntos semánticos** del modelo (reglas semánticas del dominio de la aplicación; fuente canónica en `opencode-AppFinanciera/context/dominio.md`, secciones 2, 5, 6, 7, 10 y 11). Este BUILD documenta el alcance; no implementa el modelo.
+- **Extracción manual** de datos: el uso de datos puede ser inicialmente manual; no requiere endpoint ni automatización.
+
+Este BUILD **solo documenta** este alcance en los contextos. No implementa código ni modifica el repo `opencode-AppFinanciera`.
+
 Estado: **Activo** — Etapa 0 (Relevamiento + construcción del contexto interno) **completada** vía el OpenCode del repo de AppFinanciera (contexto y agentes commiteados y pusheados en `opencode-AppFinanciera`, `d0c6fec`; verificado 23/09). Etapa 1 (Base estructural) **CERRADA (25/09/2026)**, commit `78e1461` en el repo. Etapa 2 (Correcciones y limpieza) **en curso**: 2.1 (taxonomía de gastos fijos + `Otros`) **CERRADA el 25/09/2026** con commit de producción `b46b570`, y **2.2 (totales del mes con gastos fijos), 2.3 (ingresos: labels de bandas + sección `Otros`) y 2.8 (header `Personal` / `Total registrado`) CERRADAS el 30/09/2026** (`119cc4a` · `7d71fb5` · `66ba009`; Producción PASS con cuenta real); 2.4 · 2.5 · 2.6 sin empezar y **2.7 (guard `groupId`) NO implementada, requiere aprobación propia**. Acceso a Firestore read-only aprobado, sin escrituras ni migraciones. La auditoría inicial está completada en el repo (`REPORT-02.md`). El roadmap (etapas 0–4), las decisiones funcionales cerradas y el estado viven en `context/AppFinanciera.md`; los HANDOFF y PROPUESTAS aprobados viven en el repo del proyecto (`opencode-AppFinanciera/HANDOFF-ETAPA-0-MAPA-CONTEXTO.md`, `opencode-AppFinanciera/HANDOFF-ETAPA-1-BASE-ESTRUCTURAL.md`, `opencode-AppFinanciera/PROPUESTA-ETAPA-1.md`, `opencode-AppFinanciera/HANDOFF-ETAPA-2.md`); el respaldo del contexto de sesión original está en `CONTEXTO-ETAPA3.md` del repo. Ver también `03-Programacion/Proyectos Personales/Indice de Proyectos.md` y `03-Programacion/Proyectos Personales/AppFinanciera.md`.
 
 #### VentoleraApp
@@ -69,6 +81,12 @@ No agregar más funcionalidades por ahora.
 
 El sistema de organización personal que se construye con OpenCode (este sistema y el Vault de Obsidian). Proyecto principal actual.
 
+**Definición de 2026 (objetivo anual):** el Organizador es la capa de **objetivos, prioridades, alcance, secuencia, handoffs, reportes y coordinación** que hace posible que los proyectos funcionen y se reporten. Su resultado esperado en 2026 es el **uso real del circuito de rutina y planificación (hasta el nivel mensual)** y que los proyectos reporten avances por el circuito, no el cierre técnico del sistema.
+
+**Límite con la capa técnica:** el OpenCode de cada repositorio de proyecto (**OpenCode de proyecto**) conserva y utiliza el conocimiento técnico necesario para ejecutar las planificaciones aprobadas. El Organizador **no** duplica ese conocimiento ni sustituye al OpenCode de proyecto en la auditoría técnica, el plan técnico, la ejecución del código o la verificación. Ver `context/arquitectura.md`.
+
+**Fuera de alcance en 2026:** Calendar (automatización de calendario), la FASE 6 de automatizaciones/integraciones y el cierre técnico completo del sistema. Calendar es una idea futura, no parte del objetivo anual 2026.
+
 Flujo previsto:
 
 1. Agentes
@@ -76,9 +94,24 @@ Flujo previsto:
 3. Datos reales (Fase 5)
 4. Automatización (Fase 6): Calendario → Drive → AppFinanciera (mediante el endpoint de AppFinanciera).
 
+#### VentoleraApp
+
+Estado 2026: **Etapa 0 de recuperación y preparación.** En 2026 no se desarrolla funcionalidad nueva del dashboard; el trabajo es reapropiarse del proyecto y dejarlo preparado.
+
+Mínimo 2026 (resultado esperado):
+
+- **Etapa 0 ejecutada:** repo y OpenCode de proyecto preparados, auditoría inicial y plan derivados de ella.
+- **Dossier / landing** editable y mantenida por el usuario.
+- **Audio por partitura:** estructura del sistema de audios por canción en la sección de partituras, definida y con carga inicial.
+- Cierre de la etapa con informe y **pendientes explícitamente asignados a 2027**.
+
+Además de este mínimo, las etapas previstas (armador de landings dentro del Dashboard y demás funcionalidades) quedan para 2027 o posterior. No agregar más funcionalidades por ahora.
+
 #### Portfolio
 
 Portfolio profesional personal. Estado: **en pausa / en definición**. No se elimina. Dos pilares: (1) CV, carta de presentación y preparación para entrevistas (mantener actualizado con LinkedIn); (2) sección **Tools** con herramientas para optimizar procesos de trabajo (backlog inicial: optimizador/formateador de imágenes, armador de newsletter que toma datos de un PDF y los pasa a HTML). Antes de entrar al ciclo opencode se define el alcance de cada pilar.
+
+**Mínimo 2026 (resultado esperado):** **Etapa 0** (repo y OpenCode de proyecto preparados, auditoría inicial y plan derivados de ella), resolver las inconsistencias necesarias para que la base quede coherente, **CV 2027** actualizado y **Tools** queda como backlog. Carta de presentación y entrevistas quedan como camino 2027; no se implementan en 2026.
 
 ### Ciclo de proyectos con opencode
 

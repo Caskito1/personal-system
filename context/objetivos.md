@@ -24,7 +24,9 @@ Estructura actual:
 - Los niveles Mensual, Semanal y Diario NO se duplican aquí: viven principalmente en 06-Rutina y se vinculan mediante enlaces internos.
 - Una carpeta por año (2026, 2027, …). Cada año nuevo, crear su carpeta.
 - Dentro de cada año: una nota anual (`Objetivos Anuales.md`) y una nota por semestre (`H1.md` = primer semestre, `H2.md` = segundo semestre).
-- Estado actual: `H1.md` y `H2.md` tienen contenido real; `Objetivos Anuales.md` todavía contiene únicamente su título.
+- **La nota anual es a la vez el objetivo del año y el lugar donde queda escrita su evaluación y sus decisiones.** Al cerrarse el año, esta nota suma la evaluación por línea, las decisiones del cierre y la proyección al año siguiente.
+- **El nivel anual forma parte de la cadena de revisión** Daily → Semana → Mes → Año → siguiente año (ver `context/rutina.md` y `context/agentes.md`).
+- Estado actual: `H2.md` tiene contenido real; `Objetivos Anuales.md` tiene el objetivo anual 2026 y aloja la evaluación de cierre; `H1.md` es un registro explícito de que el primer semestre no se utilizó y no tiene objetivos.
 
 ## Decisiones
 
@@ -35,9 +37,13 @@ Estructura actual:
 - El modelo general del sistema está documentado en `context/arquitectura.md`: la cadena **Objetivos → Rutinas/Proyectos → Planificación → Ejecución → Revisión** es una precisión conceptual de la cadena existente, no una implementación nueva.
 - La nota mensual de Rutina enlaza al objetivo semestral correspondiente (`[[H1]]` / `[[H2]]`); las acciones individuales pueden enlazar al objetivo concreto que corresponda.
 
+## Estado de los objetivos
+
+- Cada objetivo se marca como **Cumplido**, **Parcial** o **No cumplido**.
+- El estado **nunca va solo**: cada objetivo lleva **motivo**, **aprendizaje o hallazgo relevante** y **decisión para 2027**.
+- Un objetivo **no alcanzado no desaparece ni se copia automáticamente** al año siguiente. La decisión de trasladarlo, modificarlo, abandonarlo o reemplazarlo surge de la conversación de cierre del año y queda registrada en la nota anual.
+- Los objetivos no alcanzados se registran en su propia tabla dentro de la nota anual del año cerrado.
+
 ## Sin definir aún
 
-- Formato/contenido de las notas (cómo se escriben los objetivos).
-- Forma de marcar estado (completado, pendiente, parcial, etc.).
-- Qué ocurre con los objetivos no alcanzados al cerrar el año.
 - Si las notas semanales y diarias de Rutina llevan vínculo propio a un objetivo a nivel de nota (la mensual ya enlaza al semestral; las acciones ya pueden enlazar al objetivo concreto).

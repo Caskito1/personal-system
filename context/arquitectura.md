@@ -146,6 +146,8 @@ LEER → ANALIZAR → RECORDAR CONTEXTO → PROPONER → USUARIO DECIDE → PLAN
 
 Ciclo de planificación: **mensual → semanal → diaria → ejecución/registro → revisión ↺**. La operación del ciclo —cierre del período → revisión (REVISOR) → conversación de cierre → propuesta (PLANIFICADOR) → decisión del usuario → apertura → planificación— está definida en `context/agentes.md` (sección **Ciclo del sistema**). El período siguiente no se abre antes de que exista una decisión explícita del usuario: su nota se crea en ese momento, junto con los hallazgos persistidos de la revisión anterior.
 
+El ciclo de revisión tiene además un **nivel anual**: la cadena acumulativa **Daily → Semana → Mes → Año → siguiente año** (ver `context/rutina.md`). El cierre anual es la tercera instancia del mismo ciclo de 7 pasos y del mismo REVISOR, y se construye **desde los meses cerrados**.
+
 - El Planner sugiere y no manda; la decisión final siempre es del usuario.
 - Las rutinas de música y ejercicio son comportamiento estable, no proyectos que compiten por prioridad: se protegen antes de llenar espacios con proyectos.
 - La prioridad de proyectos de programación solo aplica dentro de esa categoría. El Planner nunca interpreta "Organizador es prioridad 1" como "hay que darle más tiempo que a música".
@@ -248,6 +250,8 @@ Representará lo que realmente ocurrió, con registro diario liviano (Hecho / No
 
 La ejecuta el **REVISOR** (agente read-only, Fase 3.6 completada) entre el cierre del período y la apertura del siguiente (Ciclo del sistema, `context/agentes.md`). Compara lo planificado con lo ejecutado sobre el período **cerrado**, clasifica las acciones y responde: qué se planeó, qué ocurrió, qué quedó pendiente, qué apareció sin estar previsto, qué se traslada, qué se descarta, qué se prioriza después. Los hallazgos relevantes se persisten en la nota del período siguiente —que se crea en el paso **ABRIR**, después de la decisión del usuario— como sección `## Hallazgos de la revisión de <período>`, y los consume el **PLANIFICADOR** como contexto de la próxima propuesta. La operación completa está definida en `context/agentes.md` (sección **REVISOR**).
 
+El REVISOR opera en **tres niveles**: semanal, mensual y **anual**. El nivel anual es la tercera instancia del mismo ciclo y del mismo agente: trabaja sobre los meses cerrados y su evaluación se escribe en `01-Objetivos/<Año>/Objetivos Anuales.md`, que es el lugar donde queda registrada la evaluación del año y las decisiones para el año siguiente.
+
 ### Aclaraciones de proyectos
 
 - **Ventolera (web)** = proyecto de programación (`03-Programacion/Proyectos Personales`): web de la banda La Ventolera, dashboard, Next.js/Tailwind.
@@ -269,6 +273,8 @@ Eje de funcionalidad del sistema (no confundir con las fases de desarrollo del p
 3. **Contexto semanal dinámico**: preguntas/contexto variables semana a semana (toques, visitas, partidos, compromisos puntuales), con persistencia ligera en la nota semanal.
 
 La evolución conceptual: **Objetivos → Proyectos/Rutinas → Planificación mensual → semanal → diaria → Ejecución → Revisión**, con el Planner como capa de inteligencia: contexto + estado real + calendario + prioridades → preguntas → propuesta → decisión del usuario → plan.
+
+La revisión es una **cadena acumulativa Daily → Semana → Mes → Año → siguiente año** (`context/rutina.md`): cada nivel consume la síntesis del anterior y sube el nivel de análisis. El cierre anual se construye desde los meses cerrados y define los objetivos y prioridades del año siguiente.
 
 ## Reglas vigentes
 
