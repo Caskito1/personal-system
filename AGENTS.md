@@ -86,6 +86,7 @@ El Planner funciona como asistente de planificación, no como jefe. El diseño f
 | Objetivos | `context/objetivos.md` | `01-Objetivos` |
 | Música | `context/musica.md` | `02-Musica` |
 | Programación | `context/programacion.md` | `03-Programacion` |
+| AppFinanciera (proyecto de Programación/Finanzas) | `context/AppFinanciera.md` | `03-Programacion` |
 | Finanzas | `context/finanzas.md` | `04-Finanzas` |
 | Otros | `context/otros-objetivos.md` | `05-Otros` |
 | Rutina | `context/rutina.md` | `06-Rutina` |

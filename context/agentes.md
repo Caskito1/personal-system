@@ -933,7 +933,5 @@ El MANTENIMIENTO nunca escribe; su salida final es el informe con los hallazgos 
 
 ## Sin definir aún
 
-- Ajustes a la escritura del PLANIFICADOR que surjan de la prueba real de la Fase 3.5.
 - La validación del ciclo completo en un nuevo uso real, ahora con el flujo refinado (cierre → REVISOR → conversación de cierre → propuesta → decisión → apertura → planificación). El primer uso real del flujo original (Semana 39) ya dio veredicto del usuario y cerró la Fase 3.6 el 27/09/2026.
-- Si la división PLANIFICADOR/REVISOR se mantiene tal cual tras la evaluación de la Fase 3.6.
 - La lectura automática de calendario/proyectos/adquisiciones y la integración con Calendar o automatizaciones: fases posteriores (el V2 define quién consulta qué, no la automatización).
