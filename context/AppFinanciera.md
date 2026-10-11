@@ -21,15 +21,16 @@ La intención es poder enviar a futuro HANDOFFs relativamente concisos al OpenCo
   - `opencode-AppFinanciera/HANDOFF-ETAPA-0-MAPA-CONTEXTO.md` aprobado y entregado: commiteado en el repo `opencode-AppFinanciera`.
   - Etapa 0 cerrada.
 - **Etapa 1 (Base estructural): CERRADA (25/09/2026).** Commit `78e1461` en el repo `opencode-AppFinanciera`. Entregables: `opencode-AppFinanciera/HANDOFF-ETAPA-1-BASE-ESTRUCTURAL.md` y `opencode-AppFinanciera/PROPUESTA-ETAPA-1.md`. Etapa de diseño/estructura (NO implementa funcionalidades).
-- **Etapa 2 (Correcciones y limpieza): EN CURSO.** Estructura de subetapas aprobada en `opencode-AppFinanciera/HANDOFF-ETAPA-2.md`:
+- **Etapa 2 (Correcciones y limpieza): CERRADA (11/10/2026).** 9/9 subetapas cerradas. Estructura de subetapas aprobada en `opencode-AppFinanciera/HANDOFF-ETAPA-2.md`:
   - **2.1 — Taxonomía de gastos fijos unificada + `Otros`: CERRADA (25/09/2026).** Commit de producción `b46b570`; validada en Local (build + 27 invariantes), Staging y Producción. Sin cambios en Firestore.
   - **2.2 — Totales del mes con gastos fijos: CERRADA (30/09/2026).** Commit `119cc4a`; Local (build + fixtures 24/24) y Producción PASS (cuenta real).
   - **2.3 — Ingresos (labels de bandas + sección `Otros`): CERRADA (30/09/2026).** Commit `7d71fb5`; gate read-only PASS, Local 8/8, Staging PASS y Producción PASS (cuenta real, solo lectura, 0 escrituras).
   - **2.8 — Header `Personal` / `Total registrado` en `/gastos-fijos`: CERRADA (30/09/2026).** Commit `66ba009`; verificada en Producción.
   - **2.9 — Totales del header acotados al período visible: CERRADA (06/10/2026).** Commit `bfbdda4`; gate read-only PASS (P1–P6) y runtime 17/17; verificada en Producción por el usuario.
   - **2.7 — Guard de integridad `groupId` en el alta de compartidos: CERRADA (08/10/2026).** Commit `96934c0`; gate Firestore PASS (41 entries, 0 corruptos) y harness 20/20; verificada en Producción por el usuario.
-   - **2.4 — Robustez de sesión/redirección: CERRADA (10/10/2026).** Commit `1716a19`; verificada en Producción.
-   - **2.5 · 2.6: sin empezar** (únicas subetapas abiertas de la Etapa 2).
+  - **2.4 — Robustez de sesión/redirección: CERRADA (10/10/2026).** Commit `1716a19`; verificada en Producción.
+  - **2.5 — Retiro del flujo legacy de gastos fijos: CERRADA (11/10/2026).** Commit `3216095`; bloque de Transferencias intacto; verificada en Producción.
+  - **2.6 — Limpieza de código muerto: CERRADA (11/10/2026).** Commit `10ab576`; transferencias excluida del alcance (conservados `Transferenciassections.jsx`, `gastosCalculations.js` y `origenCompra` para el diseño de la Etapa 3); verificada en Producción.
 - **Etapas 3–4: NO iniciadas.** Solo se definen aquí su alcance (sección Roadmap).
 - Regla de flujo: **LEER → ANALIZAR → PROPONER → USUARIO DECIDE → PLANIFICAR → USUARIO APRUEBA → EJECUTAR**.
 - Regla permanente de despliegue (cuando haya implementación): **Local → Staging → Producción → Verificación**. Nunca asumir terminado solo porque funciona localmente; verificar tras producción; no modificar producción directamente.
@@ -65,7 +66,9 @@ Solo aquello que la Etapa 0 justifique: código obsoleto; transferencias antigua
 - **2.9 CERRADA (06/10/2026)**, commit `bfbdda4`: `totalPersonal` (`Total registrado`) y `totalPersonalCubierto` (`Personal`) solo suman entries reales del período visible (`esDelPeriodo = !!g.entry && g.entry.periodo === periodo`); el efecto 4 (`pagoHasta > periodo`) y `esPagado` quedaron intactos. Gate read-only PASS (P1–P6) y runtime 17/17. Verificada en Producción por el usuario.
 - **2.7 CERRADA (08/10/2026)**, commit `96934c0`: guard en `registrarGasto` que lanza si `esCompartido && !grupo?.id`, `groupId` agregado al `updateDoc` de re-registro y `PagarModal` con `try/catch/finally` que muestra el error sin cerrar el modal. Gate Firestore PASS (41 entries, 0 corruptos) y harness 20/20. Verificada en Producción por el usuario. Promovida con push directo previo a la adopción del flujo permanente de ramas del proyecto.
 - **2.4 CERRADA (10/10/2026)**, commit `1716a19`: robustez de sesión/redirección en `lib/AuthContext.jsx`; primer cierre con el flujo de ramas completo; verificada en Producción por el usuario.
-- **2.5 · 2.6 sin empezar**: únicas subetapas abiertas de la Etapa 2.
+- **2.5 CERRADA (11/10/2026)**, commit `3216095`: retiro del flujo legacy de gastos fijos (−705 líneas); bloque de Transferencias intacto; flujo completo Local → Staging → Producción; verificada en Producción por el usuario.
+- **2.6 CERRADA (11/10/2026)**, commit `10ab576`: limpieza de código muerto (−330 líneas); transferencias excluida del alcance; conservados `gastosCalculations.js` (balances de transferencias), `origenCompra` y `Transferenciassections.jsx` como base para el diseño de la Etapa 3; verificada en Producción por el usuario.
+- **Etapa 2 COMPLETAMENTE CERRADA (9/9 subetapas, 11/10/2026).**
 
 ### Etapa 3 — Nuevas funcionalidades financieras
 
@@ -127,8 +130,8 @@ No eliminar, migrar, normalizar ni modificar datos durante la Etapa 0. Las decis
 - **Auditoría inicial:** completada (`REPORT-02.md`, read-only; previa al esquema 0–4).
 - **Etapa 0 (Relevamiento + contexto):** completada (contexto y agentes commiteados, `d0c6fec`, con `REPORT-ETAPA-0.md`; pusheados, verificado 23/09). `opencode-AppFinanciera/HANDOFF-ETAPA-0-MAPA-CONTEXTO.md` aprobado y entregado (commiteado en `opencode-AppFinanciera`, 22–23/09).
 - **Etapa 1 (Base estructural):** **CERRADA (25/09/2026)**, commit `78e1461`. Entregables: `opencode-AppFinanciera/HANDOFF-ETAPA-1-BASE-ESTRUCTURAL.md` y `opencode-AppFinanciera/PROPUESTA-ETAPA-1.md`.
-- **Etapa 2 (Correcciones y limpieza):** **en curso**. 2.1 CERRADA (25/09/2026, `b46b570`); **2.2, 2.3 y 2.8 CERRADAS (30/09/2026)** (`119cc4a` · `7d71fb5` · `66ba009`, Producción PASS con cuenta real); **2.9 CERRADA (06/10/2026, `bfbdda4`)** y **2.7 CERRADA (08/10/2026, `96934c0`)**, ambas verificadas en Producción; **2.4 CERRADA (10/10/2026, `1716a19`)**; **2.5 · 2.6 sin empezar** (únicas abiertas). Ambientes alineados: `main` == `staging` == Producción == `1716a19` (10/10/2026).
+- **Etapa 2 (Correcciones y limpieza):** **CERRADA (11/10/2026), 9/9 subetapas**. 2.1 CERRADA (25/09/2026, `b46b570`); **2.2, 2.3 y 2.8 CERRADAS (30/09/2026)** (`119cc4a` · `7d71fb5` · `66ba009`, Producción PASS con cuenta real); **2.9 CERRADA (06/10/2026, `bfbdda4`)** y **2.7 CERRADA (08/10/2026, `96934c0`)**; **2.4 CERRADA (10/10/2026, `1716a19`)**; **2.5 CERRADA (11/10/2026, `3216095`)** y **2.6 CERRADA (11/10/2026, `10ab576`)**, ambas verificadas en Producción. Ambientes alineados: `main` == `staging` == Producción == `10ab576` (11/10/2026).
 - **Etapas 3–4:** no iniciadas.
 - **Acceso Firestore:** read-only aprobado por el usuario; sin escrituras, migraciones, índices ni cambios de reglas. La Etapa 2.1 no modificó Firestore.
-- **Próxima acción:** planificar la siguiente subetapa disponible de la Etapa 2 (2.5 retirar flujo legacy o 2.6 limpieza de código muerto), cada una con su propia planificación y aprobación antes de implementar. La Etapa 3 (diseño del modelo financiero) está desbloqueada (2.2 cerrada) y es el siguiente paso estratégico propuesto; su implementación (Etapa 4) requiere aprobación explícita y separada.
+- **Próxima acción:** **Etapa 3 — diseño (Paso 3):** pasar el `HANDOFF-ETAPA-3.md` (commiteado en `opencode-AppFinanciera`, `405a11c`) al OpenCode de AppFinanciera para que produzca `PROPUESTA-ETAPA-3.md`, en modo **solo diseño** (sin implementación, sin escrituras en Firestore, sin commit). El cierre del diseño se aprueba en conversación con el usuario. La **implementación (Etapa 4) requiere aprobación explícita y separada** y no está autorizada.
 - **Sesión de origen:** 21/09/2026 (redefinición de la Etapa 0, nuevo esquema de etapas 0–4 y decisiones funcionales cerradas).
