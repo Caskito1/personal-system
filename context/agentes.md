@@ -933,5 +933,5 @@ El MANTENIMIENTO nunca escribe; su salida final es el informe con los hallazgos 
 
 ## Sin definir aún
 
-- La validación del ciclo completo en un nuevo uso real, ahora con el flujo refinado (cierre → REVISOR → conversación de cierre → propuesta → decisión → apertura → planificación). El primer uso real del flujo original (Semana 39) ya dio veredicto del usuario y cerró la Fase 3.6 el 27/09/2026.
+- **Validación en uso real:** el flujo refinado de cierre y revisión se ejercitó en el cierre de la Semana 40, mediante el registro Plan vs. Realidad → Hallazgos → Cierre (`06-Rutina/Semanal/Semana 40.md`, Estado: Cerrada). Los hallazgos quedaron persistidos en `06-Rutina/Semanal/Semana 41.md`, en «Hallazgos de la revisión de la Semana 40». La validación en uso real ya se realizó; no se registra aquí un veredicto formal del usuario porque no está determinado en la documentación.
 - La lectura automática de calendario/proyectos/adquisiciones y la integración con Calendar o automatizaciones: fases posteriores (el V2 define quién consulta qué, no la automatización).

@@ -40,7 +40,8 @@ G:\Mi unidad\Organizador Personal\
 ├── 04-Finanzas\
 │   ├── Objetivos Financieros\
 │   ├── Inversiones\
-│   └── Resumenes\
+│   ├── Resumenes\
+│   └── Estrategia Financiera.md
 ├── 05-Otros\
 │   ├── Otros Objetivos\
 │   ├── Rutina de Ejercicio\

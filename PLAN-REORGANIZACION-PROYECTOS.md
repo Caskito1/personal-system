@@ -1,5 +1,11 @@
 # Plan de continuidad — Reorganización de proyectos
 
+> **Estado: ejecución parcial verificada — 10/10/2026**
+>
+> **Verificado:** la estructura física actual de los proyectos coincide con la estructura objetivo documentada, y los tres repositorios identificados cuentan con `.git`. El objetivo de disponer de un agente VERIFICADOR centralizado también está implementado (Fase 3.7 de `roadmap.md`).
+>
+> **Alcance de esta verificación:** se comprobó la estructura física y la existencia de los repositorios. No se certifica la ejecución de las 16 etapas del plan original ni la configuración individual de remotos, `.gitignore` o nombres por repositorio. Esas verificaciones quedan fuera del alcance de este mantenimiento.
+
 ## Propósito
 
 Este documento sirve como instrucción de continuidad para retomar desde otra PC la reorganización de la estructura de `Proyectos Personales`.
