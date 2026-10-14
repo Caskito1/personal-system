@@ -53,7 +53,8 @@ Estructura:
 ### Resúmenes mensuales
 
 - Registro manual una vez por mes, con datos de AppFinanciera/Excel.
-- Contenido: ingresos totales, egresos totales, inversión realizada, estado de las inversiones en Gletir (fondo local y ETF VOO), estado de préstamos (si existen), estado de tarjeta (si corresponde) y avance contra objetivos.
+- Contenido: ingresos totales, egresos totales, excedente real, inversión realizada, estado de las inversiones en Gletir (fondo local y ETF VOO), estado de préstamos (si existen), estado de tarjeta (si corresponde) y avance contra objetivos.
+- El excedente real se contrasta con el excedente calculado (ingresos − egresos): la diferencia entre lo registrado en la app y la cuenta real queda visible para su análisis.
 - Objetivo: una fotografía mensual comparable con los objetivos anuales.
 
 ### Inversiones
@@ -104,8 +105,8 @@ Dirección de trabajo del sistema financiero. **Regla: el roadmap es dirección 
 6. **Resúmenes financieros** — resúmenes mensuales en Obsidian con datos reales (evolución y cumplimiento de objetivos).
 7. **Automatización** — endpoint/API de AppFinanciera e integración con Obsidian/Planner cuando las fuentes estén estables.
 
-- **Estado actual:** etapa 1 completada (historial de inversiones 2026 cargado). Etapa 2 (Auditoría inicial de AppFinanciera) completada (`REPORT-02.md`, read-only). Del lado de la aplicación, AppFinanciera tiene su **Etapa 2 CERRADA (11/10/2026, 9/9 subetapas)**: **2.1, 2.2, 2.3 y 2.8 cerradas** (25/09 y 30/09/2026; `b46b570` · `119cc4a` · `7d71fb5` · `66ba009`), **2.9 y 2.7 cerradas** (06/10 y 08/10/2026; `bfbdda4` · `96934c0`), **2.4 cerrada** (10/10/2026, `1716a19`) y **2.5 · 2.6 cerradas** (11/10/2026, `3216095` · `10ab576`, ambas verificadas en Producción; detalle en `context/AppFinanciera.md`).
-- **Próximo paso:** las etapas 3 y 4 (diseño e implementación de gastos de terceros/reintegros) se alimentan de la **Etapa 0 de AppFinanciera** (Relevamiento + contexto interno, completada; ver `context/AppFinanciera.md` y `opencode-AppFinanciera/HANDOFF-ETAPA-0-MAPA-CONTEXTO.md`) y del cierre de la **subetapa 2.2**, cerrada el 30/09/2026. Esa subetapa era la condición de bloqueo real del diseño; **cerrar la Etapa 2 completa no es requisito** para diseñarlo.
+- **Estado actual:** etapa 1 completada (historial de inversiones 2026 cargado). Etapa 2 (Auditoría inicial de AppFinanciera) completada (`REPORT-02.md`, read-only). Del lado de la aplicación, AppFinanciera tiene su **Etapa 2 CERRADA (11/10/2026, 9/9 subetapas)**: **2.1, 2.2, 2.3 y 2.8 cerradas** (25/09 y 30/09/2026; `b46b570` · `119cc4a` · `7d71fb5` · `66ba009`), **2.9 y 2.7 cerradas** (06/10 y 08/10/2026; `bfbdda4` · `96934c0`), **2.4 cerrada** (10/10/2026, `1716a19`) y **2.5 · 2.6 cerradas** (11/10/2026, `3216095` · `10ab576`, ambas verificadas en Producción; detalle en `context/AppFinanciera.md`). **Paso 3 (Etapa 3 de AppFinanciera, diseño de reintegros): EN CURSO** — `PROPUESTA-ETAPA-3.md` producida y commiteada en `opencode-AppFinanciera` (`e665e3d`, 14/10/2026), pendiente de aprobación del usuario en la conversación de cierre (Etapa 3 aún no cerrada).
+- **Próximo paso:** **cierre de la Etapa 3 (paso 3) en conversación** (Organizador + usuario): aprobación del diseño (`PROPUESTA-ETAPA-3.md`, incluidos los pendientes P-1…P-9 de su §12.6) → registro del cierre en los contextos → planificación de la **Etapa 4**. El diseño se apoyó en la **Etapa 0 de AppFinanciera** (ver `context/AppFinanciera.md`) y en el cierre de la **subetapa 2.2** (30/09/2026: era la condición de bloqueo real; cerrar la Etapa 2 completa no era requisito). La **implementación (paso 4 / Etapa 4) requiere aprobación explícita y separada** y no está autorizada.
 - Las etapas 2–4 requieren trabajo sobre AppFinanciera: primero se releva/audita y se diseña, y solo después se implementa. La Etapa 0 de AppFinanciera (nuevo esquema de etapas 0–4 de la aplicación) es el relevamiento que sostiene este diseño.
 - No priorizar mejoras del Excel ni convertirlo en fuente de verdad; no crear estructuras nuevas en Obsidian sin aprobación.
 
