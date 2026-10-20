@@ -14,7 +14,8 @@ Estructura:
 02-Musica/
 ├── Estudio/
 │   ├── Rutina de Estudio del Instrumento.md
-│   └── Ejercicios.md
+│   ├── Ejercicios.md
+│   └── Libros de Improvisación.md
 ├── Partituras/
 │   ├── Ejercicios/
 │   └── Repertorio/
@@ -52,7 +53,7 @@ Orden estable de la rutina de estudio:
 
 El **tema de improvisación** se trabaja en tres pasadas: **Pasada 1 — Acordes**, **Pasada 2 — Melodía**, **Pasada 3 — Improvisación**.
 
-Estado actual de los ejercicios: Escalas y Arpegios en **Mayores 7**; Progresiones armónicas en II-V-I (sin ejercicios cargados todavía).
+Estado actual de los ejercicios: Escalas y Arpegios en **Mayores 7**; Progresiones armónicas en V-I (Ejercicio 1: patrón de bajo de candombe, 12 tonalidades por cuartas desde Cmaj7); Tema de improvisación con Ejercicio 1 (V-I, 2 compases de V7 + 2 de I maj7, tres pasadas: acordes/melodía/improvisación, ejemplo de referencia en Do mayor).
 
 El sistema registra cambios de ejercicios/modalidades pero **no decide por sí mismo** cuándo cambiar la rutina. Los cambios ocurren porque el ejercicio está procesado/dominado o porque el profesor lo indica.
 
