@@ -117,8 +117,8 @@ Portfolio profesional personal. Estado: **en pausa / en definición**. No se eli
 
 - Principio de arquitectura: **el Organizador planifica y coordina; el OpenCode de cada proyecto conserva y utiliza el conocimiento técnico necesario para ejecutar autónomamente esas planificaciones**. Ver `context/arquitectura.md`.
 - Cada proyecto personal puede tener su propio ciclo de trabajo con opencode, ejecutado en otra instancia de opencode dentro del repo del proyecto.
-- Componentes por repo: `AGENTS.md` (reglas), `ROADMAP.md` (roadmap propio), `HANDOFF-<etapa>.md` (orden de trabajo), `opencode.json` (config mínima), `.opencode/agent/` (subagentes) y `REPORT-<etapa>.md` (entregable de vuelta).
-- Estructura de conocimiento estándar dentro del repo del proyecto (confirmada en la Etapa 0 de AppFinanciera):
+- Componentes por repo: `AGENTS.md` (reglas, incl. la definición canónica de tipos de documento), `ROADMAP.md` (roadmap propio), `opencode.json` (config mínima), `.opencode/agent/` (subagentes) y documentos de trabajo en `docs/` (HANDOFF, PROPUESTA, EVIDENCIA, REPORT — tipos y rutas canónicos en el `AGENTS.md` del repo).
+- Estructura de conocimiento estándar dentro del repo del proyecto (confirmada en la Etapa 0 de AppFinanciera; documentación de trabajo en `docs/` desde la reorganización del 22/10/2026):
 
 ```
 <repo>/
@@ -129,15 +129,20 @@ Portfolio profesional personal. Estado: **en pausa / en definición**. No se eli
 │   ├── arquitectura.md        (cómo funciona técnicamente)
 │   └── dominio.md             (cómo debe comportarse el sistema, separado de la implementación)
 ├── .opencode/agent/           (agentes que el relevamiento justifique)
-├── HANDOFF-*.md
-└── REPORT-*.md
+└── docs/
+    ├── handoffs/              HANDOFF-*.md
+    ├── propuestas/            PROPUESTA-*.md
+    ├── reportes/              REPORT-*.md (+ docs históricos de contexto)
+    └── evidencia/             EVIDENCIA-*.md (si el proyecto genera evidencia por subetapa)
 ```
+
+- Regla de ubicación: los documentos de trabajo viven en `docs/` del repo del proyecto; si el código está en un repo anidado, la evidencia de cierre vive igual en `docs/evidencia/` del repo padre (commiteada en la misma sesión que el código, citando su hash).
 
 - Regla de contexto: el conocimiento técnico vive en el repo del proyecto (no en `personal-system`). El Organizador conserva en sus contextos: objetivos, prioridades, decisiones, roadmap, estado, qué debe hacerse, resultado esperado, y restricciones/criterios.
 - El Vault es el **panel de control y registro permanente**: `Indice de Proyectos.md` + nota por proyecto guardan estado, etapa, próxima acción y decisiones.
-- `personal-system` actúa como **coordinador**: redacta los HANDOFF, evalúa los REPORT y actualiza el panel tras cada decisión del usuario.
+- `personal-system` actúa como **coordinador**: redacta los HANDOFF, evalúa las PROPUESTAS y los cierres (EVIDENCIA) y actualiza el panel tras cada decisión del usuario.
 - Estados: proyecto → En definición / Activo / En pausa / Bloqueado; etapa → Pendiente / En curso / En revisión / Aprobada / Ajustes.
-- Ciclo por etapa: HANDOFF → ejecución (en el repo) → REPORT → evaluación → decisión → actualización del Vault.
+- Ciclo por etapa: HANDOFF → PROPUESTA → aprobación del usuario → ejecución → EVIDENCIA por subetapa → evaluación/cierre de etapa → actualización del Vault. REPORT: solo auditorías read-only. Definición canónica de tipos y rutas: `AGENTS.md` del repo del proyecto.
 
 #### Onboarding de un proyecto
 

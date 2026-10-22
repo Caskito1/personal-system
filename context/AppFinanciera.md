@@ -1,6 +1,6 @@
 # AppFinanciera — Documento de coordinación
 
-Documento de coordinación de `personal-system` para el proyecto AppFinanciera: qué conoce y cómo coordina el Organizador. Contiene principios, roadmap, decisiones funcionales cerradas, estado y próximas acciones. **No es el lugar del conocimiento técnico de la aplicación**: ese vive en el repo de AppFinanciera (ver `opencode-AppFinanciera/HANDOFF-ETAPA-0-MAPA-CONTEXTO.md`).
+Documento de coordinación de `personal-system` para el proyecto AppFinanciera: qué conoce y cómo coordina el Organizador. Contiene principios, roadmap, decisiones funcionales cerradas, estado y próximas acciones. **No es el lugar del conocimiento técnico de la aplicación**: ese vive en el repo de AppFinanciera (ver `opencode-AppFinanciera/docs/handoffs/HANDOFF-ETAPA-0-MAPA-CONTEXTO.md`).
 
 ## Principio arquitectónico
 
@@ -18,10 +18,10 @@ La intención es poder enviar a futuro HANDOFFs relativamente concisos al OpenCo
 
 - **Auditoría inicial: completada** (previa al esquema de etapas 0–4). Read-only, `REPORT-02.md` en el repo de AppFinanciera. Base de partida, no verdad absoluta.
 - **Etapa 0 (Relevamiento + construcción del contexto interno): COMPLETADA.** Contexto y agentes de Etapa 0 commiteados en `opencode-AppFinanciera` (commit `d0c6fec`), con `REPORT-ETAPA-0.md` incluido (no se copia a `personal-system`); commits commiteados y pusheados (verificado 23/09).
-  - `opencode-AppFinanciera/HANDOFF-ETAPA-0-MAPA-CONTEXTO.md` aprobado y entregado: commiteado en el repo `opencode-AppFinanciera`.
+  - `opencode-AppFinanciera/docs/handoffs/HANDOFF-ETAPA-0-MAPA-CONTEXTO.md` aprobado y entregado: commiteado en el repo `opencode-AppFinanciera`.
   - Etapa 0 cerrada.
-- **Etapa 1 (Base estructural): CERRADA (25/09/2026).** Commit `78e1461` en el repo `opencode-AppFinanciera`. Entregables: `opencode-AppFinanciera/HANDOFF-ETAPA-1-BASE-ESTRUCTURAL.md` y `opencode-AppFinanciera/PROPUESTA-ETAPA-1.md`. Etapa de diseño/estructura (NO implementa funcionalidades).
-- **Etapa 2 (Correcciones y limpieza): CERRADA (11/10/2026).** 9/9 subetapas cerradas. Estructura de subetapas aprobada en `opencode-AppFinanciera/HANDOFF-ETAPA-2.md`:
+- **Etapa 1 (Base estructural): CERRADA (25/09/2026).** Commit `78e1461` en el repo `opencode-AppFinanciera`. Entregables: `opencode-AppFinanciera/docs/handoffs/HANDOFF-ETAPA-1-BASE-ESTRUCTURAL.md` y `opencode-AppFinanciera/docs/propuestas/PROPUESTA-ETAPA-1.md`. Etapa de diseño/estructura (NO implementa funcionalidades).
+- **Etapa 2 (Correcciones y limpieza): CERRADA (11/10/2026).** 9/9 subetapas cerradas. Estructura de subetapas aprobada en `opencode-AppFinanciera/docs/handoffs/HANDOFF-ETAPA-2.md`:
   - **2.1 — Taxonomía de gastos fijos unificada + `Otros`: CERRADA (25/09/2026).** Commit de producción `b46b570`; validada en Local (build + 27 invariantes), Staging y Producción. Sin cambios en Firestore.
   - **2.2 — Totales del mes con gastos fijos: CERRADA (30/09/2026).** Commit `119cc4a`; Local (build + fixtures 24/24) y Producción PASS (cuenta real).
   - **2.3 — Ingresos (labels de bandas + sección `Otros`): CERRADA (30/09/2026).** Commit `7d71fb5`; gate read-only PASS, Local 8/8, Staging PASS y Producción PASS (cuenta real, solo lectura, 0 escrituras).
@@ -38,7 +38,7 @@ La intención es poder enviar a futuro HANDOFFs relativamente concisos al OpenCo
 
 ### Etapa 4 — decisiones de las Rondas 1 y 2 (aprobadas 15/10/2026)
 
-No reabrir. Detalle y límites exactos en `opencode-AppFinanciera/HANDOFF-ETAPA-4.md`; son la base de ese handoff.
+No reabrir. Detalle y límites exactos en `opencode-AppFinanciera/docs/handoffs/HANDOFF-ETAPA-4.md`; son la base de ese handoff.
 
 **Ronda 1 — estructura y flujo:**
 
@@ -51,7 +51,7 @@ No reabrir. Detalle y límites exactos en `opencode-AppFinanciera/HANDOFF-ETAPA-
 
 **Secuencia aprobada (enmienda 17/10/2026):** `4.0 → 4.1 → 4.2 → 4.3 → 4.3-bis → 4.4 → 4.4-bis → 4.5` — **4.6 eliminada** (decisión del usuario; sin renumeración de las subetapas). El plan técnico puede justificar reordenamiento con aprobación; nunca modificar el alcance en silencio.
 
-**Estado (19/10/2026):** Ronda 1–2 aprobadas (15/10); `HANDOFF-ETAPA-4.md` **entregado** en el repo (`5ca4e35`, 15/10); `PROPUESTA-ETAPA-4.md` **aprobada 16/10/2026** (`e57f6f0`) y **enmendada 17/10/2026** (`0ed53ab`); subetapas **4.0, 4.1 y 4.2 implementadas** en `staging` con sus EVIDENCIA (`EVIDENCIA-4.0` · `EVIDENCIA-4.1` · `EVIDENCIA-4.2` en el subrepo `AppFinanciera/`; commits `ff47291`·`63666f6` — 4.0, suite 25/25 —, `2404140`·`6519dda` — 4.1 —, `74b9203`·`632dd65` — 4.2, 17/10 — y `5264d2e`·`41f8cb8` — lote de reglas). **Siguiente subetapa: 4.3** (EVIDENCIA-4.2 §9.5). Pendiente de aprobación del usuario: promoción `staging → main` y despliegue de reglas a Producción (4.2 no se promueve sola, EVIDENCIA-4.2 §6); H-e (obligación impuesta a un tercero) sigue abierto.
+**Estado (19/10/2026):** Ronda 1–2 aprobadas (15/10); `HANDOFF-ETAPA-4.md` **entregado** en el repo (`5ca4e35`, 15/10); `PROPUESTA-ETAPA-4.md` **aprobada 16/10/2026** (`e57f6f0`) y **enmendada 17/10/2026** (`0ed53ab`); subetapas **4.0, 4.1 y 4.2 implementadas** en `staging` con sus EVIDENCIA (`EVIDENCIA-4.0` · `EVIDENCIA-4.1` · `EVIDENCIA-4.2` en `docs/evidencia/` del repo padre desde 22/10/2026 — antes en el subrepo `AppFinanciera/`; commits `ff47291`·`63666f6` — 4.0, suite 25/25 —, `2404140`·`6519dda` — 4.1 —, `74b9203`·`632dd65` — 4.2, 17/10 — y `5264d2e`·`41f8cb8` — lote de reglas). **Siguiente subetapa: 4.3** (EVIDENCIA-4.2 §9.5). Pendiente de aprobación del usuario: promoción `staging → main` y despliegue de reglas a Producción (4.2 no se promueve sola, EVIDENCIA-4.2 §6); H-e (obligación impuesta a un tercero) sigue abierto.
 
 ## Roadmap
 
@@ -74,7 +74,7 @@ Con la evidencia de la Etapa 0: modelo de gastos; gastos compartidos; gastos fij
 
 Solo aquello que la Etapa 0 justifique: código obsoleto; transferencias antiguas; código muerto; bugs; taxonomías; `Otros`; robustez; schemas/types; inconsistencias; otras mejoras concretas.
 
-**Estado real (verificado en el repo `opencode-AppFinanciera`):** no se implementa como un bloque grande, sino en subetapas pequeñas, independientes y verificables, con el flujo Local → Staging → Producción → Verificación. Estructura aprobada en `opencode-AppFinanciera/HANDOFF-ETAPA-2.md`: 2.1 (taxonomía de fijos + `Otros`), 2.2 (totales del mes con gastos fijos), 2.3 (ids de bandas + sección `Otros` de ingresos), 2.4 (robustez de sesión/redirección), 2.5 (retirar flujo legacy de gastos fijos), 2.6 (limpieza de código muerto); además existen **2.7 (guard de integridad `groupId`) y 2.8 (header `Personal` / `Total registrado` en `/gastos-fijos`)**, surgidas de la validación runtime de 2.2, y **2.9 (totales del header acotados al período visible)**, surgida de una discrepancia detectada después de 2.8. Las transferencias quedan para la Etapa 3.
+**Estado real (verificado en el repo `opencode-AppFinanciera`):** no se implementa como un bloque grande, sino en subetapas pequeñas, independientes y verificables, con el flujo Local → Staging → Producción → Verificación. Estructura aprobada en `opencode-AppFinanciera/docs/handoffs/HANDOFF-ETAPA-2.md`: 2.1 (taxonomía de fijos + `Otros`), 2.2 (totales del mes con gastos fijos), 2.3 (ids de bandas + sección `Otros` de ingresos), 2.4 (robustez de sesión/redirección), 2.5 (retirar flujo legacy de gastos fijos), 2.6 (limpieza de código muerto); además existen **2.7 (guard de integridad `groupId`) y 2.8 (header `Personal` / `Total registrado` en `/gastos-fijos`)**, surgidas de la validación runtime de 2.2, y **2.9 (totales del header acotados al período visible)**, surgida de una discrepancia detectada después de 2.8. Las transferencias quedan para la Etapa 3.
 
 - **2.1 CERRADA (25/09/2026)**, commit de producción `b46b570`; sin cambios en Firestore.
 - **2.2 CERRADA (30/09/2026)**, commit `119cc4a`. Regla aplicada: los totales de `/gastos` incluyen solo gastos fijos **efectivamente pagados** (`esPagado = !!paidByUid || (pagoHasta > periodo)`, no `estado`); *pagado* ≠ *saldado*, y liquidar un saldo no altera los totales. Gate histórico read-only PASS (34 entries, 0 inconsistentes); prueba runtime en sandbox 6/6 PASS con limpieza verificada. No tocó históricos ni estructura de datos.
@@ -147,8 +147,8 @@ No eliminar, migrar, normalizar ni modificar datos durante la Etapa 0. Las decis
 
 - **Estado del proyecto:** Activo.
 - **Auditoría inicial:** completada (`REPORT-02.md`, read-only; previa al esquema 0–4).
-- **Etapa 0 (Relevamiento + contexto):** completada (contexto y agentes commiteados, `d0c6fec`, con `REPORT-ETAPA-0.md`; pusheados, verificado 23/09). `opencode-AppFinanciera/HANDOFF-ETAPA-0-MAPA-CONTEXTO.md` aprobado y entregado (commiteado en `opencode-AppFinanciera`, 22–23/09).
-- **Etapa 1 (Base estructural):** **CERRADA (25/09/2026)**, commit `78e1461`. Entregables: `opencode-AppFinanciera/HANDOFF-ETAPA-1-BASE-ESTRUCTURAL.md` y `opencode-AppFinanciera/PROPUESTA-ETAPA-1.md`.
+- **Etapa 0 (Relevamiento + contexto):** completada (contexto y agentes commiteados, `d0c6fec`, con `REPORT-ETAPA-0.md`; pusheados, verificado 23/09). `opencode-AppFinanciera/docs/handoffs/HANDOFF-ETAPA-0-MAPA-CONTEXTO.md` aprobado y entregado (commiteado en `opencode-AppFinanciera`, 22–23/09).
+- **Etapa 1 (Base estructural):** **CERRADA (25/09/2026)**, commit `78e1461`. Entregables: `opencode-AppFinanciera/docs/handoffs/HANDOFF-ETAPA-1-BASE-ESTRUCTURAL.md` y `opencode-AppFinanciera/docs/propuestas/PROPUESTA-ETAPA-1.md`.
 - **Etapa 2 (Correcciones y limpieza):** **CERRADA (11/10/2026), 9/9 subetapas**. 2.1 CERRADA (25/09/2026, `b46b570`); **2.2, 2.3 y 2.8 CERRADAS (30/09/2026)** (`119cc4a` · `7d71fb5` · `66ba009`, Producción PASS con cuenta real); **2.9 CERRADA (06/10/2026, `bfbdda4`)** y **2.7 CERRADA (08/10/2026, `96934c0`)**; **2.4 CERRADA (10/10/2026, `1716a19`)**; **2.5 CERRADA (11/10/2026, `3216095`)** y **2.6 CERRADA (11/10/2026, `10ab576`)**, ambas verificadas en Producción. Ambientes alineados: `main` == `staging` == Producción == `10ab576` (11/10/2026).
 - **Etapa 3 (diseño): CERRADA (15/10/2026).** `HANDOFF-ETAPA-3.md` entregado (`405a11c`) y `PROPUESTA-ETAPA-3.md` producida y commiteada (`e665e3d`, 14/10/2026), **aprobada por el usuario** en la conversación de cierre (15/10/2026): el diseño queda como base autorizada para planificar la Etapa 4. Decisiones PO-1…PO-8 y DC-1…DC-8 incorporadas. Los pendientes técnicos P-1…P-9 se abordan subetapa por subetapa durante la Etapa 4 (p. ej. P-2 en 4.0/D-6) y los vacíos de PO-4 (§12.6) quedaron resueltos en la propuesta (§11, 17/10). **Etapa 4:** **EN CURSO (implementación en `staging`)** — **Ronda 1–2 aprobadas (15/10/2026)**: estructura (orden 4.0→4.5, bis incluidas; herramientas solo propuesta; flujo de 6 pasos) + decisiones técnicas D-1…D-11, con **D-9 resuelto (opción B, 16/10)** y **D-11a/D-11b/PO-4 sin objeto (17/10: sin confirmación bilateral)**. `HANDOFF-ETAPA-4.md` **entregado** (`5ca4e35`, 15/10); `PROPUESTA-ETAPA-4.md` (**plan técnico, nombre ordenado por el usuario**) **aprobada 16/10** (`e57f6f0`) y **enmendada 17/10** (`0ed53ab`: 4.6 eliminada, secuencia hasta 4.5). **Implementación hasta ahora (rama `staging`):** 4.0 gate Firestore (`ff47291`·`63666f6`, suite 25/25), 4.1 modelo y servicios (`2404140`·`6519dda`), 4.2 alta de reintegros (`74b9203`·`632dd65`, aprobada por el usuario 17/10, `EVIDENCIA-4.2`) y lote de reglas sin confirmación bilateral aplicado (`5264d2e`·`41f8cb8`). **Sin promoción a `main` y sin deploy de reglas a Producción** (requieren aprobación explícita del usuario; 4.2 no se promueve sola, EVIDENCIA-4.2 §6).
 - **Acceso Firestore:** read-only aprobado por el usuario; sin escrituras, migraciones, índices ni cambios de reglas. La Etapa 2.1 no modificó Firestore.

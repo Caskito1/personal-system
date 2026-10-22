@@ -881,7 +881,7 @@ El MANTENIMIENTO revisa, con criterio y sin ruido:
 2. **Estado vs realidad** — afirmaciones de estado (fases "cerradas/realizadas", "commiteado y pusheado", "sin pendientes") que no se corresponden con el contenido real ni con los hechos verificables read-only.
 3. **Contradicciones entre documentos** — reglas que difieren entre `context/*.md`, `AGENTS.md` y `roadmap.md` (órdenes de sección, numeración de pasos, cobertura, nomenclatura).
 4. **Hechos desactualizados** — fechas, eventos, fases y estados de agentes que la documentación mantiene con datos viejos.
-5. **Práctica vs regla** — subsecciones/categorías nuevas en las notas operativas que la regla no prevé, y reglas documentadas que la práctica ignora.
+5. **Práctica vs regla** — subsecciones/categorías nuevas en las notas operativas que la regla no prevé, y reglas documentadas que la práctica ignora; también aplica a los repositorios de Proyectos Personales: documentación de trabajo ubicada o nombrada fuera de los patrones definidos en el `AGENTS.md` del repo (archivos en la raíz del repo, tipos no registrados, nombres que violen el patrón).
 6. **Estructura esperada vs real** — carpetas o archivos que el contexto promete y no existen, sin marcar como error las carpetas futuras u opcionales.
 
 ### Qué NO revisa
