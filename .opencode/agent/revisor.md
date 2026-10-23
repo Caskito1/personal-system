@@ -4,7 +4,7 @@ mode: all
 permission:
   read: allow
   edit: deny
-  bash: allow
+  bash: deny
   task: deny
   webfetch: deny
   websearch: deny

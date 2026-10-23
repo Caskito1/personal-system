@@ -20,10 +20,11 @@ ROOT: `~/Desktop/Proyectos Personales` (base portable: `~` se resuelve como el h
 ESPERADOS (única fuente de verdad; actualizar al agregar proyectos):
 - personal-system
 - opencode-AppFinanciera (+ `AppFinanciera` anidado, repositorio git independiente)
+- opencode-CatalogoB2B (+ `fuente/`: copia TLW con `.git` propio, **gitignored**; el padre la ignora ✓; no es repo del panel ni se commitea)
 - futuro: opencode-Ventolera (+ Ventolera), opencode-Portfolio (+ Portfolio)
 
 FLUJO:
-1. **NIVEL 1 (estructura, read-only)**: paneá ROOT. Detectá repositorios (`.git/`) propios y anidados. Clasificá: esperado / adicional (nunca error por sí solo) / faltante / inesperado relevante / estructura incorrecta. Verificá que cada repo `opencode-X` ignore a su hijo `X` (p. ej. `git check-ignore AppFinanciera/` ejecutado en `opencode-AppFinanciera`).
+1. **NIVEL 1 (estructura, read-only)**: paneá ROOT. Detectá repositorios (`.git/`) propios y anidados. Clasificá: esperado / adicional (nunca error por sí solo) / faltante / inesperado relevante / estructura incorrecta. Verificá que cada repo `opencode-X` con hijo declarado en ESPERADOS ignore a su hijo (p. ej. `git check-ignore AppFinanciera/` ejecutado en `opencode-AppFinanciera`). Los repos sin hijo declarado no tienen ese check.
 2. **NIVEL 2 (git por repo, read-only)**: primero `git fetch origin` (solo actualiza `refs/remotes/*`; no modifica working tree, HEAD ni ramas). Después: branch, HEAD, `git status --porcelain`, commits sin push (`git log @{u}..HEAD --oneline`), remotos pendientes (`git log HEAD..@{u} --oneline`), divergencia, `git remote -v`. Comparar siempre con refs ya actualizadas tras el fetch. Nota: `git status` por sí solo no garantiza sincronización con el remote si las refs locales están stale; la comparación válida contra el remote comienza con `git fetch origin` y recién después contra `origin/<branch>`. Solo untracked relevantes (ignorá caches como `node_modules`). Si corriste `fetch`, el informe lo indica: `✓ Verificación remota realizada con refs actualizadas mediante git fetch origin`.
 3. Clasificá cada repo: OK / CAMBIOS LOCALES / COMMITS SIN PUSH / REMOTOS PENDIENTES / DIVERGENCIA / SIN REMOTE / ERROR DE ACCESO / REPO NO ENCONTRADO / ESTRUCTURA INESPERADA; ADICIONAL = informativo.
 4. Produci el informe: ESTRUCTURA + REPOSITORIOS + RESULTADO (+ ACCIÓN si hay pendientes). No resuelvas nada.
