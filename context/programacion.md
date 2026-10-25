@@ -42,7 +42,7 @@ Cada proyecto mantiene su propio contexto; no se mezclan los proyectos en una ú
 - Toda actividad extra en baja carga laboral la decide el usuario día a día; el Planner nunca la asume.
 - Rol: Frontend. Stack principal: Next.js, Tailwind.
 - Trabajo sobre varias páginas/proyectos.
-- **Catálogo de componentes B2B**: análisis de una copia local del proyecto Next.js de TLW para producir un catálogo de componentes (IDs canónicos, dos vistas, contrato exportable). Repo propio: `opencode-CatalogoB2B` (GitHub privado, rama `main`). Fuente de decisión/estado: Vault `03-Programacion/Trabajo/Catalogo/Catálogo de componentes.md`; fuente técnica: el repo. Estado: Fases 0–1 completadas (22/10); pendiente autorizar Fase 1.5. Relacionado: **Armador de Componentes B2B** (Proyectos Personales; en definición).
+- **Catálogo de componentes B2B**: análisis de una copia local del proyecto Next.js de TLW para producir un catálogo de componentes (IDs canónicos, dos vistas, contrato exportable). Repo propio: `opencode-CatalogoB2B` (GitHub privado, rama `main`). Fuente de decisión/estado: Vault `03-Programacion/Trabajo/Catalogo/Catálogo de componentes.md`; fuente técnica: el repo. Estado: Fases 0-1.6 del piloto completadas; punto de pausa (25/10/2026) pendiente de revisión visual y aprobación del usuario; etapa de variantes e inventario global no autorizados. Relacionado: **Armador de Componentes B2B** (Proyectos Personales; en definición).
 
 ### Proyectos Personales
 
